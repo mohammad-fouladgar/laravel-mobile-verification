@@ -5,6 +5,7 @@ namespace Fouladgar\MobileVerification;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Fouladgar\MobileVerification\Middleware\EnsureMobileIsVerified;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -17,6 +18,7 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__.'/../database/migrations/create_mobile_verifications_table.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
 
+        $this->app['router']->middleware('mobile.verified',EnsureMobileIsVerified::class);
     }
 
     /**

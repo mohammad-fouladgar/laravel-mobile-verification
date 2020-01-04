@@ -49,10 +49,7 @@
     "laravel": {
       "providers": [
         "Fouladgar\\MobileVerification\\ServiceProvider"
-      ],
-      "aliases": {
-        "MobileVerification": "Fouladgar\\MobileVerification\\Facade"
-      }
+      ]
     }
   },
   "config": {
