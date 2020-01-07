@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Notifications\Messages;
 
-class MobileVerifierMessage
+class MobileVerificationMessage
 {
     /**
      * The message code.

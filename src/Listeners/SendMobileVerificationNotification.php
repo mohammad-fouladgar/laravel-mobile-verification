@@ -5,7 +5,7 @@ namespace Fouladgar\MobileVerifier\Listeners;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Illuminate\Auth\Events\Registered;
 
-class SendMobileVerifierNotification
+class SendMobileVerificationNotification
 {
     /**
      * Handle the event.

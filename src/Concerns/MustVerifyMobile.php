@@ -11,9 +11,9 @@ trait MustVerifyMobile
      *
      * @return bool
      */
-    public function hasVerifiedMobile()
+    public function hasVerifiedMobile(): bool
     {
-        return ! is_null($this->mobile_verified_at);
+        return $this->mobile_verified_at !== null;
     }
 
     /**
@@ -21,7 +21,7 @@ trait MustVerifyMobile
      *
      * @return bool
      */
-    public function markMobileAsVerified()
+    public function markMobileAsVerified(): bool
     {
         return $this->forceFill([
             'mobile_verified_at' => $this->freshTimestamp(),
@@ -33,7 +33,7 @@ trait MustVerifyMobile
      *
      * @return void
      */
-    public function sendMobileVerifierNotification()
+    public function sendMobileVerifierNotification(): void
     {
         $this->notify(new VerifyMobile);
     }
@@ -43,7 +43,7 @@ trait MustVerifyMobile
      *
      * @return string
      */
-    public function getMobileForVerification()
+    public function getMobileForVerification(): string
     {
         return $this->mobile;
     }
