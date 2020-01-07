@@ -23,9 +23,7 @@ trait MustVerifyMobile
      */
     public function markMobileAsVerified(): bool
     {
-        return $this->forceFill([
-            'mobile_verified_at' => $this->freshTimestamp(),
-        ])->save();
+        return $this->forceFill(['mobile_verified_at' => $this->freshTimestamp()])->save();
     }
 
     /**
@@ -49,11 +47,11 @@ trait MustVerifyMobile
     }
 
     /**
-     * Undocumented function
+     * Get the recipients of the given message.
      *
-     * @return void
+     * @return mixed
      */
-    public function routeNotificationForVerificationMobile()
+    public function routeNotificationForVerificationMobile(): string
     {
         return $this->mobile;
     }

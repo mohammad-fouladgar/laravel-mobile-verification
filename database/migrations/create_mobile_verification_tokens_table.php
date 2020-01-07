@@ -12,6 +12,9 @@ class CreateMobileVerificationsTables extends Migration
      */
     private $userTable;
 
+    /**
+     * CreateMobileVerificationsTables constructor.
+     */
     public function __construct()
     {
         $this->userTable = config('mobile_verifier.user_table');

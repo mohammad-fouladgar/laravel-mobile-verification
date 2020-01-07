@@ -2,11 +2,11 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Concerns\SmsClient;
+use Fouladgar\MobileVerifier\Contracts\SmsClient;
 
-class KavenegarClient extends SmsClient
+class KavenegarClient implements SmsClient
 {
-    public function sendMessage($payload)
+    public function sendMessage(array $payload)
     {
         dd($payload);
         return $payload;

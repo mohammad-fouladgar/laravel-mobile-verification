@@ -2,27 +2,31 @@
 
 namespace Fouladgar\MobileVerifier\Notifications\Channels;
 
-use Fouladgar\MobileVerifier\Concerns\SmsClient;
+use Fouladgar\MobileVerifier\Contracts\SmsClient;
 use Illuminate\Notifications\Notification;
 
 class VerificationChannel
 {
-    
-
+    /**
+     * @var SmsClient
+     */
     protected $smsClient;
 
     /**
-   *
-   * @param SmsClient $smsClient
-   */
-  public function __construct(SmsClient $smsClient)
-  {
-      $this->smsClient = $smsClient;
-  }
+     * VerificationChannel constructor.
+     * @param SmsClient $smsClient
+     */
+    public function __construct(SmsClient $smsClient)
+    {
+        $this->smsClient = $smsClient;
+    }
 
     /**
      * Send the given notification.
      *
+     * @param $notifiable
+     * @param Notification $notification
+     * @return mixed|void
      */
     public function send($notifiable, Notification $notification)
     {
@@ -33,12 +37,10 @@ class VerificationChannel
         $message = $notification->toVerify($notifiable);
 
         $payload = [
-            'token'=>$message->getCode(),
-            'to'=>$to
-
+            'token' => $message->getCode(),
+            'to'    => $to
         ];
 
         return $this->smsClient->sendMessage($payload);
-
     }
 }
