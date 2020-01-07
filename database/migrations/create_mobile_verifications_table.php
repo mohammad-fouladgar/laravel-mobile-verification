@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMobileVerifiersTables extends Migration
+class CreateMobileVerificationsTables extends Migration
 {
     public function __construct()
     {
-        $this->userTable = config('verified.user_table');
+        $this->userTable = config('mobile_verifier.user_table');
     }
 
     /**
