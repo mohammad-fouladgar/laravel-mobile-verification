@@ -9,9 +9,8 @@ class MobileVerificationMessage
      *
      * @var string
      */
-    // public $code;
+    private $code;
 
-    // public $template_id;
 
     /**
      * Create a new message instance.
@@ -31,12 +30,17 @@ class MobileVerificationMessage
      *
      * @return $this
      */
-    // public function code($code)
-    // {
-    //     $this->code = $code;
+    public function code($code)
+    {
+        $this->code = $code;
 
-    //     return $this;
-    // }
+        return $this;
+    }
+
+    public function getCode()
+    {
+        return $this->code;
+    }
 
     /**
      * Set the message template ID.

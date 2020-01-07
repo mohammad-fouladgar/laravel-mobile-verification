@@ -35,7 +35,7 @@ trait MustVerifyMobile
      */
     public function sendMobileVerifierNotification(): void
     {
-        $this->notify(new VerifyMobile);
+        $this->notify(new VerifyMobile());
     }
 
     /**
@@ -44,6 +44,16 @@ trait MustVerifyMobile
      * @return string
      */
     public function getMobileForVerification(): string
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function routeNotificationForVerificationMobile()
     {
         return $this->mobile;
     }

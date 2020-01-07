@@ -2,46 +2,43 @@
 
 namespace Fouladgar\MobileVerifier\Notifications\Channels;
 
-// use App\SMS\SmsIrClient;
+use Fouladgar\MobileVerifier\Concerns\SmsClient;
 use Illuminate\Notifications\Notification;
 
 class VerificationChannel
 {
-    /**
-     * The Nexmo client instance.
-     *
-     * @var \App\SMS\SmsIrClient
-     */
-    // protected $sms;
+    
+
+    protected $smsClient;
 
     /**
-     * Create a new SMS channel instance.
-     *
-     * @param \App\SMS\SmsIrClient $sms
-     */
-    // public function __construct(SmsIrClient $sms)
-    // {
-    //     $this->sms = $sms;
-    // }
+   *
+   * @param SmsClient $smsClient
+   */
+  public function __construct(SmsClient $smsClient)
+  {
+      $this->smsClient = $smsClient;
+  }
 
     /**
      * Send the given notification.
      *
-     * @param mixed                                  $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @return \Nexmo\Message\Message
      */
     public function send($notifiable, Notification $notification)
     {
-        // if (!$to = $notifiable->routeNotificationFor('verification_mobile', $notification)) {
-        //     return;
-        // }
+        if (!$to = $notifiable->routeNotificationFor('verification_mobile', $notification)) {
+            return;
+        }
 
-        // $message = $notification->toVerificationSms($notifiable);
+        $message = $notification->toVerify($notifiable);
 
-        // return $this->sms->fastSendMessage([
-        //       'VerificationCode'=> $message->code,
-        // ], $message->template_id, $to);
+        $payload = [
+            'token'=>$message->getCode(),
+            'to'=>$to
+
+        ];
+
+        return $this->smsClient->sendMessage($payload);
+
     }
 }

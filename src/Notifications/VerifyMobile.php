@@ -2,6 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Notifications;
 
+use Fouladgar\MobileVerifier\Concerns\SmsClient;
 use Illuminate\Notifications\Notification;
 use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
 use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
@@ -15,6 +16,8 @@ class VerifyMobile extends Notification
      */
     // public static $toMailCallback;
 
+
+
     /**
      * Get the notification's channels.
      *
@@ -27,9 +30,9 @@ class VerifyMobile extends Notification
     }
 
 
-    public function toVerification($notifiable)
+    public function toVerify($notifiable)
     {
-        return (new MobileVerificationMessage());
+        return (new MobileVerificationMessage())->code('24155');
     }
 
     /**
