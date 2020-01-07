@@ -1,11 +1,11 @@
 <?php
 
-namespace Fouladgar\MobileVerification;
+namespace Fouladgar\MobileVerifier;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Fouladgar\MobileVerification\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
 
 class ServiceProvider extends BaseServiceProvider
 {

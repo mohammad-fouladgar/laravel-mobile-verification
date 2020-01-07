@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Notifications\Channels;
+namespace Fouladgar\MobileVerifier\Notifications\Channels;
 
 // use App\SMS\SmsIrClient;
 use Illuminate\Notifications\Notification;

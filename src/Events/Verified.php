@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Events;
+namespace Fouladgar\MobileVerifier\Events;
 
 use Illuminate\Queue\SerializesModels;
 
@@ -11,14 +11,14 @@ class Verified
     /**
      * The verified user.
      *
-     * @var \Fouladgar\MobileVerification\Contracts\MustVerifyMobile
+     * @var \Fouladgar\MobileVerifier\Contracts\MustVerifyMobile
      */
     public $user;
 
     /**
      * Create a new event instance.
      *
-     * @param  \Fouladgar\MobileVerification\Contracts\MustVerifyMobile  $user
+     * @param  \Fouladgar\MobileVerifier\Contracts\MustVerifyMobile  $user
      * @return void
      */
     public function __construct($user)

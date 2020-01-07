@@ -1,10 +1,10 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Notifications;
+namespace Fouladgar\MobileVerifier\Notifications;
 
 use Illuminate\Notifications\Notification;
-use Fouladgar\MobileVerification\Notifications\Channels\VerificationChannel;
-use Fouladgar\MobileVerification\Notifications\Messages\MobileVerificationMessage;
+use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
+use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerifierMessage;
 
 class VerifyMobile extends Notification
 {
@@ -29,7 +29,7 @@ class VerifyMobile extends Notification
 
     public function toVerification($notifiable)
     {
-        return (new MobileVerificationMessage());
+        return (new MobileVerifierMessage());
     }
 
     /**

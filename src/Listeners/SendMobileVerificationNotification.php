@@ -1,11 +1,11 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Listeners;
+namespace Fouladgar\MobileVerifier\Listeners;
 
-use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Illuminate\Auth\Events\Registered;
 
-class SendMobileVerificationNotification
+class SendMobileVerifierNotification
 {
     /**
      * Handle the event.
@@ -16,7 +16,7 @@ class SendMobileVerificationNotification
     public function handle(Registered $event)
     {
         if ($event->user instanceof MustVerifyMobile && ! $event->user->hasVerifiedMobile()) {
-            $event->user->sendMobileVerificationNotification();
+            $event->user->sendMobileVerifierNotification();
         }
     }
 }

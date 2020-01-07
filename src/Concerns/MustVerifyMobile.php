@@ -1,8 +1,8 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Concerns;
+namespace Fouladgar\MobileVerifier\Concerns;
 
-use Fouladgar\MobileVerification\Notifications\VerifyMobile;
+use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
 
 trait MustVerifyMobile
 {
@@ -33,7 +33,7 @@ trait MustVerifyMobile
      *
      * @return void
      */
-    public function sendMobileVerificationNotification()
+    public function sendMobileVerifierNotification()
     {
         $this->notify(new VerifyMobile);
     }

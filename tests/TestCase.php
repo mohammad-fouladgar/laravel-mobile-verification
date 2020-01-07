@@ -1,8 +1,8 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Tests;
+namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerification\ServiceProvider;
+use Fouladgar\MobileVerifier\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Contracts;
+namespace Fouladgar\MobileVerifier\Contracts;
 
 interface MustVerifyMobile
 {
@@ -23,7 +23,7 @@ interface MustVerifyMobile
      *
      * @return void
      */
-    public function sendMobileVerificationNotification();
+    public function sendMobileVerifierNotification();
 
     /**
      * Get the mobile number that should be used for verification.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fouladgar\MobileVerification\Middleware;
+namespace Fouladgar\MobileVerifier\Middleware;
 
 use Closure;
-use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Illuminate\Support\Facades\Redirect;
 
 class EnsureMobileIsVerified
