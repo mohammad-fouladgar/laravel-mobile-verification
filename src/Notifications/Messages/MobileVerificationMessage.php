@@ -2,57 +2,48 @@
 
 namespace Fouladgar\MobileVerifier\Notifications\Messages;
 
+use Fouladgar\MobileVerifier\Concerns\Payload;
+
 class MobileVerificationMessage
 {
     /**
-     * The message code.
-     *
      * @var string
      */
-    private $code;
-
-
-    /**
-     * Create a new message instance.
-     *
-     * @param string $content
-     */
-    // public function __construct($code = '', $template_id='4303')
-    // {
-    //     $this->code        = $code;
-    //     $this->template_id = $template_id;
-    // }
+    protected $token;
 
     /**
-     * Set the message code.
-     *
-     * @param string $code
-     *
-     * @return $this
+     * @var string
      */
-    public function code($code)
+    protected $to;
+
+    /**
+     * @param $to
+     * @return MobileVerificationMessage
+     */
+    public function to($to): MobileVerificationMessage
     {
-        $this->code = $code;
+        $this->to = $to;
 
         return $this;
     }
 
-    public function getCode()
+    /**
+     * @param $token
+     * @return MobileVerificationMessage
+     */
+    public function token($token): MobileVerificationMessage
     {
-        return $this->code;
+        $this->token = $token;
+
+        return $this;
     }
 
     /**
-     * Set the message template ID.
-     *
-     * @param string $template_id
-     *
-     * @return $this
+     * @return Payload
      */
-    // public function templateId($template_id)
-    // {
-    //     $this->template_id = $template_id;
-
-    //     return $this;
-    // }
+    public function getPayload(): Payload
+    {
+        return (new Payload())->setTo($this->to)
+                              ->setToken($this->token);
+    }
 }

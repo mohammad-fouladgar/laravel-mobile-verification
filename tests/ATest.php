@@ -3,8 +3,10 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Fouladgar\MobileVerifier\Concerns\MustVerifyMobile;
+use Fouladgar\MobileVerifier\Concerns\TokenBroker;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile as ContractsMustVerifyMobile;
 use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
+use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -18,8 +20,8 @@ class  ATest extends TestCase
 
         $user->mobile = '09389599530';
 
-        $event = new Registered($user);
-        $listener = new SendMobileVerificationNotification();
+        $event    = new Registered($user);
+        $listener = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository()));
         $listener->handle($event);
 
         // $this->assertEquals( $listener->handle($event),'send successfuly.');
@@ -27,9 +29,7 @@ class  ATest extends TestCase
 }
 
 
-
 class  User extends Model implements ContractsMustVerifyMobile
 {
-    use MustVerifyMobile,Notifiable;
-
+    use MustVerifyMobile, Notifiable;
 }

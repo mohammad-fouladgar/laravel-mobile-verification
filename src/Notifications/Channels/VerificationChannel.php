@@ -3,17 +3,21 @@
 namespace Fouladgar\MobileVerifier\Notifications\Channels;
 
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
+use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
 use Illuminate\Notifications\Notification;
 
 class VerificationChannel
 {
     /**
+     * SmsClient (i.e. Nexmo)
+     *
      * @var SmsClient
      */
     protected $smsClient;
 
     /**
      * VerificationChannel constructor.
+     *
      * @param SmsClient $smsClient
      */
     public function __construct(SmsClient $smsClient)
@@ -34,13 +38,9 @@ class VerificationChannel
             return;
         }
 
-        $message = $notification->toVerify($notifiable);
+        /** @var MobileVerificationMessage $message */
+        $message = $notification->toMobile($notifiable);
 
-        $payload = [
-            'token' => $message->getCode(),
-            'to'    => $to
-        ];
-
-        return $this->smsClient->sendMessage($payload);
+        return $this->smsClient->sendMessage($message->getPayload());
     }
 }

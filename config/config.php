@@ -1,8 +1,10 @@
 <?php
 
 return [
- 
+
     'user_table' => 'users',
 
-    'sms_client' => Fouladgar\MobileVerifier\Tests\KavenegarClient::class, // 
+    'sms_client' => Fouladgar\MobileVerifier\Tests\KavenegarClient::class,
+
+    'token_count' => 5
 ];
