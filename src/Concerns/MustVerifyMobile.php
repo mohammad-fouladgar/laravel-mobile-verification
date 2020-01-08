@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Concerns;
 
-use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
+use Fouladgar\MobileVerifier\Notifications\VerifyMobile as VerifyMobileNotification;
 
 trait MustVerifyMobile
 {
@@ -29,11 +29,12 @@ trait MustVerifyMobile
     /**
      * Send the mobile verification notification.
      *
+     * @param string $token
      * @return void
      */
-    public function sendMobileVerifierNotification(): void
+    public function sendMobileVerifierNotification(string $token): void
     {
-        $this->notify(new VerifyMobile());
+        $this->notify(new VerifyMobileNotification($token));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
 use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
@@ -20,7 +21,7 @@ class ATest extends TestCase
     /** @test */
     public function it_can()
     {
-        $notification = new VerifyMobile();
+        $notification = new VerifyMobile('123');
         $notifiable = new UserNotifiable();
 
         $verificationChannel = new VerificationChannel(
@@ -37,7 +38,7 @@ class ATest extends TestCase
     /** @test */
     public function it_can2()
     {
-        $notification = new VerifyMobile();
+        $notification = new VerifyMobile('1233');
         $notifiable = new User();
 
         $verificationChannel = new VerificationChannel(
@@ -126,7 +127,7 @@ class ATest extends TestCase
 }
 
 
-class UserNotifiable
+class UserNotifiable implements MustVerifyMobile
 {
     use Notifiable;
 

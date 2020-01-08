@@ -2,8 +2,12 @@
 
 namespace Fouladgar\MobileVerifier;
 
+use Fouladgar\MobileVerifier\Concerns\TokenBroker;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
+use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
+use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
@@ -32,6 +36,9 @@ class ServiceProvider extends BaseServiceProvider
         $this->app->singleton(SmsClient::class, static function ($app) {
             return $app->make(config('mobile_verifier.sms_client'));
         });
+
+        $this->app->bind(TokenRepositoryInterface::class, DatabaseTokenRepository::class);
+        $this->app->bind(TokenBrokerInterface::class, TokenBroker::class);
     }
 
     /**

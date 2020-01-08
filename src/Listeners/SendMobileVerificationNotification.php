@@ -3,10 +3,25 @@
 namespace Fouladgar\MobileVerifier\Listeners;
 
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
 
 class SendMobileVerificationNotification
 {
+    /**
+     * @var TokenBrokerInterface
+     */
+    protected $tokenBroker;
+
+    /**
+     * SendMobileVerificationNotification constructor.
+     * @param TokenBrokerInterface $tokenBroker
+     */
+    public function __construct(TokenBrokerInterface $tokenBroker)
+    {
+        $this->tokenBroker = $tokenBroker;
+    }
+
     /**
      * Handle the event.
      *
@@ -15,8 +30,10 @@ class SendMobileVerificationNotification
      */
     public function handle(Registered $event): void
     {
-        if ($event->user instanceof MustVerifyMobile && !$event->user->hasVerifiedMobile()) {
-            $event->user->sendMobileVerifierNotification();
+        $user = $event->user;
+
+        if ($user instanceof MustVerifyMobile && !$user->hasVerifiedMobile()) {
+            $this->tokenBroker->sendToken($user);
         }
     }
 }

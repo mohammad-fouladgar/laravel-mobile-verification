@@ -2,11 +2,13 @@
 
 namespace Fouladgar\MobileVerifier\Contracts;
 
+use Fouladgar\MobileVerifier\Concerns\Payload;
+
 interface SmsClient
 {
     /**
-     * @param array $payload
+     * @param Payload $payload
      * @return mixed
      */
-    public function sendMessage(array $payload);
+    public function sendMessage(Payload $payload);
 }
