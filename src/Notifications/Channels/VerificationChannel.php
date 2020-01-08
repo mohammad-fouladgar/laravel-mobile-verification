@@ -14,6 +14,7 @@ class VerificationChannel
 
     /**
      * VerificationChannel constructor.
+     * 
      * @param SmsClient $smsClient
      */
     public function __construct(SmsClient $smsClient)

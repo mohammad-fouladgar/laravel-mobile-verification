@@ -20,10 +20,12 @@ class EnsureMobileIsVerified
      */
     public function handle($request, Closure $next, $redirectToRoute = null)
     {
-        if (!$request->user() || ($request->user() instanceof MustVerifyMobile && !$request->user()->hasVerifiedMobile())) {
-            abort(403, 'Your mobile number is not verified.');
-        }
+        $user = auth()->user();
 
+        if (! $user || ($user instanceof MustVerifyMobile && ! $user->hasVerifiedMobile())) {
+            return abort(403, 'Your mobile number is not verified.');
+        }
+        
         return $next($request);
     }
 }
