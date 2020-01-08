@@ -9,7 +9,7 @@ class KavenegarClient implements SmsClient
 {
     public function sendMessage(Payload $payload)
     {
-//        return $this->send($payload['to'], $payload['token']);
+//        return $this->send($payload->to, $payload->token);
         dd($payload);
     }
 
