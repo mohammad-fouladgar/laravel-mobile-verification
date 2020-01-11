@@ -17,13 +17,19 @@ class Verified
     public $user;
 
     /**
+     * @var array
+     */
+    protected $arguments;
+
+    /**
      * Create a new event instance.
      *
      * @param MustVerifyMobile $user
-     * @return void
+     * @param array $arguments
      */
-    public function __construct($user)
+    public function __construct($user, ...$arguments)
     {
-        $this->user = $user;
+        $this->user      = $user;
+        $this->arguments = $arguments;
     }
 }

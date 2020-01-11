@@ -6,7 +6,7 @@ return [
 
     'token_table' => 'mobile_verification_tokens',
 
-    'token_length' => 10,
+    'token_length' => 5,
 
     'token_lifetime' => 5, // min
 
