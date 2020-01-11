@@ -6,7 +6,6 @@ use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Carbon;
 use Exception;
 
 class DatabaseTokenRepository implements TokenRepositoryInterface
@@ -104,7 +103,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      */
     protected function getPayload($mobile, $token): array
     {
-        return ['mobile' => $mobile, 'token' => $token, 'created_at' => new Carbon];
+        return ['mobile' => $mobile, 'token' => $token, 'expires_at' => now()->addMinutes($this->expires)];
     }
 
     /**
