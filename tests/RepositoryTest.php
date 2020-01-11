@@ -6,7 +6,6 @@ use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Illuminate\Database\ConnectionInterface;
 use Exception;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
 use Mockery as m;
 
@@ -21,15 +20,56 @@ class RepositoryTest extends TestCase
         $user->mobile = '555555';
 
         $tokenRepository = new DatabaseTokenRepository(
-            $connection = m::mock(ConnectionInterface::class)
+            app(ConnectionInterface::class)
         );
-
-        $connection->shouldReceive('table')
-                   ->andReturn(m::spy(Builder::class))
-                   ->with('mobile_verification_tokens');
 
         $tokenLength = config('mobile_verifier.token_length');
 
-        $this->assertEquals($tokenLength, Str::length($tokenRepository->create($user)));
+        $tokenLifetime = config('mobile_verifier.token_lifetime');
+
+        $token = $tokenRepository->create($user);
+
+        $this->assertEquals($tokenLength, Str::length($token));
+
+        $this->assertDatabaseHas('mobile_verification_tokens', [
+            'mobile'     => '555555',
+            'token'      => $token,
+            'expires_at' => (string)now()->addMinutes($tokenLifetime)
+        ]);
+    }
+
+    /** @test
+     * @throws Exception
+     */
+    public function it_can_successfully_delete_existing_token()
+    {
+        $user         = new VerifiableUser();
+        $user->mobile = '555555';
+
+        $tokenRepository = new DatabaseTokenRepository(
+            app(ConnectionInterface::class)
+        );
+
+        $record = [
+            'mobile'     => '555555',
+            'token'      => 'token_123',
+            'expires_at' => (string)now()
+        ];
+
+        $tokenRepository->getTable()->insert($record);
+
+        $tokenRepository->deleteExisting($user);
+
+        $this->assertDatabaseMissing('mobile_verification_tokens', $record);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        m::close();
     }
 }

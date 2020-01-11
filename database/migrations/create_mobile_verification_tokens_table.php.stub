@@ -32,6 +32,8 @@ class CreateMobileVerificationsTables extends Migration
             $table->string('mobile')->index();
             $table->string('token', 10)->index();
             $table->timestamp('expires_at')->nullable();
+
+            $table->index(['mobile', 'token']);
         });
 
         Schema::table($this->userTable, static function (Blueprint $table) {

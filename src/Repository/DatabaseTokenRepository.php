@@ -77,7 +77,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      *
      * @return Builder
      */
-    protected function getTable(): Builder
+    public function getTable(): Builder
     {
         return $this->connection->table($this->table);
     }
@@ -88,7 +88,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      * @param MustVerifyMobile $user
      * @return int|null
      */
-    protected function deleteExisting(MustVerifyMobile $user): ?int
+    public function deleteExisting(MustVerifyMobile $user): ?int
     {
         return optional($this->getTable()->where('mobile', $user->getMobileForVerification()))->delete();
     }

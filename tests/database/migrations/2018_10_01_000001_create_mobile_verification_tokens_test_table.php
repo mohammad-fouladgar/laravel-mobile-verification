@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Config\Repository;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -7,7 +8,22 @@ use Illuminate\Support\Facades\Schema;
 class CreateMobileVerificationTokensTestTable extends Migration
 {
     /**
+     * @var Repository|mixed
+     */
+    private $userTable;
+
+    /**
+     * CreateMobileVerificationsTables constructor.
+     */
+    public function __construct()
+    {
+        $this->userTable = config('mobile_verifier.user_table');
+    }
+
+    /**
      * Run the migrations.
+     *
+     * @return void
      */
     public function up(): void
     {
@@ -16,6 +32,12 @@ class CreateMobileVerificationTokensTestTable extends Migration
             $table->string('mobile')->index();
             $table->string('token', 10)->index();
             $table->timestamp('expires_at')->nullable();
+
+            $table->index(['mobile', 'token']);
+        });
+
+        Schema::table($this->userTable, static function (Blueprint $table) {
+            $table->timestamp('mobile_verified_at')->nullable();
         });
     }
 
