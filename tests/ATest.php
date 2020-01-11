@@ -2,27 +2,38 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerifier\Concerns\TokenBroker;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
-use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
 use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
 use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
-use Fouladgar\MobileVerifier\Tests\Models\User as ModelsUser;
+use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
+use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Events\Registered;
 use Mockery as m;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpFoundation\Response;
 
 class ATest extends TestCase
 {
 
     /** @test */
+    public function it_can_hard()
+    {
+        $user = new VerifiableUser();
+        $user->mobile = '55555';
+        $event    = new Registered($user);
+        $listener = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository()));
+
+        $listener->handle($event);
+    }
+
+    /** @test */
     public function it_can()
     {
-        $notification = new VerifyMobile('123');
-        $notifiable = new UserNotifiable();
+        $notification = new VerifyMobile('token_123');
+        $notifiable   = new VerifiableUser();
+
+        $notifiable->mobile = '555555';
 
         $verificationChannel = new VerificationChannel(
             $client = m::mock(SmsClient::class)
@@ -32,116 +43,22 @@ class ATest extends TestCase
                 ->once()
                 ->andReturn(true);
 
-        $this->assertTrue($verificationChannel->send($notifiable,$notification));
+        $this->assertTrue($verificationChannel->send($notifiable, $notification));
     }
 
     /** @test */
     public function it_can2()
     {
-        $notification = new VerifyMobile('1233');
-        $notifiable = new User();
+        $notification = new VerifyMobile('token_123');
+        $notifiable   = new User();
 
         $verificationChannel = new VerificationChannel(
             $client = m::mock(SmsClient::class)
         );
 
         $client->shouldNotReceive('sendMessage');
-       
-        $this->assertNull($verificationChannel->send($notifiable,$notification));
-    }
 
-    /** @test */
-    public function it_can3()
-    {
-       $request = new Request();
-
-       $middleware = new EnsureMobileIsVerified();
-
-       try {
-            $middleware->handle($request,function($request){});
-        } catch (HttpException $ex) {
-            
-            $this->assertEquals(Response::HTTP_FORBIDDEN,$ex->getStatusCode());
-            $this->assertEquals('Your mobile number is not verified.',$ex->getMessage());
-            return;
-        }
-
-        $this->fail('Expected a 403 forbidden');
-    }
-
-    /** @test */
-    public function it_can4()
-    {
-      
-        $this->actingAs(
-         factory(ModelsUser::class)->make()
-        );
-
-        $request = new Request();
-
-       $middleware = new EnsureMobileIsVerified();
-
-        $response = $middleware->handle($request,function($request){});
-
-        $this->assertNull($response);
-    }
-
-    /** @test */
-    public function it_can5()
-    {
-        $this->actingAs(
-            factory(VerifiableUser::class)->make()
-        );
-   
-        $request = new Request();
-
-        $middleware = new EnsureMobileIsVerified();
-
-        try {
-            $middleware->handle($request,function($request){});
-        } catch (HttpException $ex) {
-            
-            $this->assertEquals(Response::HTTP_FORBIDDEN,$ex->getStatusCode());
-            $this->assertEquals('Your mobile number is not verified.',$ex->getMessage());
-            return;
-        }
-
-        $this->fail('Expected a 403 forbidden');
-    }
-
-    /** @test */
-    public function it_can6()
-    {
-        $this->actingAs(
-            factory(VerifiableUser::class)->state('verified')->make()
-        );
-   
-           $request = new Request();
-   
-          $middleware = new EnsureMobileIsVerified();
-   
-           $response = $middleware->handle($request,function($request){});
-   
-           $this->assertNull($response);
+        $this->assertNull($verificationChannel->send($notifiable, $notification));
     }
 }
 
-
-class UserNotifiable implements MustVerifyMobile
-{
-    use Notifiable;
-
-    public $mobile = '2222222';
-
-    public function routeNotificationForVerificationMobile($notification)
-    {
-        return $this->mobile;
-    }
-}
-
-class User
-{
-    use Notifiable;
-
-    public $mobile = '2222222';
-}
