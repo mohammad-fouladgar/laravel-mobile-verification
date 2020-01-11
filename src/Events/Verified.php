@@ -3,6 +3,7 @@
 namespace Fouladgar\MobileVerifier\Events;
 
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Renter\Payment\Http\Requests\VerificationRequest;
 use Illuminate\Queue\SerializesModels;
 
 class Verified
@@ -17,19 +18,21 @@ class Verified
     public $user;
 
     /**
-     * @var array
+     * The validated request
+     *
+     * @var VerificationRequest
      */
-    protected $arguments;
+    protected $request;
 
     /**
-     * Create a new event instance.
+     * Create a new event instance
      *
-     * @param MustVerifyMobile $user
-     * @param array $arguments
+     * @param $user
+     * @param VerificationRequest $request
      */
-    public function __construct($user, ...$arguments)
+    public function __construct($user, VerificationRequest $request)
     {
-        $this->user      = $user;
-        $this->arguments = $arguments;
+        $this->user    = $user;
+        $this->request = $request;
     }
 }
