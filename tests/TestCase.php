@@ -8,7 +8,6 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-
     /**
      * Setup the test environment.
      */
@@ -16,17 +15,28 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        $this->withFactories(__DIR__.'/database/factories');
+        $this->withFactories(__DIR__ . '/database/factories');
     }
+
     /**
      * @param Application $app
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [ServiceProvider::class];
+    }
+
+    /**
+     * Define environment setup.
+     *
+     * @param Application $app
+     */
+    protected function getEnvironmentSetUp($app): void
+    {
+        $app['config']->set('mobile_verifier.sms_client', SampleSMSClient::class);
     }
 }

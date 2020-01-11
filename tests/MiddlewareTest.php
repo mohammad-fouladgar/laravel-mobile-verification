@@ -5,21 +5,21 @@ namespace Fouladgar\MobileVerifier\Tests;
 use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Http\Request;
 
-class MiddlwareTest extends TestCase
+class MiddlewareTest extends TestCase
 {
     /** @test */
-    public function it_can3()
+    public function it_fails_if_user_not_authenticated()
     {
         $request = new Request();
 
         $middleware = new EnsureMobileIsVerified();
 
         try {
-            $middleware->handle($request, function ($request) {});
+            $middleware->handle($request, static function ($request) {});
         } catch (HttpException $ex) {
             $this->assertEquals(Response::HTTP_FORBIDDEN, $ex->getStatusCode());
             $this->assertEquals('Your mobile number is not verified.', $ex->getMessage());
@@ -31,23 +31,23 @@ class MiddlwareTest extends TestCase
     }
 
     /** @test */
-    public function it_can4()
+    public function it_fails_if_user_is_not_verifiable()
     {
         $this->actingAs(
-         factory(User::class)->make()
+            factory(User::class)->make()
         );
 
         $request = new Request();
 
         $middleware = new EnsureMobileIsVerified();
 
-        $response = $middleware->handle($request, function ($request) {});
+        $response = $middleware->handle($request, static function ($request) {});
 
         $this->assertNull($response);
     }
 
     /** @test */
-    public function it_can5()
+    public function it_fails_if_user_mobile_is_not_verified()
     {
         $this->actingAs(
             factory(VerifiableUser::class)->make()
@@ -58,7 +58,7 @@ class MiddlwareTest extends TestCase
         $middleware = new EnsureMobileIsVerified();
 
         try {
-            $middleware->handle($request, function ($request) {});
+            $middleware->handle($request, static function ($request) {});
         } catch (HttpException $ex) {
             $this->assertEquals(Response::HTTP_FORBIDDEN, $ex->getStatusCode());
             $this->assertEquals('Your mobile number is not verified.', $ex->getMessage());
@@ -70,7 +70,7 @@ class MiddlwareTest extends TestCase
     }
 
     /** @test */
-    public function it_can6()
+    public function it_pass_the_request_successfully()
     {
         $this->actingAs(
             factory(VerifiableUser::class)->state('verified')->make()
@@ -80,7 +80,7 @@ class MiddlwareTest extends TestCase
 
         $middleware = new EnsureMobileIsVerified();
 
-        $response = $middleware->handle($request, function ($request) {});
+        $response = $middleware->handle($request, static function ($request) {});
 
         $this->assertNull($response);
     }

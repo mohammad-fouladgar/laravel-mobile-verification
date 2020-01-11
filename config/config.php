@@ -4,7 +4,7 @@ return [
 
     'user_table' => 'users',
 
-    'sms_client' => Fouladgar\MobileVerifier\Tests\KavenegarClient::class,
+    'sms_client' => '',
 
     'token_count' => 5,
 

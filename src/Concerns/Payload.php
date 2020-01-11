@@ -7,12 +7,12 @@ class Payload
     /**
      * @var string
      */
-    public $token;
+    private $token;
 
     /**
      * @var string
      */
-    public $to;
+    private $to;
 
     /**
      * @return string

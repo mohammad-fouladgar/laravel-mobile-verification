@@ -6,6 +6,7 @@ use Fouladgar\MobileVerifier\Concerns\TokenBroker;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
 use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
 use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
+use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -34,7 +35,11 @@ class ServiceProvider extends BaseServiceProvider
         $this->mergeConfigFrom($this->getConfig(), 'mobile_verifier');
 
         $this->app->singleton(SmsClient::class, static function ($app) {
-            return $app->make(config('mobile_verifier.sms_client'));
+            try {
+                return $app->make(config('mobile_verifier.sms_client'));
+            } catch (\Throwable $e) {
+                throw new SMSClientNotFoundException('SMS client is not specified in config file.');
+            }
         });
 
         $this->app->bind(TokenRepositoryInterface::class, DatabaseTokenRepository::class);

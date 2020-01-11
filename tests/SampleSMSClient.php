@@ -5,12 +5,12 @@ namespace Fouladgar\MobileVerifier\Tests;
 use Fouladgar\MobileVerifier\Concerns\Payload;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
 
-class KavenegarClient implements SmsClient
+class SampleSMSClient implements SmsClient
 {
     public function sendMessage(Payload $payload)
     {
-//        return $this->send($payload->to, $payload->token);
-        dd($payload);
+//        return $this->send($payload->getTo(), $payload->getToken());
+        var_dump($payload);
     }
 
     /**

@@ -13,22 +13,21 @@ use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Illuminate\Auth\Events\Registered;
 use Mockery as m;
 
-class ATest extends TestCase
+class VerificationChannelTest extends TestCase
 {
-
-    /** @test */
-    public function it_can_hard()
+    /** @test */ //todo (Should be removed)
+    public function its_a_test()
     {
-        $user = new VerifiableUser();
+        $user         = new VerifiableUser();
         $user->mobile = '55555';
-        $event    = new Registered($user);
-        $listener = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository()));
+        $event        = new Registered($user);
+        $listener     = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository()));
 
         $listener->handle($event);
     }
 
     /** @test */
-    public function it_can()
+    public function it_can_successfully_send_verification_token()
     {
         $notification = new VerifyMobile('token_123');
         $notifiable   = new VerifiableUser();
@@ -40,14 +39,14 @@ class ATest extends TestCase
         );
 
         $client->shouldReceive('sendMessage')
-                ->once()
-                ->andReturn(true);
+               ->once()
+               ->andReturn(true);
 
         $this->assertTrue($verificationChannel->send($notifiable, $notification));
     }
 
     /** @test */
-    public function it_can2()
+    public function it_not_working_on_not_vefifable_user_model()
     {
         $notification = new VerifyMobile('token_123');
         $notifiable   = new User();
@@ -61,4 +60,3 @@ class ATest extends TestCase
         $this->assertNull($verificationChannel->send($notifiable, $notification));
     }
 }
-
