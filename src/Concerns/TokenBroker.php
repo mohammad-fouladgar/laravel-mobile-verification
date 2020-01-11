@@ -30,6 +30,8 @@ class TokenBroker implements TokenBrokerInterface
      */
     public function sendToken(MustVerifyMobile $user): void
     {
-        $user->sendMobileVerifierNotification($this->tokenRepository->create($user));
+        $user->sendMobileVerifierNotification(
+            $this->tokenRepository->create($user)
+        );
     }
 }

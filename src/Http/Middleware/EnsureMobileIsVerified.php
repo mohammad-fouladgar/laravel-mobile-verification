@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Middleware;
+namespace Fouladgar\MobileVerifier\Http\Middleware;
 
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Closure;

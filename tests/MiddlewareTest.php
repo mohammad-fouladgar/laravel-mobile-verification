@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Symfony\Component\HttpFoundation\Response;

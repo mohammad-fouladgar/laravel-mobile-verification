@@ -17,7 +17,7 @@ class SendMobileVerificationNotificationTest extends TestCase
         parent::setUp();
 
         $this->tokenBroker = m::mock(TokenBrokerInterface::class);
-        $this->VerifiableUser = m::mock(VerifiableUser::class)->makePartial();
+        $this->verifiableUser = m::mock(VerifiableUser::class)->makePartial();
     }
    /** @test */
    public function it_can1()
@@ -36,28 +36,28 @@ class SendMobileVerificationNotificationTest extends TestCase
    public function it_can2()
    {
         $tokenBroker    = $this->tokenBroker;
-        $VerifiableUser = $this->VerifiableUser;
+        $verifiableUser = $this->verifiableUser;
 
-        $VerifiableUser->shouldReceive('hasVerifiedMobile')->andReturn(true);
+        $verifiableUser->shouldReceive('hasVerifiedMobile')->andReturn(true);
         $tokenBroker->shouldNotReceive('sendToken');
 
         $listener = new SendMobileVerificationNotification($tokenBroker);
 
-        $listener->handle(new Registered($VerifiableUser));
+        $listener->handle(new Registered($verifiableUser));
    }
 
    /** @test */
    public function it_can3()
    {
         $tokenBroker    = $this->tokenBroker;
-        $VerifiableUser = $this->VerifiableUser;
+        $verifiableUser = $this->verifiableUser;
 
-        $VerifiableUser->shouldReceive('hasVerifiedMobile')->andReturn(false);
+        $verifiableUser->shouldReceive('hasVerifiedMobile')->andReturn(false);
         $tokenBroker->shouldReceive('sendToken');
 
         $listener = new SendMobileVerificationNotification($tokenBroker);
 
-        $listener->handle(new Registered($VerifiableUser));
+        $listener->handle(new Registered($verifiableUser));
    }
 
    public function tearDown():void
