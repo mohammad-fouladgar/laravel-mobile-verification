@@ -2,11 +2,11 @@
 
 namespace Fouladgar\MobileVerifier\Repository;
 
+use Exception;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
-use Exception;
 
 class DatabaseTokenRepository implements TokenRepositoryInterface
 {
@@ -51,7 +51,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
         $tokenLength = 5
     ) {
         $this->table       = $table;
-        $this->expires     = $expires * 60;
+        $this->expires     = $expires;
         $this->connection  = $connection;
         $this->tokenLength = $tokenLength;
     }
@@ -86,11 +86,11 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      * Delete all existing tokens from the database.
      *
      * @param MustVerifyMobile $user
-     * @return int
+     * @return int|null
      */
-    protected function deleteExisting(MustVerifyMobile $user): int
+    protected function deleteExisting(MustVerifyMobile $user): ?int
     {
-        return $this->getTable()->where('mobile', $user->getMobileForVerification())->delete();
+        return optional($this->getTable()->where('mobile', $user->getMobileForVerification()))->delete();
     }
 
     /**
