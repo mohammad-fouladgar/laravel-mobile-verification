@@ -11,6 +11,7 @@ use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Database\ConnectionInterface;
 use Mockery as m;
 
 class VerificationChannelTest extends TestCase
@@ -21,7 +22,9 @@ class VerificationChannelTest extends TestCase
         $user         = new VerifiableUser();
         $user->mobile = '55555';
         $event        = new Registered($user);
-        $listener     = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository()));
+        $listener     = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository(
+            app()->make(ConnectionInterface::class)
+        )));
 
         $listener->handle($event);
     }

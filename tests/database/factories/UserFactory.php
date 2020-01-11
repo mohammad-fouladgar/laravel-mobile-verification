@@ -1,8 +1,10 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/** @var Factory $factory */
+
 use Faker\Generator as Faker;
 use Fouladgar\MobileVerifier\Tests\Models\User;
+use Illuminate\Database\Eloquent\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +17,9 @@ use Fouladgar\MobileVerifier\Tests\Models\User;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(User::class, static function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name'   => $faker->name,
         'mobile' => '555555',
     ];
 });

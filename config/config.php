@@ -4,9 +4,11 @@ return [
 
     'user_table' => 'users',
 
-    'sms_client' => '',
+    'token_table' => 'mobile_verification_tokens',
 
-    'token_count' => 5,
+    'token_length' => 5,
 
-    'token_lifetime' => 5 // min
+    'token_lifetime' => 5, // min
+
+    'sms_client' => ''
 ];

@@ -9,6 +9,7 @@ use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerifier\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
+use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
@@ -42,7 +43,14 @@ class ServiceProvider extends BaseServiceProvider
             }
         });
 
-        $this->app->bind(TokenRepositoryInterface::class, DatabaseTokenRepository::class);
+        $this->app->bind(TokenRepositoryInterface::class, static function ($app) {
+            return new DatabaseTokenRepository(
+                $app->make(ConnectionInterface::class),
+                config('mobile_verifier.token_table'),
+                config('mobile_verifier.token_lifetime')
+            );
+        });
+
         $this->app->bind(TokenBrokerInterface::class, TokenBroker::class);
     }
 
@@ -58,8 +66,8 @@ class ServiceProvider extends BaseServiceProvider
 
         return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
                          ->flatMap(static function ($path) use ($filesystem) {
-                             return $filesystem->glob($path . '*_create_mobile_verifications_table.php');
-                         })->push($this->app->databasePath() . "/migrations/{$timestamp}_create_mobile_verifications_table.php")
+                             return $filesystem->glob($path . '*_create_mobile_verification_tokens_table.php');
+                         })->push($this->app->databasePath() . "/migrations/{$timestamp}_create_mobile_verification_tokens_table.php")
                          ->first();
     }
 
@@ -74,7 +82,7 @@ class ServiceProvider extends BaseServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../database/migrations/create_mobile_verifications_table.php.stub' => $this->getMigrationFileName($filesystem),
+            __DIR__ . '/../database/migrations/create_mobile_verification_tokens_table.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
     }
 
