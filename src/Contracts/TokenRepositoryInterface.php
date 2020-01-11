@@ -14,4 +14,21 @@ interface TokenRepositoryInterface
      * @throws Exception
      */
     public function create(MustVerifyMobile $user): string;
+
+    /**
+     * Determine if a token record exists and is valid.
+     *
+     * @param $user
+     * @param $token
+     * @return bool
+     */
+    public function exists($user, $token): bool;
+
+    /**
+     * Delete all existing tokens from the database.
+     *
+     * @param MustVerifyMobile $user
+     * @return int|null
+     */
+    public function deleteExisting(MustVerifyMobile $user): ?int;
 }

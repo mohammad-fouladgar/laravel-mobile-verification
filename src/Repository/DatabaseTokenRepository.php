@@ -2,11 +2,12 @@
 
 namespace Fouladgar\MobileVerifier\Repository;
 
-use Exception;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Carbon;
+use Exception;
 
 class DatabaseTokenRepository implements TokenRepositoryInterface
 {
@@ -83,14 +84,25 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
     }
 
     /**
-     * Delete all existing tokens from the database.
-     *
-     * @param MustVerifyMobile $user
-     * @return int|null
+     * {@inheritDoc}
      */
     public function deleteExisting(MustVerifyMobile $user): ?int
     {
         return optional($this->getTable()->where('mobile', $user->getMobileForVerification()))->delete();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function exists($user, $token): bool
+    {
+        /** @var MustVerifyMobile $user */
+        $record = (array)$this->getTable()
+                              ->where('mobile', $user->getMobileForVerification())
+                              ->where('token', $token)
+                              ->first();
+
+        return $record && !$this->tokenExpired($record['expires_at']);
     }
 
     /**
@@ -117,5 +129,16 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
         $tokenLength = config('mobile_verifier.token_length');
 
         return (string)random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
+    }
+
+    /**
+     * Determine if the token has expired.
+     *
+     * @param string $expiresAt
+     * @return bool
+     */
+    protected function tokenExpired($expiresAt): bool
+    {
+        return Carbon::parse($expiresAt)->addMinutes($this->expires)->isPast();
     }
 }
