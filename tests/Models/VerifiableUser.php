@@ -19,4 +19,11 @@ class VerifiableUser extends Model implements AuthenticatableContract,IMustVerif
         'name', 'mobile'
     ];
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
 }
