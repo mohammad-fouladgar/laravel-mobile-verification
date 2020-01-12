@@ -19,6 +19,7 @@
             <directory suffix=".php">./src</directory>
             <exclude>
                 <file>src/Events/Verified.php</file>
+                <file>src/Concerns/Payload.php</file>
                 <file>src/ServiceProvider.php</file>
             </exclude>
         </whitelist>

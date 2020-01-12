@@ -39,7 +39,7 @@ class TokenBroker implements TokenBrokerInterface
      */
     public function verifyToken(MustVerifyMobile $user, $token): bool
     {
-        throw_unless($this->tokenExists($user, $token), InvalidTokenException::class);
+        throw_unless($this->tokenExists($user, $token), InvalidTokenException::class,'The token has been expired or invalid');
 
         $user->markMobileAsVerified();
 
