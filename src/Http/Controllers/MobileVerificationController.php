@@ -7,11 +7,12 @@ use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerifier\Http\Requests\VerificationRequest;
 use Fouladgar\MobileVerifier\Events\Verified;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Throwable;
 use Exception;
 
-class MobileVerificationController
+class MobileVerificationController extends Controller
 {
     /**
      * @var TokenBrokerInterface
@@ -24,6 +25,8 @@ class MobileVerificationController
      */
     public function __construct(TokenBrokerInterface $tokenBroker)
     {
+        $this->middleware('auth');
+
         $this->tokenBroker = $tokenBroker;
     }
 

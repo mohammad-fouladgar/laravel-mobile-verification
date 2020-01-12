@@ -10,6 +10,5 @@ class SampleSMSClient implements SmsClient
     public function sendMessage(Payload $payload)
     {
 //        return $this->send($payload->getTo(), $payload->getToken());
-        var_dump($payload);
     }
 }

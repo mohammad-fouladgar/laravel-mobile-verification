@@ -35,7 +35,7 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->bootPublishes($filesystem);
 
-        $this->app['router']->middleware('mobile.verified', EnsureMobileIsVerified::class);
+        $this->app['router']->aliasMiddleware('mobile.verified', EnsureMobileIsVerified::class);
     }
 
     /**
@@ -43,6 +43,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(EventServiceProvider::class);
+
         $this->mergeConfigFrom($this->getConfig(), 'mobile_verifier');
 
         $this->app->singleton(SmsClient::class, static function ($app) {
