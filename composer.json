@@ -1,5 +1,5 @@
 {
-  "name": "fouladgar/mobile-verifier",
+  "name": "fouladgar/laravel-mobile-verifier",
   "description": "",
   "keywords": [
     "laravel",
@@ -9,8 +9,8 @@
     "mobile-verifier"
   ],
   "support": {
-    "issues": "https://github.com/mohammad-fouladgar/mobile-verifier/issues",
-    "source": "https://github.com/mohammad-fouladgar/mobile-verifier"
+    "issues": "https://github.com/mohammad-fouladgar/laravel-mobile-verifier/issues",
+    "source": "https://github.com/mohammad-fouladgar/laravel-mobile-verifier"
   },
   "authors": [
     {
