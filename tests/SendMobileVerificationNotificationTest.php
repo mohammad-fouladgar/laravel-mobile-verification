@@ -59,11 +59,4 @@ class SendMobileVerificationNotificationTest extends TestCase
 
         $listener->handle(new Registered($verifiableUser));
    }
-
-   public function tearDown():void
-   {
-       parent::tearDown();
-
-       m::close();
-   }
 }

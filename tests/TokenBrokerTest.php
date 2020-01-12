@@ -22,11 +22,4 @@ class TokenBrokerTest extends TestCase
 
         $tokenBroker->sendToken($verifiableUser);
     }
-
-    public function tearDown():void
-    {
-        parent::tearDown();
- 
-        m::close();
-    }
 }

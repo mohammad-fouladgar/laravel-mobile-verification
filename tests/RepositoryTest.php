@@ -62,14 +62,4 @@ class RepositoryTest extends TestCase
 
         $this->assertDatabaseMissing('mobile_verification_tokens', $record);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        m::close();
-    }
 }
