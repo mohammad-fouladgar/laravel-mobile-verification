@@ -78,7 +78,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      *
      * @return Builder
      */
-    public function getTable(): Builder
+    protected function getTable(): Builder
     {
         return $this->connection->table($this->table);
     }
