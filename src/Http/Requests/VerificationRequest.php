@@ -1,6 +1,6 @@
 <?php
 
-namespace Renter\Payment\Http\Requests;
+namespace Fouladgar\MobileVerifier\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,8 +16,7 @@ class VerificationRequest extends FormRequest
         $tokenLength = config('mobile_verifier.token_length');
 
         return [
-            'mobile' => 'required|string|exists:users,mobile',
-            'token'  => 'required|string|size:' . $tokenLength
+            'token' => 'required|string|size:' . $tokenLength
         ];
     }
 }

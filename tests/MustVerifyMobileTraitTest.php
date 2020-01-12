@@ -6,26 +6,25 @@ use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 
 class MustVerifyMobileTraitTest extends TestCase
 {
+    /** @test */
+    public function it_checks_has_verified_mobile_method()
+    {
+        $user = factory(VerifiableUser::class)->make();
 
-  /** @test */
-  public function it_can_11()
-  {
-	$user = factory(VerifiableUser::class)->make();
+        $this->assertFalse($user->hasVerifiedMobile());
 
-	$this->assertFalse($user->hasVerifiedMobile());
+        $user = factory(VerifiableUser::class)->state('verified')->make();
 
-	$user = factory(VerifiableUser::class)->state('verified')->make();
+        $this->assertTrue($user->hasVerifiedMobile());
+    }
 
-	$this->assertTrue($user->hasVerifiedMobile());
-  }
+    /** @test */
+    public function it_can_successfully_verify_a_user()
+    {
+        $user = factory(VerifiableUser::class)->create();
 
-  /** @test */
-  public function it_can_12()
-  {
-	$user = factory(VerifiableUser::class)->create();
+        $user->markMobileAsVerified();
 
-	$user->markMobileAsVerified();
-	$this->assertTrue($user->hasVerifiedMobile());
-  }
-
+        $this->assertTrue($user->hasVerifiedMobile());
+    }
 }

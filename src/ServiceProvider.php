@@ -9,13 +9,21 @@ use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
-use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 
 class ServiceProvider extends BaseServiceProvider
 {
+    /**
+     * Default namespace for controllers
+     *
+     * @var string
+     */
+    protected $namespace = 'Fouladgar\MobileVerifier\Http\Controllers';
+
     /**
      * Perform post-registration booting of services.
      *
@@ -23,6 +31,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot(Filesystem $filesystem): void
     {
+        $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
+
         $this->bootPublishes($filesystem);
 
         $this->app['router']->middleware('mobile.verified', EnsureMobileIsVerified::class);
@@ -92,5 +102,15 @@ class ServiceProvider extends BaseServiceProvider
     protected function getConfig(): string
     {
         return __DIR__ . '/../config/config.php';
+    }
+
+    /**
+     * Map routes
+     */
+    protected function mapApiRoutes(): void
+    {
+        Route::prefix('auth')
+             ->namespace($this->namespace)
+             ->group(__DIR__ . '/Http/routes.php');
     }
 }

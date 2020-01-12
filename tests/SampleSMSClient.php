@@ -12,18 +12,4 @@ class SampleSMSClient implements SmsClient
 //        return $this->send($payload->getTo(), $payload->getToken());
         var_dump($payload);
     }
-
-    /**
-     * @param $number
-     * @param $message
-     * @return mixed
-     */
-    public function send($number, $message)
-    {
-        try {
-            return Kavenegar::Send(config('kavenegar.sender'), $number, $message);
-        } catch (\Exception $e) {
-            //todo log error
-        }
-    }
 }

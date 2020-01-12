@@ -2,33 +2,15 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Concerns\TokenBroker;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
-use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
 use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
 use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
-use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Database\ConnectionInterface;
 use Mockery as m;
 
 class VerificationChannelTest extends TestCase
 {
-    /** @test */ //todo (Should be removed)
-    public function its_a_test()
-    {
-        $user         = new VerifiableUser();
-        $user->mobile = '55555';
-        $event        = new Registered($user);
-        $listener     = new SendMobileVerificationNotification(new TokenBroker(new DatabaseTokenRepository(
-            app()->make(ConnectionInterface::class)
-        )));
-
-        $listener->handle($event);
-    }
-
     /** @test */
     public function it_can_successfully_send_verification_token()
     {
@@ -41,9 +23,7 @@ class VerificationChannelTest extends TestCase
             $client = m::mock(SmsClient::class)
         );
 
-        $client->shouldReceive('sendMessage')
-               ->once()
-               ->andReturn(true);
+        $client->shouldReceive('sendMessage')->andReturn(true);
 
         $this->assertTrue($verificationChannel->send($notifiable, $notification));
     }

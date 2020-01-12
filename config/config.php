@@ -10,5 +10,10 @@ return [
 
     'token_lifetime' => 5, // min
 
-    'sms_client' => ''
+    'sms_client' => '',
+
+    'routes' => [
+        'verify' => '/auth/mobile/verify',
+        'resend' => '/auth/mobile/resend',
+    ]
 ];
