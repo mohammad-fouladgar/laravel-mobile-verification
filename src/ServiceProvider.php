@@ -96,6 +96,10 @@ class ServiceProvider extends BaseServiceProvider
         ], 'config');
 
         $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/MobileVerifier'),
+        ]);
+
+        $this->publishes([
             __DIR__ . '/../database/migrations/create_mobile_verification_tokens_table.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
     }
