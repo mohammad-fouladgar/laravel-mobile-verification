@@ -126,7 +126,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      */
     protected function createNewToken(): string
     {
-        $tokenLength = config('mobile_verifier.token_length');
+        $tokenLength = config('mobile_verifier.token_length', 5);
 
         return (string)random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
     }

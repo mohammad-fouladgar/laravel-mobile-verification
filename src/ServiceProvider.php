@@ -58,8 +58,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->app->bind(TokenRepositoryInterface::class, static function ($app) {
             return new DatabaseTokenRepository(
                 $app->make(ConnectionInterface::class),
-                config('mobile_verifier.token_table'),
-                config('mobile_verifier.token_lifetime')
+                config('mobile_verifier.token_table', 'mobile_verification_tokens'),
+                config('mobile_verifier.token_lifetime', 5)
             );
         });
 

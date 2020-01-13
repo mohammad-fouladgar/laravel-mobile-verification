@@ -13,7 +13,7 @@ class VerificationRequest extends FormRequest
      */
     public function rules(): array
     {
-        $tokenLength = config('mobile_verifier.token_length');
+        $tokenLength = config('mobile_verifier.token_length', 5);
 
         return [
             'token' => 'required|string|size:' . $tokenLength

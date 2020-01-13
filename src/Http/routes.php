@@ -3,7 +3,8 @@
 use Fouladgar\MobileVerifier\Http\Controllers\MobileVerificationController;
 use Illuminate\Support\Facades\Route;
 
-$routes = config('mobile_verifier.routes');
+$verifyRoute = config('mobile_verifier.routes.verify', '/auth/mobile/verify');
+$resendRoute = config('mobile_verifier.routes.verify', '/auth/mobile/resend');
 
-Route::post($routes['verify'], [MobileVerificationController::class, 'verify'])->name('mobile.verified');
-Route::post($routes['resend'], [MobileVerificationController::class, 'resend'])->name('mobile.resend');
+Route::post($verifyRoute, [MobileVerificationController::class, 'verify'])->name('mobile.verified');
+Route::post($resendRoute, [MobileVerificationController::class, 'resend'])->name('mobile.resend');
