@@ -51,7 +51,7 @@ class ServiceProvider extends BaseServiceProvider
             try {
                 return $app->make(config('mobile_verifier.sms_client'));
             } catch (\Throwable $e) {
-                throw new SMSClientNotFoundException('SMS client is not specified in config file.');
+                throw new SMSClientNotFoundException();
             }
         });
 
