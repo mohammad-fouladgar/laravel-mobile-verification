@@ -11,6 +11,6 @@ class InvalidTokenException extends Exception
      */
     public function __construct()
     {
-        parent::__construct('The token has been expired or invalid.');
+        parent::__construct('The token has been expired or invalid.', 406);
     }
 }

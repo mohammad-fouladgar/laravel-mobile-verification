@@ -21,6 +21,7 @@
                 <file>src/Events/Verified.php</file>
                 <file>src/Concerns/Payload.php</file>
                 <file>src/ServiceProvider.php</file>
+                <file>src/Exceptions/SMSClientNotFoundException.php</file>
             </exclude>
         </whitelist>
     </filter>
