@@ -10,7 +10,7 @@ return [
      | Here you should specify name of your users table in database.
      |
      */
-    'user_table'     => 'users',
+    'user_table' => 'users',
 
     /*
      |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ return [
      | This table will held all information about created verification tokens for users.
      |
      */
-    'token_table'    => 'mobile_verification_tokens',
+    'token_table' => 'mobile_verification_tokens',
 
     /*
      |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ return [
      | Here you can specify length of verification tokens which will send to users.
      |
      */
-    'token_length'   => 5,
+    'token_length' => 5,
 
     /*
      |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
      | responsible for sending SMS to users.
      |
      */
-    'sms_client'     => '',
+    'sms_client' => '',
 
     /*
      |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return [
      | Here you can specify your desired routes for verify and resend actions.
      |
      */
-    'routes'         => [
+    'routes' => [
 
         'verify' => '/auth/mobile/verify',
         'resend' => '/auth/mobile/resend',
@@ -77,6 +77,6 @@ return [
      | Here you can specify throttle for verify/resend routes
      |
      */
-    'throttle'       => 10,
+    'throttle' => 10,
 
 ];
