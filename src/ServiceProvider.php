@@ -33,6 +33,8 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
 
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'MobileVerifier');
+
         $this->bootPublishes($filesystem);
 
         $this->app['router']->aliasMiddleware('mobile.verified', EnsureMobileIsVerified::class);

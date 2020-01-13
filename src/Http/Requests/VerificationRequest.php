@@ -4,6 +4,9 @@ namespace Fouladgar\MobileVerifier\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed token
+ */
 class VerificationRequest extends FormRequest
 {
     /**

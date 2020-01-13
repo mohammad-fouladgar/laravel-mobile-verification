@@ -8,7 +8,6 @@ use Illuminate\Routing\Controller;
 
 abstract class BaseController extends Controller
 {
-
     use VerifiesMobiles;
 
     /**
@@ -16,9 +15,9 @@ abstract class BaseController extends Controller
      */
     protected $tokenBroker;
 
-     /**
+    /**
      * Create a new controller instance.
-     * 
+     *
      * @param TokenBrokerInterface $tokenBroker
      * @return void
      */
@@ -26,8 +25,9 @@ abstract class BaseController extends Controller
     {
         $this->middleware('auth');
 
-        // TODO: set throttle from config.
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $throttle = config('mobile_verifier.throttle', 10);
+
+        $this->middleware("throttle:$throttle,1")->only('verify', 'resend');
 
         $this->tokenBroker = $tokenBroker;
     }

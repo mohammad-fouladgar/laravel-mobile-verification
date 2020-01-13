@@ -2,9 +2,10 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
+use Illuminate\Routing\Middleware\ThrottleRequests;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 use Fouladgar\MobileVerifier\ServiceProvider;
 use Illuminate\Foundation\Application;
-use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
@@ -14,6 +15,8 @@ class TestCase extends BaseTestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->withoutMiddleware(ThrottleRequests::class);
 
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
