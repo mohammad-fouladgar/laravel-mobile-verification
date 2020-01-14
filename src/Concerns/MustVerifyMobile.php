@@ -3,6 +3,7 @@
 namespace Fouladgar\MobileVerifier\Concerns;
 
 use Fouladgar\MobileVerifier\Notifications\VerifyMobile as VerifyMobileNotification;
+use Illuminate\Config\Repository;
 
 trait MustVerifyMobile
 {
@@ -44,7 +45,7 @@ trait MustVerifyMobile
      */
     public function getMobileForVerification(): string
     {
-        return $this->mobile;
+        return $this->{$this->getMobileField()};
     }
 
     /**
@@ -54,6 +55,14 @@ trait MustVerifyMobile
      */
     public function routeNotificationForVerificationMobile(): string
     {
-        return $this->mobile;
+        return $this->{$this->getMobileField()};
+    }
+
+    /**
+     * @return Repository|mixed
+     */
+    private function getMobileField()
+    {
+        return config('mobile_verifier.mobile_column', 'mobile');
     }
 }

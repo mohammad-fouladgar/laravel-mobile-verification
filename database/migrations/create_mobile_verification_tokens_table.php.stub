@@ -18,12 +18,18 @@ class CreateMobileVerificationTokensTable extends Migration
     private $tokenTable;
 
     /**
+     * @var Repository
+     */
+    private $mobileColumn;
+
+    /**
      * CreateMobileVerificationTokensTable constructor.
      */
     public function __construct()
     {
-        $this->userTable  = config('mobile_verifier.user_table', 'users');
-        $this->tokenTable = config('mobile_verifier.token_table', 'mobile_verification_tokens');
+        $this->userTable    = config('mobile_verifier.user_table', 'users');
+        $this->mobileColumn = config('mobile_verifier.mobile_column', 'mobile');
+        $this->tokenTable   = config('mobile_verifier.token_table', 'mobile_verification_tokens');
     }
 
     /**
@@ -43,7 +49,7 @@ class CreateMobileVerificationTokensTable extends Migration
         });
 
         Schema::table($this->userTable, static function (Blueprint $table) {
-            $table->timestamp('mobile_verified_at')->nullable()->after('mobile');
+            $table->timestamp('mobile_verified_at')->nullable()->after($this->mobileColumn);
         });
     }
 
