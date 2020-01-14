@@ -65,7 +65,7 @@ trait VerifiesMobiles
      */
     protected function successMessage(): JsonResponse
     {
-        return response()->json(['message' => 'Your mobile has been verified successfully.'], 200);
+        return response()->json(['message' => __('mobile_verifier.successful_verification')], 200);
     }
 
     /**
@@ -73,6 +73,6 @@ trait VerifiesMobiles
      */
     protected function unprocessableEntity(): JsonResponse
     {
-        return response()->json(['message' => 'Your mobile already has been verified.'], 422);
+        return response()->json(['message' => __('mobile_verifier.already_verified')], 422);
     }
 }
