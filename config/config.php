@@ -14,6 +14,17 @@ return [
 
     /*
      |--------------------------------------------------------------------------
+     | Default Mobile Column
+     |--------------------------------------------------------------------------
+     |
+     | Here you should specify name of your column (in users table) which user
+     | mobile number reside in.
+     |
+     */
+    'mobile_column' => 'mobile',
+
+    /*
+     |--------------------------------------------------------------------------
      | Default Verification Tokens Table Name
      |--------------------------------------------------------------------------
      |

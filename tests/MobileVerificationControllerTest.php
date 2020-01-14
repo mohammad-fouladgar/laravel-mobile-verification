@@ -82,7 +82,7 @@ class MobileVerificationControllerTest extends TestCase
              ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
         $this->post(route('mobile.resend'))
-             ->assertViewHas('mobileVerificationError');
+             ->assertStatus(Response::HTTP_FOUND);
     }
 
     /**
@@ -98,6 +98,6 @@ class MobileVerificationControllerTest extends TestCase
              ->assertOk();
 
         $this->post(route('mobile.resend'))
-             ->assertStatus(Response::HTTP_FOUND);
+             ->assertViewHas('mobileVerificationResend');
     }
 }

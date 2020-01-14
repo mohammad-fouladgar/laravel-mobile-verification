@@ -96,7 +96,7 @@ class ServiceProvider extends BaseServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/MobileVerifier'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/MobileVerifier'),
         ]);
 
         $this->publishes([
