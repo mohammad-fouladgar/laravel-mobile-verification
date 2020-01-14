@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Mobile Verification</title>
+    <title>Home</title>
     <style type="text/css">
         body {
             background-color: #F3EBF6;
@@ -80,20 +80,11 @@
 
 <body>
 <div class="main">
-    <p class="sign" align="center">Mobile Verification</p>
-    <form class="form1" action="{{route('mobile.verify')}}">
-        <input class="un " type="text" align="center" placeholder="Token">
-        <button class="submit">Verify</button>
-        <button class="submit">Resend</button>
-    </form>
+    <p class="sign" align="center">Home</p>
     <br>
     <p align="center" style="color: red;font-size: small">
-        @if(isset($mobileVerificationError))
-            {{ $mobileVerificationError }}
-        @endif
-
-        @if(isset($mobileVerificationResend))
-            {{ $mobileVerificationResend }}
+        @if(isset($mobileVerificationVerified))
+            {{ $mobileVerificationVerified }}
         @endif
     </p>
 </div>

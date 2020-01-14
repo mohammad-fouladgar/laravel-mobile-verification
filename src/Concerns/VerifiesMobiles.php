@@ -10,7 +10,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 trait VerifiesMobiles
 {
@@ -25,7 +24,7 @@ trait VerifiesMobiles
         $user = $request->user();
 
         if ($user->hasVerifiedMobile()) {
-            return $request->expectsJson() ? $this->unprocessableEntityJson() : redirect($this->redirectPath());
+            return $request->expectsJson() ? $this->unprocessableEntity() : redirect($this->redirectPath());
         }
 
         try {
@@ -52,13 +51,13 @@ trait VerifiesMobiles
         $user = $request->user();
 
         if ($user->hasVerifiedMobile()) {
-            return $request->expectsJson() ? $this->unprocessableEntityJson() : $this->unprocessableEntityView();
+            return $request->expectsJson() ? $this->unprocessableEntity() : redirect($this->redirectPath());
         }
 
         $this->tokenBroker->sendToken($user);
 
         return $request->expectsJson() ? $this->successMessage() :
-            redirect($this->redirectPath())->with('mobileVerificationResend', true);
+            view('MobileVerifier::auth.mobile_verify')->with('mobileVerificationResend', true);
     }
 
     /**
@@ -72,17 +71,8 @@ trait VerifiesMobiles
     /**
      * @return JsonResponse
      */
-    protected function unprocessableEntityJson(): JsonResponse
+    protected function unprocessableEntity(): JsonResponse
     {
         return response()->json(['message' => 'Your mobile already has been verified.'], 422);
-    }
-
-    /**
-     * @return Factory|View
-     */
-    protected function unprocessableEntityView()
-    {
-        return view('MobileVerifier::auth.mobile_verify')
-            ->with('mobileVerificationError', 'Your mobile already has been verified.');
     }
 }
