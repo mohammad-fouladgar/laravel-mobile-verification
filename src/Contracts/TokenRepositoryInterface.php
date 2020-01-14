@@ -10,8 +10,10 @@ interface TokenRepositoryInterface
      * Create a new token record.
      *
      * @param MustVerifyMobile $user
-     * @return string
+     *
      * @throws Exception
+     *
+     * @return string
      */
     public function create(MustVerifyMobile $user): string;
 
@@ -20,6 +22,7 @@ interface TokenRepositoryInterface
      *
      * @param $user
      * @param $token
+     *
      * @return bool
      */
     public function exists($user, $token): bool;
@@ -28,6 +31,7 @@ interface TokenRepositoryInterface
      * Delete all existing tokens from the database.
      *
      * @param MustVerifyMobile $user
+     *
      * @return int|null
      */
     public function deleteExisting(MustVerifyMobile $user): ?int;

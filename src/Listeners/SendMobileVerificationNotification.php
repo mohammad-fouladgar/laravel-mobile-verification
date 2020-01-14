@@ -2,10 +2,10 @@
 
 namespace Fouladgar\MobileVerifier\Listeners;
 
+use Exception;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
-use Exception;
 
 class SendMobileVerificationNotification
 {
@@ -16,6 +16,7 @@ class SendMobileVerificationNotification
 
     /**
      * SendMobileVerificationNotification constructor.
+     *
      * @param TokenBrokerInterface $tokenBroker
      */
     public function __construct(TokenBrokerInterface $tokenBroker)
@@ -27,8 +28,10 @@ class SendMobileVerificationNotification
      * Handle the event.
      *
      * @param Registered $event
-     * @return void
+     *
      * @throws Exception
+     *
+     * @return void
      */
     public function handle(Registered $event): void
     {

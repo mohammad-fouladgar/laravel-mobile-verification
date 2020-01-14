@@ -8,19 +8,23 @@ use Throwable;
 interface TokenBrokerInterface
 {
     /**
-     * Send token via notification
+     * Send token via notification.
      *
      * @param MustVerifyMobile $user
-     * @return void
+     *
      * @throws Exception
+     *
+     * @return void
      */
     public function sendToken(MustVerifyMobile $user): void;
 
     /**
      * @param MustVerifyMobile $user
      * @param $token
-     * @return bool
+     *
      * @throws Throwable
+     *
+     * @return bool
      */
     public function verifyToken(MustVerifyMobile $user, $token): bool;
 }

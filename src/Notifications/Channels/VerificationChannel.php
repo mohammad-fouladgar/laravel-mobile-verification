@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 class VerificationChannel
 {
     /**
-     * SmsClient (i.e. Nexmo)
+     * SmsClient (i.e. Nexmo).
      *
      * @var SmsClient
      */
@@ -30,6 +30,7 @@ class VerificationChannel
      *
      * @param $notifiable
      * @param Notification $notification
+     *
      * @return mixed|void
      */
     public function send($notifiable, Notification $notification)

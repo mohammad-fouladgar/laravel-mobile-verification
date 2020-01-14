@@ -2,14 +2,14 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
+use Exception;
 use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Illuminate\Config\Repository;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Config\Repository;
 use Illuminate\Support\Str;
 use ReflectionMethod;
-use Exception;
 
 class TokenRepositoryTest extends TestCase
 {
@@ -34,7 +34,7 @@ class TokenRepositoryTest extends TestCase
     private $tokenLifetime;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setUp(): void
     {
@@ -47,10 +47,10 @@ class TokenRepositoryTest extends TestCase
         $method = new ReflectionMethod(DatabaseTokenRepository::class, 'getTable');
         $method->setAccessible(true);
 
-        $this->table           = $method->invoke($tokenRepository);
+        $this->table = $method->invoke($tokenRepository);
         $this->tokenRepository = $tokenRepository;
-        $this->tokenLength     = config('mobile_verifier.token_length');
-        $this->tokenLifetime   = config('mobile_verifier.token_lifetime');
+        $this->tokenLength = config('mobile_verifier.token_length');
+        $this->tokenLifetime = config('mobile_verifier.token_lifetime');
     }
 
     /** @test
@@ -58,7 +58,7 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_create_a_token()
     {
-        $user         = new VerifiableUser();
+        $user = new VerifiableUser();
         $user->mobile = '555555';
 
         $token = $this->tokenRepository->create($user);
@@ -68,7 +68,7 @@ class TokenRepositoryTest extends TestCase
         $this->assertDatabaseHas('mobile_verification_tokens', [
             'mobile'     => '555555',
             'token'      => $token,
-            'expires_at' => (string)now()->addMinutes($this->tokenLifetime)
+            'expires_at' => (string) now()->addMinutes($this->tokenLifetime),
         ]);
     }
 
@@ -77,13 +77,13 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_delete_existing_token()
     {
-        $user         = new VerifiableUser();
+        $user = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
             'mobile'     => '555555',
             'token'      => 'token_123',
-            'expires_at' => (string)now()
+            'expires_at' => (string) now(),
         ];
 
         $this->table->insert($record);
@@ -98,13 +98,13 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_find_existing_and_not_expired_token()
     {
-        $user         = new VerifiableUser();
+        $user = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
             'mobile'     => '555555',
             'token'      => 'token_123',
-            'expires_at' => (string)now()
+            'expires_at' => (string) now(),
         ];
 
         $this->table->insert($record);
@@ -117,13 +117,13 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_fails_when_token_is_exist_but_expired()
     {
-        $user         = new VerifiableUser();
+        $user = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
             'mobile'     => '555555',
             'token'      => 'token_123',
-            'expires_at' => (string)now()->subMinutes($this->tokenLifetime)
+            'expires_at' => (string) now()->subMinutes($this->tokenLifetime),
         ];
 
         $this->table->insert($record);
@@ -136,13 +136,13 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_fails_when_token_is_not_existed()
     {
-        $user         = new VerifiableUser();
+        $user = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
             'mobile'     => '555555',
             'token'      => 'token_123',
-            'expires_at' => (string)now()
+            'expires_at' => (string) now(),
         ];
 
         $this->table->insert($record);

@@ -4,8 +4,8 @@ namespace Fouladgar\MobileVerifier\Tests;
 
 use Fouladgar\MobileVerifier\Concerns\TokenBroker;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Symfony\Component\HttpFoundation\Response;
 use Mockery as m;
+use Symfony\Component\HttpFoundation\Response;
 
 class MobileVerificationControllerTest extends TestCase
 {

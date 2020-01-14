@@ -8,6 +8,7 @@ interface SmsClient
 {
     /**
      * @param Payload $payload
+     *
      * @return mixed
      */
     public function sendMessage(Payload $payload);

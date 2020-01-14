@@ -4,19 +4,20 @@ namespace Fouladgar\MobileVerifier\Tests\Models;
 
 use Fouladgar\MobileVerifier\Concerns\MustVerifyMobile as MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile as IMustVerifyMobile;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class VerifiableUser extends Model implements AuthenticatableContract,IMustVerifyMobile
+class VerifiableUser extends Model implements AuthenticatableContract, IMustVerifyMobile
 {
-    use Authenticatable, MustVerifyMobile, Notifiable;
-
+    use Authenticatable;
+    use MustVerifyMobile;
+    use Notifiable;
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'mobile'
+        'name', 'mobile',
     ];
 
     /**
@@ -25,5 +26,4 @@ class VerifiableUser extends Model implements AuthenticatableContract,IMustVerif
      * @var string
      */
     protected $table = 'users';
-
 }

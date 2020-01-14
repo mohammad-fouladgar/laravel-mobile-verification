@@ -5,9 +5,9 @@ namespace Fouladgar\MobileVerifier\Tests;
 use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Http\Request;
 
 class MiddlewareTest extends TestCase
 {
@@ -19,7 +19,8 @@ class MiddlewareTest extends TestCase
         $middleware = new EnsureMobileIsVerified();
 
         try {
-            $middleware->handle($request, static function ($request) {});
+            $middleware->handle($request, static function ($request) {
+            });
         } catch (HttpException $ex) {
             $this->assertEquals(Response::HTTP_FORBIDDEN, $ex->getStatusCode());
             $this->assertEquals('Your mobile number is not verified.', $ex->getMessage());
@@ -41,7 +42,8 @@ class MiddlewareTest extends TestCase
 
         $middleware = new EnsureMobileIsVerified();
 
-        $response = $middleware->handle($request, static function ($request) {});
+        $response = $middleware->handle($request, static function ($request) {
+        });
 
         $this->assertNull($response);
     }
@@ -58,7 +60,8 @@ class MiddlewareTest extends TestCase
         $middleware = new EnsureMobileIsVerified();
 
         try {
-            $middleware->handle($request, static function ($request) {});
+            $middleware->handle($request, static function ($request) {
+            });
         } catch (HttpException $ex) {
             $this->assertEquals(Response::HTTP_FORBIDDEN, $ex->getStatusCode());
             $this->assertEquals('Your mobile number is not verified.', $ex->getMessage());
@@ -80,7 +83,8 @@ class MiddlewareTest extends TestCase
 
         $middleware = new EnsureMobileIsVerified();
 
-        $response = $middleware->handle($request, static function ($request) {});
+        $response = $middleware->handle($request, static function ($request) {
+        });
 
         $this->assertNull($response);
     }

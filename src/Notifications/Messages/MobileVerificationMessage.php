@@ -18,9 +18,10 @@ class MobileVerificationMessage
 
     /**
      * @param $to
+     *
      * @return MobileVerificationMessage
      */
-    public function to($to): MobileVerificationMessage
+    public function to($to): self
     {
         $this->to = $to;
 
@@ -29,9 +30,10 @@ class MobileVerificationMessage
 
     /**
      * @param $token
+     *
      * @return MobileVerificationMessage
      */
-    public function token($token): MobileVerificationMessage
+    public function token($token): self
     {
         $this->token = $token;
 

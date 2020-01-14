@@ -4,7 +4,6 @@
 
 use Carbon\Carbon;
 use Faker\Generator as Faker;
-use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 
 /*
@@ -20,12 +19,12 @@ use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 
 $factory->define(VerifiableUser::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'mobile' => '555555',
-        'mobile_verified_at' => null
+        'name'               => $faker->name,
+        'mobile'             => '555555',
+        'mobile_verified_at' => null,
     ];
 });
 
-$factory->state(VerifiableUser::class,'verified',[
-    'mobile_verified_at' => Carbon::now()
+$factory->state(VerifiableUser::class, 'verified', [
+    'mobile_verified_at' => Carbon::now(),
 ]);

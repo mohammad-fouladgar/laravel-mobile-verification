@@ -19,6 +19,7 @@ abstract class BaseController extends Controller
      * Create a new controller instance.
      *
      * @param TokenBrokerInterface $tokenBroker
+     *
      * @return void
      */
     public function __construct(TokenBrokerInterface $tokenBroker)

@@ -15,7 +15,7 @@ class VerificationChannelTest extends TestCase
     public function it_can_successfully_send_verification_token()
     {
         $notification = new VerifyMobile('token_123');
-        $notifiable   = new VerifiableUser();
+        $notifiable = new VerifiableUser();
 
         $notifiable->mobile = '555555';
 
@@ -32,7 +32,7 @@ class VerificationChannelTest extends TestCase
     public function it_not_working_on_not_vefifable_user_model()
     {
         $notification = new VerifyMobile('token_123');
-        $notifiable   = new User();
+        $notifiable = new User();
 
         $verificationChannel = new VerificationChannel(
             $client = m::mock(SmsClient::class)
