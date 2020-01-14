@@ -22,13 +22,13 @@ class ListenerTest extends TestCase
     private $verifiableUser;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->tokenBroker    = m::mock(TokenBrokerInterface::class);
+        $this->tokenBroker = m::mock(TokenBrokerInterface::class);
         $this->verifiableUser = m::mock(VerifiableUser::class)->makePartial();
     }
 

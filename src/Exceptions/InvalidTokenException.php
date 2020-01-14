@@ -7,7 +7,7 @@ use Exception;
 class InvalidTokenException extends Exception
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct()
     {

@@ -7,7 +7,7 @@ use Exception;
 class SMSClientNotFoundException extends Exception
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct()
     {

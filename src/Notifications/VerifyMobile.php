@@ -20,6 +20,7 @@ class VerifyMobile extends Notification
      * Create a notification instance.
      *
      * @param string $token
+     *
      * @return void
      */
     public function __construct(string $token)
@@ -31,6 +32,7 @@ class VerifyMobile extends Notification
      * Get the notification's channels.
      *
      * @param mixed $notifiable
+     *
      * @return array|string
      */
     public function via($notifiable)
@@ -42,11 +44,12 @@ class VerifyMobile extends Notification
      * Build the mobile representation of the notification.
      *
      * @param $notifiable
+     *
      * @return MobileVerificationMessage
      */
     public function toMobile(MustVerifyMobile $notifiable): MobileVerificationMessage
     {
-        return (new MobileVerificationMessage)->to($notifiable->getMobileForVerification())
+        return (new MobileVerificationMessage())->to($notifiable->getMobileForVerification())
                                               ->token($this->token);
     }
 }

@@ -22,6 +22,7 @@ interface MustVerifyMobile
      * Send the mobile verification notification.
      *
      * @param string $token
+     *
      * @return void
      */
     public function sendMobileVerifierNotification(string $token): void;

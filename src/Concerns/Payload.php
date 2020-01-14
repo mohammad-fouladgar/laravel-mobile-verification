@@ -24,9 +24,10 @@ class Payload
 
     /**
      * @param string $token
+     *
      * @return Payload
      */
-    public function setToken(string $token): Payload
+    public function setToken(string $token): self
     {
         $this->token = $token;
 
@@ -43,9 +44,10 @@ class Payload
 
     /**
      * @param string $to
+     *
      * @return Payload
      */
-    public function setTo(string $to): Payload
+    public function setTo(string $to): self
     {
         $this->to = $to;
 

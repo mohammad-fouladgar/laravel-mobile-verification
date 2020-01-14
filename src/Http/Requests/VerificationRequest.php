@@ -19,7 +19,7 @@ class VerificationRequest extends FormRequest
         $tokenLength = config('mobile_verifier.token_length', 5);
 
         return [
-            'token' => 'required|string|size:' . $tokenLength
+            'token' => 'required|string|size:'.$tokenLength,
         ];
     }
 }

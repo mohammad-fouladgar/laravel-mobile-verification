@@ -2,12 +2,12 @@
 
 namespace Fouladgar\MobileVerifier\Repository;
 
+use Exception;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
-use Exception;
 
 class DatabaseTokenRepository implements TokenRepositoryInterface
 {
@@ -41,9 +41,9 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      * Create a new token repository instance.
      *
      * @param ConnectionInterface $connection
-     * @param string $table
-     * @param int $expires
-     * @param int $tokenLength
+     * @param string              $table
+     * @param int                 $expires
+     * @param int                 $tokenLength
      */
     public function __construct(
         ConnectionInterface $connection,
@@ -51,14 +51,14 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
         $expires = 5,
         $tokenLength = 5
     ) {
-        $this->table       = $table;
-        $this->expires     = $expires;
-        $this->connection  = $connection;
+        $this->table = $table;
+        $this->expires = $expires;
+        $this->connection = $connection;
         $this->tokenLength = $tokenLength;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function create(MustVerifyMobile $user): string
     {
@@ -84,7 +84,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function deleteExisting(MustVerifyMobile $user): ?int
     {
@@ -92,12 +92,12 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function exists($user, $token): bool
     {
         /** @var MustVerifyMobile $user */
-        $record = (array)$this->getTable()
+        $record = (array) $this->getTable()
                               ->where('mobile', $user->getMobileForVerification())
                               ->where('token', $token)
                               ->first();
@@ -110,8 +110,10 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
      *
      * @param $mobile
      * @param string $token
-     * @return array
+     *
      * @throws Exception
+     *
+     * @return array
      */
     protected function getPayload($mobile, $token): array
     {
@@ -121,20 +123,22 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
     /**
      * Create a new token for the user.
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     protected function createNewToken(): string
     {
         $tokenLength = config('mobile_verifier.token_length', 5);
 
-        return (string)random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
+        return (string) random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
     }
 
     /**
      * Determine if the token has expired.
      *
      * @param string $expiresAt
+     *
      * @return bool
      */
     protected function tokenExpired($expiresAt): bool

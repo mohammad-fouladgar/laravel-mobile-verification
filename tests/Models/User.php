@@ -9,8 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Model implements AuthenticatableContract
 {
-    use Authenticatable, Notifiable;
-
+    use Authenticatable;
+    use Notifiable;
     public $timestamps = false;
 
     protected $fillable = [

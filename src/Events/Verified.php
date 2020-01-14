@@ -17,21 +17,21 @@ class Verified
     public $user;
 
     /**
-     * The validated request
+     * The validated request.
      *
      * @var array
      */
     protected $request;
 
     /**
-     * Create a new event instance
+     * Create a new event instance.
      *
      * @param MustVerifyMobile $user
-     * @param array $request
+     * @param array            $request
      */
     public function __construct(MustVerifyMobile $user, array $request)
     {
-        $this->user    = $user;
+        $this->user = $user;
         $this->request = $request;
     }
 }

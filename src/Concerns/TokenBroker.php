@@ -2,9 +2,9 @@
 
 namespace Fouladgar\MobileVerifier\Concerns;
 
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
 use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
 
 class TokenBroker implements TokenBrokerInterface
@@ -25,7 +25,7 @@ class TokenBroker implements TokenBrokerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function sendToken(MustVerifyMobile $user): void
     {
@@ -35,7 +35,7 @@ class TokenBroker implements TokenBrokerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function verifyToken(MustVerifyMobile $user, $token): bool
     {
@@ -51,6 +51,7 @@ class TokenBroker implements TokenBrokerInterface
     /**
      * @param MustVerifyMobile $user
      * @param $token
+     *
      * @return bool
      */
     protected function tokenExists(MustVerifyMobile $user, $token): bool
