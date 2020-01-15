@@ -9,26 +9,30 @@ use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Routing\Router;
 
 class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Perform post-registration booting of services.
+     *
+     * @param Filesystem $filesystem
+     * @param Router $router
      */
-    public function boot(Filesystem $filesystem): void
+    public function boot(Filesystem $filesystem, Router $router): void
     {
         $this->mapApiRoutes();
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'MobileVerifier');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'MobileVerifier');
 
         $this->bootPublishes($filesystem);
 
-        $this->app['router']->aliasMiddleware('mobile.verified', EnsureMobileIsVerified::class);
+        $router->aliasMiddleware('mobile.verified', EnsureMobileIsVerified::class);
     }
 
     /**
@@ -61,15 +65,18 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Returns existing migration file if found, else uses the current timestamp.
+     *
+     * @param Filesystem $filesystem
+     * @return string
      */
     protected function getMigrationFileName(Filesystem $filesystem): string
     {
         $timestamp = date('Y_m_d_His');
 
-        return Collection::make($this->app->databasePath().DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR)
+        return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
                          ->flatMap(static function ($path) use ($filesystem) {
-                             return $filesystem->glob($path.'*_create_mobile_verification_tokens_table.php');
-                         })->push($this->app->databasePath()."/migrations/{$timestamp}_create_mobile_verification_tokens_table.php")
+                             return $filesystem->glob($path . '*_create_mobile_verification_tokens_table.php');
+                         })->push($this->app->databasePath() . "/migrations/{$timestamp}_create_mobile_verification_tokens_table.php")
                          ->first();
     }
 
@@ -80,17 +87,20 @@ class ServiceProvider extends BaseServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/MobileVerifier'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/MobileVerifier'),
         ]);
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_mobile_verification_tokens_table.php.stub' => $this->getMigrationFileName($filesystem),
+            __DIR__ . '/../database/migrations/create_mobile_verification_tokens_table.php.stub' => $this->getMigrationFileName($filesystem),
         ], 'migrations');
     }
 
+    /**
+     * @return string
+     */
     protected function getConfig(): string
     {
-        return __DIR__.'/../config/config.php';
+        return __DIR__ . '/../config/config.php';
     }
 
     /**
@@ -99,7 +109,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function mapApiRoutes(): void
     {
         Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
+            $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
         });
     }
 
@@ -108,11 +118,11 @@ class ServiceProvider extends BaseServiceProvider
      *
      * @return array
      */
-    private function routeConfiguration()
+    private function routeConfiguration(): array
     {
         return [
-            'namespace'  => config('mobile_verifier.controller_namespace', 'Fouladgar\MobileVerifier\Http\Controllers'),
-            'prefix'     => config('mobile_verifier.routes_prefix', 'auth'),
+            'namespace' => config('mobile_verifier.controller_namespace', 'Fouladgar\MobileVerifier\Http\Controllers'),
+            'prefix'    => config('mobile_verifier.routes_prefix', 'auth'),
         ];
     }
 }

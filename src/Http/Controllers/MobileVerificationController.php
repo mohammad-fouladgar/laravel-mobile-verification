@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Http\Controllers;
 
-class MobileVerificationController extends BaseController
+class MobileVerificationController extends BaseVerificationController
 {
     /*
     |--------------------------------------------------------------------------
