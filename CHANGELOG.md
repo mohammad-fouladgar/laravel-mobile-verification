@@ -1,3 +1,6 @@
+## 0.5.0 - 2020-01-15
+ - fix changelog
+
 ## 0.4.0 - 2020-01-15
  - WIP
  - Merge tag 'v0.3.0' into develop
