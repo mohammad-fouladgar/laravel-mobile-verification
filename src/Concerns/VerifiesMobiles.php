@@ -14,8 +14,8 @@ trait VerifiesMobiles
     use RedirectsUsers;
 
     /**
-    * @inheritDoc
-    */
+     * {@inheritdoc}
+     */
     public function verify(VerificationRequest $request)
     {
         $user = $request->user();
@@ -39,9 +39,9 @@ trait VerifiesMobiles
             : redirect($this->redirectPath())->with('mobileVerificationVerified', true);
     }
 
-   /**
-    * @inheritDoc
-    */
+    /**
+     * {@inheritdoc}
+     */
     public function resend(Request $request)
     {
         $user = $request->user();

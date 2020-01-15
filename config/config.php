@@ -94,7 +94,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the routes prefix where Mobile-Verifier controller will be accessible from. Feel free
-    | to change this path to anything you like. 
+    | to change this path to anything you like.
     |
     */
     'routes_prefix' => 'auth',
