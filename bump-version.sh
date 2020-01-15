@@ -31,7 +31,7 @@ if [ -f VERSION ]; then
     echo $INPUT_STRING > VERSION
     tag_date=$(git log -1 --pretty=format:'%ad' --date=short)
     
-    echo "## $INPUT_STRING (${tag_date}):" > tmpfile
+    echo "## $INPUT_STRING - ${tag_date}" > tmpfile
     git log --pretty=format:" - %s" "v$BASE_STRING"...HEAD >> tmpfile
     echo "" >> tmpfile
     echo "" >> tmpfile
@@ -53,7 +53,7 @@ else
     if [ "$RESPONSE" = "y" ]; then
         tag_date=$(git log -1 --pretty=format:'%ad' --date=short)
         echo "0.1.0" > VERSION
-        echo "## 0.1.0 (${tag_date}):" > CHANGELOG.md
+        echo "## 0.1.0 - ${tag_date}" > CHANGELOG.md
         git log --pretty=format:" - %s" >> CHANGELOG.md
         echo "" >> CHANGELOG.md
         echo "" >> CHANGELOG.md
