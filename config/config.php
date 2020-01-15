@@ -66,6 +66,16 @@ return [
     'sms_client' => '',
 
     /*
+    |--------------------------------------------------------------------------
+    | Default Controller Namespace
+    |--------------------------------------------------------------------------
+    |
+    | This is the namespace of default controller. Feel free
+    | to change this namespace to anything you like.
+    */
+    'controller_namespace' => 'Fouladgar\MobileVerifier\Http\Controllers',
+
+    /*
      |--------------------------------------------------------------------------
      | Controller Routes
      |--------------------------------------------------------------------------
@@ -74,11 +84,20 @@ return [
      |
      */
     'routes' => [
-
-        'verify' => '/auth/mobile/verify',
-        'resend' => '/auth/mobile/resend',
-
+        'verify' => '/mobile/verify',
+        'resend' => '/mobile/resend',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This is the routes prefix where Mobile-Verifier controller will be accessible from. Feel free
+    | to change this path to anything you like. 
+    |
+    */
+    'routes_prefix' => 'auth',
 
     /*
      |--------------------------------------------------------------------------
