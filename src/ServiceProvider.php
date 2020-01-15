@@ -115,7 +115,7 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Get the config file path.
-     * 
+     *
      * @return string
      */
     protected function getConfig(): string
