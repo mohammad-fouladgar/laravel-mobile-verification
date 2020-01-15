@@ -26,17 +26,19 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot(Filesystem $filesystem, Router $router): void
     {
-        $this->mapApiRoutes();
+        $this->registerRoutes();
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'MobileVerifier');
 
-        $this->bootPublishes($filesystem);
+        $this->registerPublishing($filesystem);
 
         $router->aliasMiddleware('mobile.verified', EnsureMobileIsVerified::class);
     }
 
     /**
-     * Register bindings in the container.
+     * Register any package services.
+     *
+     * @return void
      */
     public function register(): void
     {
@@ -44,6 +46,16 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->mergeConfigFrom($this->getConfig(), 'mobile_verifier');
 
+        $this->registerBidings();
+    }
+
+    /**
+     * Register any package bindings.
+     *
+     * @return void
+     */
+    protected function registerBidings(): void
+    {
         $this->app->singleton(SmsClient::class, static function ($app) {
             try {
                 return $app->make(config('mobile_verifier.sms_client'));
@@ -81,7 +93,12 @@ class ServiceProvider extends BaseServiceProvider
                          ->first();
     }
 
-    protected function bootPublishes(Filesystem $filesystem): void
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
+    private function registerPublishing(Filesystem $filesystem): void
     {
         $this->publishes([
             $this->getConfig() => config_path('mobile_verifier.php'),
@@ -97,6 +114,8 @@ class ServiceProvider extends BaseServiceProvider
     }
 
     /**
+     * Get the config file path.
+     * 
      * @return string
      */
     protected function getConfig(): string
@@ -105,9 +124,11 @@ class ServiceProvider extends BaseServiceProvider
     }
 
     /**
-     * Map routes.
+     * Register the package routes.
+     *
+     * @return void
      */
-    protected function mapApiRoutes(): void
+    protected function registerRoutes(): void
     {
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
