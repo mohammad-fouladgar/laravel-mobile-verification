@@ -38,10 +38,6 @@ if [ -f VERSION ]; then
     cat CHANGELOG.md >> tmpfile
     mv tmpfile CHANGELOG.md
     echo "Version bump and update CHANGELOG file."
-    #git add CHANGELOG.md VERSION
-    # git commit -m "Version bump to $INPUT_STRING"
-    #git tag -a -m "Tagging version $INPUT_STRING" "v$INPUT_STRING"
-    #git push origin --tags
 else
     echo "Could not find a VERSION file"
     read -p "Do you want to create a version file and start from scratch? [y]" RESPONSE
@@ -58,9 +54,5 @@ else
         echo "" >> CHANGELOG.md
         echo "" >> CHANGELOG.md
         echo "Version bump and make CHANGELOG file."
-        #git add VERSION CHANGELOG.md
-        # git commit -m "Added VERSION and CHANGELOG.md files, Version bump to v0.1.0"
-        #git tag -a -m "Tagging version 0.1.0" "v0.1.0"
-       # git push origin --tags
     fi
 fi
