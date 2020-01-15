@@ -1,3 +1,7 @@
+## 0.6.0 - 2020-01-15
+ - wip:update bumper
+ - Merge tag 'v0.5.0' into develop
+
 ## 0.5.0 - 2020-01-15
  - fix changelog
 
