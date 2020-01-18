@@ -93,7 +93,9 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 ### SMS Client
 
-Sending verification notifications via SMS in this package is totally desirable. Before you can send notifications via this package, you need to install or prepare your SMS client class and implements `Fouladgar\MobileVerifier\Contracts\SmsClient` contract. This contract requires you to implement one method: `sendMessage`. The `sendMessage` method return your send api based on `Payload` object which contains user number and token message:
+You can use any SMS service such as `Nexmo`, `Twilio` and etc for sending verification message.
+
+Before you can send notifications via this package, you first need to implement the `Fouladgar\MobileVerifier\Contracts\SmsClient` contract. This contract requires you to implement `sendMessage` method. The `sendMessage` method will return your SMS service api result by a `Payload` object which contains user number and token message. So, a `SMSClient` implementation would look something like this:
 
 ```php
 <?php
@@ -103,7 +105,7 @@ namespace App;
 use Fouladgar\MobileVerifier\Contracts\SmsClient;
 use Fouladgar\MobileVerifier\Concerns\Payload;
 
-class SMSService implements SmsClient
+class SMSClient implements SmsClient
 {
     /**
      * @param Payload $payload
@@ -112,16 +114,20 @@ class SMSService implements SmsClient
      */
     public function sendMessage(Payload $payload)
     {
-        // return $this->send($payload->getTo(), $payload->getToken());
+        // return $this->client->send($payload->getTo(), $payload->getToken());
     }
 
     // ...
 }
 ```
-Next, you should set the your `SMSService` namespace in config file:
+
+Next, you should set the your `SMSClient` class in config file:
+
 ```php
 <?php
+
 // config/mobile_verifier.php
+
 return [
 
   'sms_client' => App\SMSService::class, 
