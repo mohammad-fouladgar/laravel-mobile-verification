@@ -189,7 +189,7 @@ After an mobile number is verified, the user will automatically be redirected to
 composer test
 ```
 
-Changelog
+## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
