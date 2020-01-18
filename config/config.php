@@ -108,5 +108,4 @@ return [
      |
      */
     'throttle' => 10,
-
 ];

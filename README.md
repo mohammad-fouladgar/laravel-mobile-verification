@@ -162,6 +162,11 @@ return [
 ### Resend
 
 
+### Customize Route and Controller
+
+// wip
+
+
 ## Protecting Routes
 
 Route middleware can be used to only allow verified users to access a given route. This package ships with a verified middleware, which is defined at `Fouladgar\MobileVerifier\Http\Middleware`. Since this middleware is already registered in your application's HTTP kernel, all you need to do is attach the middleware to a route definition:
@@ -175,13 +180,31 @@ Route::get('profile', function () {
 
 After an mobile number is verified, the user will automatically be redirected to /home. You can customize the post verification redirect location by defining a redirectTo method or property on the VerificationController:
 
-## Views
+## Views and Langs
 
-// wip
+To generate all of the necessary views and langs for mobile verification, you may publish assets with:
+
+```
+php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="assets"
+```
+The mobile verification view is placed in `resources/views/vendor/MobileVerifier/auth/mobile_verify.blade.php` and the lang is placed in `resources/lang/en/mobile_verifier.php`
 
 ## Event
 
-// wip
+Mobile-Verifier dispatches events during the mobile verification process. You may attach listeners to these events in your `EventServiceProvider`:
+
+```php
+/**
+ * The event listener mappings for the application.
+ *
+ * @var array
+ */
+protected $listen = [
+    'Fouladgar\MobileVerifier\Events\Verified' => [
+        'App\Listeners\LogVerifiedUser',
+    ],
+];
+```
 
 
 ## Testing
