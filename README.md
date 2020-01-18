@@ -11,7 +11,22 @@
 ## Introduction
 Many web applications require users to verify their mobile numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile verification requests.
 
+## Basic Usage:
+For send verification message you need dispatch the `Illuminate\Auth\Events\Registered` event:
 
+```php
+<?php
+
+use Illuminate\Auth\Events\Registered;
+
+// Register user
+
+//...
+
+ event(new Registered($user));
+
+//...
+```
 ## Installation
 
 You can install the package via composer:
@@ -46,7 +61,9 @@ php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider"
 If you’re using another table name for `users` table or different column name for `mobile` or even `mobile_verification_tokens` table, you can customize their values in config file:
 
 ```php
+
 // config/mobile_verifier.php
+
 <?php
 
 return [
@@ -137,7 +154,34 @@ return [
 
 ```
 
-## Usage
+## Routing
+// wip
+
+### Verify
+
+### Resend
+
+
+## Protecting Routes
+
+Route middleware can be used to only allow verified users to access a given route. This package ships with a verified middleware, which is defined at `Fouladgar\MobileVerifier\Http\Middleware`. Since this middleware is already registered in your application's HTTP kernel, all you need to do is attach the middleware to a route definition:
+
+```php
+Route::get('profile', function () {
+    // Only verified users may enter...
+})->middleware('mobile.verified');
+```
+## After Verifying Mobile
+
+After an mobile number is verified, the user will automatically be redirected to /home. You can customize the post verification redirect location by defining a redirectTo method or property on the VerificationController:
+
+## Views
+
+// wip
+
+## Event
+
+// wip
 
 
 ## Testing
