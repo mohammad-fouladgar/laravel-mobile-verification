@@ -37,7 +37,7 @@ If you don't use Auto-Discovery, add the ServiceProvider to the providers array 
 
 ## Configuration
 
-First, you should publish the config/mobile_verifier.php config file with:
+First, you should publish the `config/mobile_verifier.php` config file with:
 
 ```
 php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="config"
@@ -46,6 +46,8 @@ php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider"
 If you’re using another table name for `users` table or different column name for `mobile` or even `mobile_verification_tokens` table, you can customize their values in config file:
 
 ```php
+// config/mobile_verifier.php
+
 'user_table'    => 'users',
 
 'mobile_column' => 'mobile',
@@ -59,6 +61,28 @@ php artisan migrate
 ``` 
 
 The package migration will create a table your application needs to store verification tokens. Also, a `mobile_verified_at` column will be add to your `users` table to show user verification state.
+
+### Model Preparation
+
+To get started, verify that your `App\User` model implements the `Fouladgar\MobileVerifier\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerifier\Concerns\MustVerifyMobile` trait:
+
+```php
+<?php
+
+namespace App;
+
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile as IMustVerifyMobile;
+use Fouladgar\MobileVerifier\Concerns\MustVerifyMobile;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class User extends Authenticatable implements IMustVerifyMobile
+{
+    use Notifiable, MustVerifyMobile;
+
+    // ...
+}
+```
 
 
 ## Usage
