@@ -47,12 +47,19 @@ If you’re using another table name for `users` table or different column name 
 
 ```php
 // config/mobile_verifier.php
+<?php
+
+return [
 
 'user_table'    => 'users',
 
 'mobile_column' => 'mobile',
 
 'token_table'   => 'mobile_verification_tokens',
+
+//...
+
+];
 ```
 
 And then migrate the database:
@@ -86,7 +93,7 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 ### SMS Client
 
-Sending verification notifications via SMS in this package is totally desirable. Before you can send notifications via this package, you need to install or prepare your SMS client class and implements `Fouladgar\MobileVerifier\Contracts\SmsClient` contract. 
+Sending verification notifications via SMS in this package is totally desirable. Before you can send notifications via this package, you need to install or prepare your SMS client class and implements `Fouladgar\MobileVerifier\Contracts\SmsClient` contract. This contract requires you to implement one method: `sendMessage`. The `sendMessage` method return your send api based on `Payload` object which contains user number and token message:
 
 ```php
 <?php
@@ -110,6 +117,18 @@ class SMSService implements SmsClient
 
     // ...
 }
+```
+Next, you should set the your `SMSService` namespace in config file:
+```php
+<?php
+// config/mobile_verifier.php
+return [
+
+  'sms_client' => App\SMSService::class, 
+    
+  //...
+];
+
 ```
 
 ## Usage
