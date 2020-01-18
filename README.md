@@ -36,6 +36,10 @@ If you don't use Auto-Discovery, add the ServiceProvider to the providers array 
 composer test
 ```
 
+Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+
 ## Contributing
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Security
