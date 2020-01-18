@@ -84,6 +84,33 @@ class User extends Authenticatable implements IMustVerifyMobile
 }
 ```
 
+### SMS Client
+
+Sending verification notifications via SMS in this package is totally desirable. Before you can send notifications via this package, you need to install or prepare your SMS client class and implements `Fouladgar\MobileVerifier\Contracts\SmsClient` contract. 
+
+```php
+<?php
+
+namespace App;
+
+use Fouladgar\MobileVerifier\Contracts\SmsClient;
+use Fouladgar\MobileVerifier\Concerns\Payload;
+
+class SMSService implements SmsClient
+{
+    /**
+     * @param Payload $payload
+     *
+     * @return mixed
+     */
+    public function sendMessage(Payload $payload)
+    {
+        // return $this->send($payload->getTo(), $payload->getToken());
+    }
+
+    // ...
+}
+```
 
 ## Usage
 
