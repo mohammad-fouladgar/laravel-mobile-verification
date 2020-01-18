@@ -147,7 +147,7 @@ Next, you should set the your `SMSClient` class in config file:
 
 return [
 
-  'sms_client' => App\SMSService::class, 
+  'sms_client' => App\SMSClient::class, 
     
   //...
 ];
