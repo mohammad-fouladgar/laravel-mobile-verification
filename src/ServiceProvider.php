@@ -9,10 +9,10 @@ use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
 use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Database\ConnectionInterface;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Throwable;
 
 class ServiceProvider extends BaseServiceProvider
@@ -55,18 +55,18 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerRoutes(): void
     {
         Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
+            $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
         });
     }
 
     /**
-     * Load and register package assets
+     * Load and register package assets.
      */
     protected function loadAssetsFrom(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'MobileVerifier');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'MobileVerifier');
     }
 
     /**
@@ -81,10 +81,10 @@ class ServiceProvider extends BaseServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/MobileVerifier'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/MobileVerifier'),
         ]);
 
-        $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations'),], 'migrations');
+        $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'migrations');
     }
 
     /**
@@ -120,7 +120,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function getConfig(): string
     {
-        return __DIR__ . '/../config/config.php';
+        return __DIR__.'/../config/config.php';
     }
 
     /**
