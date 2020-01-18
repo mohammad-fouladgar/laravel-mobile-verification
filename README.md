@@ -8,8 +8,11 @@
 [![License](https://poser.pugx.org/fouladgar/laravel-mobile-verifier/license)](https://packagist.org/packages/fouladgar/laravel-mobile-verifier)
 
 
-### Installation
+## Introduction
+Many web applications require users to verify their mobile numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile verification requests.
 
+
+## Installation
 
 You can install the package via composer:
 
@@ -30,6 +33,36 @@ If you don't use Auto-Discovery, add the ServiceProvider to the providers array 
   Fouladgar\MobileVerifier\ServiceProvider::class,
 ],
 ```
+
+
+## Configuration
+
+First, you should publish the config/mobile_verifier.php config file with:
+
+```
+php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="config"
+```
+
+If you’re using another table name for `users` table or different column name for `mobile` or even `mobile_verification_tokens` table, you can customize their values in config file:
+
+```php
+'user_table'    => 'users',
+
+'mobile_column' => 'mobile',
+
+'token_table'   => 'mobile_verification_tokens',
+```
+
+And then migrate the database:
+```
+php artisan migrate
+``` 
+
+The package migration will create a table your application needs to store verification tokens. Also, a `mobile_verified_at` column will be add to your `users` table to show user verification state.
+
+
+## Usage
+
 
 ## Testing
 ```sh
