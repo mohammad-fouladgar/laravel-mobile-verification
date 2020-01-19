@@ -133,7 +133,7 @@ class SampleSMSClient implements SMSClient
     // ...
 }
 ```
-> In above example, `NexmoService` can be replaced with your chosen SMS service along with its respective method.
+> :information_source: In above example, `NexmoService` can be replaced with your chosen SMS service along with its respective method.
 
 Next, you should set the your `SMSClient` class in config file:
 
@@ -177,7 +177,7 @@ curl -X POST \
       -H 'Authorization: JWT_TOKEN'
 ```
 
-### Customize Route and Controller
+### Customize Routes and Controller
 
 In order to change default routes prefix or routes themselves, you can customize them in config file:
 
@@ -234,8 +234,6 @@ class MobileVerificationController extends BaseVerificationController
 
 ```
 
-
-
 > **Important note**: If you set header request to `Accept:application/json`, the response will be in Json format, otherwise the user will automatically be redirected to `/home`. You can customize the post verification redirect location by defining a `redirectTo` method or property on the `MobileVerificationController`.
 
 ## Protecting Routes
@@ -248,13 +246,14 @@ Route::get('profile', function () {
 })->middleware('mobile.verified');
 ```
 
-## Views and Langs
+## Views and Translates
 
-To generate all of the necessary views and langs for mobile verification, you may publish assets with:
+To generate all of the necessary views and translates for mobile verification, you may publish assets with:
 
 ```
 php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="assets"
 ```
+
 The mobile verification view is placed in `resources/views/vendor/MobileVerifier/auth/mobile_verify.blade.php` and the lang is placed in `resources/lang/en/mobile_verifier.php`
 
 ## Event
@@ -273,7 +272,6 @@ protected $listen = [
     ],
 ];
 ```
-
 
 ## Testing
 ```sh
