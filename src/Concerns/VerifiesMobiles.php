@@ -29,7 +29,7 @@ trait VerifiesMobiles
         } catch (InvalidTokenException $e) {
             return $request->expectsJson()
                 ? response()->json(['message' => $e->getMessage()], $e->getCode())
-                : view('MobileVerifier::auth.mobile_verify')->with('mobileVerificationError', $e->getMessage());
+                : back()->withErrors(['token' => $e->getMessage()]);
         }
 
         event(new Verified($user, $request->all()));

@@ -27,9 +27,9 @@ class CreateMobileVerificationTokensTable extends Migration
      */
     public function __construct()
     {
-        $this->userTable = config('mobile_verifier.user_table', 'users');
+        $this->userTable    = config('mobile_verifier.user_table', 'users');
         $this->mobileColumn = config('mobile_verifier.mobile_column', 'mobile');
-        $this->tokenTable = config('mobile_verifier.token_table', 'mobile_verification_tokens');
+        $this->tokenTable   = config('mobile_verifier.token_table', 'mobile_verification_tokens');
     }
 
     /**
