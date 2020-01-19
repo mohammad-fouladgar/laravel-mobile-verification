@@ -4,7 +4,7 @@ namespace Fouladgar\MobileVerifier\Contracts;
 
 use Fouladgar\MobileVerifier\Concerns\Payload;
 
-interface SmsClient
+interface SMSClient
 {
     /**
      * @param Payload $payload

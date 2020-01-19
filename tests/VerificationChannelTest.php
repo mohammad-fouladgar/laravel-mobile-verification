@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Contracts\SmsClient;
+use Fouladgar\MobileVerifier\Contracts\SMSClient;
 use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
 use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
 use Fouladgar\MobileVerifier\Tests\Models\User;
@@ -20,7 +20,7 @@ class VerificationChannelTest extends TestCase
         $notifiable->mobile = '555555';
 
         $verificationChannel = new VerificationChannel(
-            $client = m::mock(SmsClient::class)
+            $client = m::mock(SMSClient::class)
         );
 
         $client->shouldReceive('sendMessage')->andReturn(true);
@@ -35,7 +35,7 @@ class VerificationChannelTest extends TestCase
         $notifiable = new User();
 
         $verificationChannel = new VerificationChannel(
-            $client = m::mock(SmsClient::class)
+            $client = m::mock(SMSClient::class)
         );
 
         $client->shouldNotReceive('sendMessage');

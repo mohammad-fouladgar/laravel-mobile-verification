@@ -3,9 +3,9 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Fouladgar\MobileVerifier\Concerns\Payload;
-use Fouladgar\MobileVerifier\Contracts\SmsClient;
+use Fouladgar\MobileVerifier\Contracts\SMSClient;
 
-class SampleSMSClient implements SmsClient
+class SampleSMSClient implements SMSClient
 {
     public function sendMessage(Payload $payload)
     {
