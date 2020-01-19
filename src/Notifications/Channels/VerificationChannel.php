@@ -2,8 +2,8 @@
 
 namespace Fouladgar\MobileVerifier\Notifications\Channels;
 
-use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
 use Fouladgar\MobileVerifier\Contracts\SMSClient;
+use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
 use Illuminate\Notifications\Notification;
 
 class VerificationChannel
