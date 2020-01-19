@@ -152,6 +152,9 @@ use Illuminate\Auth\Events\Registered;
 //...
 ```
 
+At this point, a notification message has been sent to user and you've done half of the job! 
+
+
 ## Routing
 
 This package includes the `Fouladgar\MobileVerifier\Http\Controllers\MobileVerificationController` class that contains the necessary logic to send verification token and verify users.
