@@ -48,7 +48,7 @@ class CreateMobileVerificationTokensTable extends Migration
             $table->index(['mobile', 'token']);
         });
 
-        Schema::table($this->userTable, static function (Blueprint $table) {
+        Schema::table($this->userTable, function (Blueprint $table) {
             $table->timestamp('mobile_verified_at')->nullable()->after($this->mobileColumn);
         });
     }
