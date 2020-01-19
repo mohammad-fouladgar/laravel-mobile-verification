@@ -12,7 +12,7 @@
 Many web applications require users to verify their mobile numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile verification requests.
 
 ## Basic Usage:
-For send verification message you need dispatch the `Illuminate\Auth\Events\Registered` event:
+For sending a verification message you need dispatch the `Illuminate\Auth\Events\Registered` event after registration:
 
 ```php
 <?php
@@ -20,8 +20,6 @@ For send verification message you need dispatch the `Illuminate\Auth\Events\Regi
 use Illuminate\Auth\Events\Registered;
 
 // Register user
-
-//...
 
  event(new Registered($user));
 
@@ -61,21 +59,19 @@ php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider"
 If you’re using another table name for `users` table or different column name for `mobile` or even `mobile_verification_tokens` table, you can customize their values in config file:
 
 ```php
-
 // config/mobile_verifier.php
 
 <?php
 
 return [
 
-'user_table'    => 'users',
+    'user_table'    => 'users',
+    
+    'mobile_column' => 'mobile',
+    
+    'token_table'   => 'mobile_verification_tokens',
 
-'mobile_column' => 'mobile',
-
-'token_table'   => 'mobile_verification_tokens',
-
-//...
-
+    //...
 ];
 ```
 
@@ -88,7 +84,7 @@ The package migration will create a table your application needs to store verifi
 
 ### Model Preparation
 
-To get started, verify that your `App\User` model implements the `Fouladgar\MobileVerifier\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerifier\Concerns\MustVerifyMobile` trait:
+To get started, verify that your `User` model implements the `Fouladgar\MobileVerifier\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerifier\Concerns\MustVerifyMobile` trait:
 
 ```php
 <?php
@@ -110,19 +106,19 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 ### SMS Client
 
-You can use any SMS service such as `Nexmo`, `Twilio` and etc for sending verification message.
+You can use any SMS service for sending verification messages such as `Nexmo`, `Twilio` or etc. For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerifier\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
 
-Before you can send notifications via this package, you first need to implement the `Fouladgar\MobileVerifier\Contracts\SmsClient` contract. This contract requires you to implement `sendMessage` method. The `sendMessage` method will return your SMS service api result by a `Payload` object which contains user number and token message. So, a `SMSClient` implementation would look something like this:
+This method will return your SMS service api result via a `Payload` object which contains user **number** and **token** message:
 
 ```php
 <?php
 
 namespace App;
 
-use Fouladgar\MobileVerifier\Contracts\SmsClient;
+use Fouladgar\MobileVerifier\Contracts\SMSClient;
 use Fouladgar\MobileVerifier\Concerns\Payload;
 
-class SMSClient implements SmsClient
+class SampleSMSClient implements SMSClient
 {
     /**
      * @param Payload $payload
@@ -131,41 +127,116 @@ class SMSClient implements SmsClient
      */
     public function sendMessage(Payload $payload)
     {
-        // return $this->client->send($payload->getTo(), $payload->getToken());
+        // return $this->NexmoService->send($payload->getTo(), $payload->getToken());
     }
 
     // ...
 }
 ```
+> In above example, `NexmoService` can be replaced with your chosen SMS service along with its respective method.
 
 Next, you should set the your `SMSClient` class in config file:
 
 ```php
-<?php
-
 // config/mobile_verifier.php
+
+<?php
 
 return [
 
-  'sms_client' => App\SMSClient::class, 
+  'sms_client' => App\SampleSMSClient::class, 
     
   //...
 ];
-
 ```
 
 ## Routing
-// wip
+
+This package includes the `Fouladgar\MobileVerifier\Http\Controllers\MobileVerificationController` class that contains the necessary logic to send verification token and verify users.
 
 ### Verify
 
+In order to use this route, you should send `token` message of an authenticated user (along with any desired data) to this route `/auth/mobile/verify`:
+
+```
+curl -X POST \
+      http://example.com/auth/mobile/verify \
+      -H 'Accept: application/json' \
+      -H 'Authorization: JWT_TOKEN' \
+      -F token=12345
+```
+
 ### Resend
 
+If you need to resend a verification message, you can use this route `/auth/mobile/resend` for an authenticated user:
+
+```
+curl -X POST \
+      http://example.com/auth/mobile/resend \
+      -H 'Accept: application/json' \
+      -H 'Authorization: JWT_TOKEN'
+```
 
 ### Customize Route and Controller
 
-// wip
+In order to change default routes prefix or routes themselves, you can customize them in config file:
 
+```php
+// config/mobile_verifier.php
+
+<?php
+
+return [
+
+    'routes_prefix' => 'auth',
+
+    'routes' => [
+        'verify' => '/mobile/verify',
+        'resend' => '/mobile/resend',
+    ],
+
+    //...
+];
+```
+
+Also this package allows you to override default controller. To achieve this, you can extend your controller from `Fouladgar\MobileVerifier\Http\Controllers\BaseVerificationController` and set your controller namespace in config file:
+
+```php
+// config/mobile_verifier.php
+
+<?php
+
+return [
+
+    'controller_namespace' => 'App\Http\Controllers',
+
+    //...
+];
+```
+> **Note:** You can only change controller namespace and name of the controller should remain as package default controller (`MobileVerificationController`)
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Fouladgar\MobileVerifier\Http\Controllers\BaseVerificationController;
+
+class MobileVerificationController extends BaseVerificationController
+{
+    /**
+     * Where to redirect users after verification.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/home';
+}
+
+```
+
+
+
+> **Important note**: If you set header request to `Accept:application/json`, the response will be in Json format, otherwise the user will automatically be redirected to `/home`. You can customize the post verification redirect location by defining a `redirectTo` method or property on the `MobileVerificationController`.
 
 ## Protecting Routes
 
@@ -176,9 +247,6 @@ Route::get('profile', function () {
     // Only verified users may enter...
 })->middleware('mobile.verified');
 ```
-## After Verifying Mobile
-
-After an mobile number is verified, the user will automatically be redirected to /home. You can customize the post verification redirect location by defining a redirectTo method or property on the VerificationController:
 
 ## Views and Langs
 
@@ -191,7 +259,7 @@ The mobile verification view is placed in `resources/views/vendor/MobileVerifier
 
 ## Event
 
-Mobile-Verifier dispatches events during the mobile verification process. You may attach listeners to these events in your `EventServiceProvider`:
+This package dispatch an event during the mobile verification process. You may attach listeners to this event in your `EventServiceProvider`:
 
 ```php
 /**

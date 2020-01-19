@@ -52,8 +52,9 @@ trait VerifiesMobiles
 
         $this->tokenBroker->sendToken($user);
 
-        return $request->expectsJson() ? $this->successMessage() :
-            view('MobileVerifier::auth.mobile_verify')->with('mobileVerificationResend', true);
+        return $request->expectsJson()
+            ? $this->successMessage()
+            : view('MobileVerifier::auth.mobile_verify')->with('mobileVerificationResend', true);
     }
 
     /**

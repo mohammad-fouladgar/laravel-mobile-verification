@@ -76,6 +76,17 @@ return [
     'controller_namespace' => 'Fouladgar\MobileVerifier\Http\Controllers',
 
     /*
+    |--------------------------------------------------------------------------
+    | Routes Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This is the routes prefix where Mobile-Verifier controller will be accessible from. Feel free
+    | to change this path to anything you like.
+    |
+    */
+    'routes_prefix' => 'auth',
+
+    /*
      |--------------------------------------------------------------------------
      | Controller Routes
      |--------------------------------------------------------------------------
@@ -87,17 +98,6 @@ return [
         'verify' => '/mobile/verify',
         'resend' => '/mobile/resend',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Routes Prefix
-    |--------------------------------------------------------------------------
-    |
-    | This is the routes prefix where Mobile-Verifier controller will be accessible from. Feel free
-    | to change this path to anything you like.
-    |
-    */
-    'routes_prefix' => 'auth',
 
     /*
      |--------------------------------------------------------------------------
