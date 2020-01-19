@@ -11,20 +11,6 @@
 ## Introduction
 Many web applications require users to verify their mobile numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile verification requests.
 
-## Basic Usage:
-For sending a verification message you need dispatch the `Illuminate\Auth\Events\Registered` event after registration:
-
-```php
-<?php
-
-use Illuminate\Auth\Events\Registered;
-
-// Register user
-
- event(new Registered($user));
-
-//...
-```
 ## Installation
 
 You can install the package via composer:
@@ -50,7 +36,7 @@ If you don't use Auto-Discovery, add the ServiceProvider to the providers array 
 
 ## Configuration
 
-First, you should publish the `config/mobile_verifier.php` config file with:
+To get started, you should publish the `config/mobile_verifier.php` config file with:
 
 ```
 php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="config"
@@ -84,7 +70,7 @@ The package migration will create a table your application needs to store verifi
 
 ### Model Preparation
 
-To get started, verify that your `User` model implements the `Fouladgar\MobileVerifier\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerifier\Concerns\MustVerifyMobile` trait:
+In the following, verify that your `User` model implements the `Fouladgar\MobileVerifier\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerifier\Concerns\MustVerifyMobile` trait:
 
 ```php
 <?php
@@ -148,6 +134,22 @@ return [
     
   //...
 ];
+```
+
+## Usage
+
+Now you are ready for sending a verification message! You just need to dispatch the `Illuminate\Auth\Events\Registered` event after registering user:
+
+```php
+<?php
+
+use Illuminate\Auth\Events\Registered;
+
+// Register user
+
+ event(new Registered($user));
+
+//...
 ```
 
 ## Routing
