@@ -36,7 +36,8 @@ trait VerifiesMobiles
 
         return $request->expectsJson()
             ? $this->successMessage()
-            : redirect($this->redirectPath())->with('mobileVerificationVerified', true);
+            : redirect($this->redirectPath())
+                ->with('mobileVerificationVerified', __('mobile_verifier.successful_verification'));
     }
 
     /**
@@ -54,7 +55,7 @@ trait VerifiesMobiles
 
         return $request->expectsJson()
             ? $this->successMessage()
-            : view('MobileVerifier::auth.mobile_verify')->with('mobileVerificationResend', true);
+            : back()->with('mobileVerificationResend', __('mobile_verifier.successful_resend'));
     }
 
     /**

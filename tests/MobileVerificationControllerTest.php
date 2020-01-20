@@ -28,7 +28,8 @@ class MobileVerificationControllerTest extends TestCase
              ->assertJson(['message' => __('mobile_verifier.successful_verification')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
-             ->assertStatus(Response::HTTP_FOUND);
+             ->assertStatus(Response::HTTP_FOUND)
+             ->assertSessionHas('mobileVerificationVerified');
     }
 
     /** @test */
@@ -110,6 +111,6 @@ class MobileVerificationControllerTest extends TestCase
              ->assertOk();
 
         $this->post(route('mobile.resend'))
-             ->assertViewHas('mobileVerificationResend');
+             ->assertSessionHas('mobileVerificationResend');
     }
 }
