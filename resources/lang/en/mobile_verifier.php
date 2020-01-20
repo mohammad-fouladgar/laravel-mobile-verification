@@ -7,7 +7,7 @@ return [
     | Mobile Verifier Language file
     |--------------------------------------------------------------------------
     |
-    | The following language lines are the default messages in case of 
+    | The following language lines are the default messages in case of
     | successful verification or successful resend or etc.
     |
     */
