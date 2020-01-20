@@ -1,7 +1,18 @@
 <?php
 
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mobile Verifier Language file
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are the default messages in case of 
+    | successful verification or successful resend or etc.
+    |
+    */
     'successful_verification' => 'Your mobile has been verified successfully.',
-    'already_verified'        => 'Your mobile already has been verified.',
     'successful_resend'       => 'Your token has been resent successfully.',
+    'already_verified'        => 'Your mobile already has been verified.',
+
 ];

@@ -251,15 +251,27 @@ Route::get('profile', function () {
 })->middleware('mobile.verified');
 ```
 
-## Views and Translates
+## Translates and Views
 
-To generate all of the necessary views and translates for mobile verification, you may publish assets with:
+To publish translation file you may use this command:
 
 ```
-php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="assets"
+php artisan vendor:publish --provider="Fouladgar\MobileVerifier\ServiceProvider" --tag="lang"
 ```
 
-The mobile verification view is placed in `resources/views/vendor/MobileVerifier/auth/mobile_verify.blade.php` and the lang is placed in `resources/lang/en/mobile_verifier.php`
+If you are not using AJAX requests, you should have some views which we provided you some information through session variables. In case of errors, you just need to use laravel default `$errors` variable. In case of successful verification, you can use `mobileVerificationVerified` variable and for successful resend verification you may use `mobileVerificationResend` variable. These variables contain messages which you can customize in provided language file:
+
+```php
+// lang/vendor/MobileVerifier/en/mobile_verifier.php
+
+<?php
+
+return [
+    'successful_verification' => 'Your mobile has been verified successfully.',
+    'successful_resend'       => 'Your token has been resent successfully.',
+    'already_verified'        => 'Your mobile already has been verified.',
+];
+```
 
 ## Event
 
