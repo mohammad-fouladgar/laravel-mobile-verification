@@ -25,9 +25,7 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
              ->assertOk()
-             ->assertJson([
-                 'message' => __('mobile_verifier.successful_verification'),
-             ]);
+             ->assertJson(['message' => __('mobile_verifier.successful_verification')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
              ->assertStatus(Response::HTTP_FOUND);
@@ -42,9 +40,7 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
              ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-             ->assertJson([
-                 'message' => __('mobile_verifier.already_verified'),
-             ]);
+             ->assertJson(['message' => __('mobile_verifier.already_verified')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
              ->assertStatus(Response::HTTP_FOUND);
@@ -60,6 +56,10 @@ class MobileVerificationControllerTest extends TestCase
         $this->postJson(route('mobile.verify'))
              ->assertJsonValidationErrors(['token'])
              ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+        $this->post(route('mobile.verify'))
+             ->assertSessionHasErrors('token')
+             ->assertStatus(Response::HTTP_FOUND);
     }
 
     /**
@@ -73,6 +73,9 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
              ->assertStatus(Response::HTTP_NOT_ACCEPTABLE);
+
+        $this->post(route('mobile.verify'), ['token' => '12345'])
+             ->assertSessionHasErrors('token');
     }
 
     /**
