@@ -55,7 +55,7 @@ class ServiceProvider extends BaseServiceProvider
     protected function registerRoutes(): void
     {
         Route::group($this->routeConfiguration(), function () {
-            $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
+            $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
         });
     }
 
@@ -64,9 +64,9 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function loadAssetsFrom(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'MobileVerifier');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'MobileVerifier');
     }
 
     /**
@@ -81,10 +81,10 @@ class ServiceProvider extends BaseServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/MobileVerifier'),
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/MobileVerifier'),
         ], 'assets');
 
-        $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'migrations');
     }
 
     /**
@@ -120,7 +120,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function getConfig(): string
     {
-        return __DIR__ . '/../config/config.php';
+        return __DIR__.'/../config/config.php';
     }
 
     /**
