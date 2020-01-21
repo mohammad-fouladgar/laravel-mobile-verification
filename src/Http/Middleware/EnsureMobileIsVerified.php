@@ -2,8 +2,8 @@
 
 namespace Fouladgar\MobileVerifier\Http\Middleware;
 
-use Closure;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Closure;
 
 class EnsureMobileIsVerified
 {
@@ -12,7 +12,7 @@ class EnsureMobileIsVerified
      *
      * @param $request
      * @param Closure $next
-     * @param null    $redirectToRoute
+     * @param null $redirectToRoute
      *
      * @return mixed|void
      */
@@ -21,7 +21,9 @@ class EnsureMobileIsVerified
         $user = auth()->user();
 
         if (!$user || ($user instanceof MustVerifyMobile && !$user->hasVerifiedMobile())) {
-            return abort(403, 'Your mobile number is not verified.');
+            return $request->expectsJson()
+                ? abort(403, 'Your mobile number is not verified.')
+                : redirect('/')->withErrors(['mobile' => 'Your mobile number is not verified.']);
         }
 
         return $next($request);
