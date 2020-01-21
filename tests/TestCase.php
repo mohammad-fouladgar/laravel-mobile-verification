@@ -3,10 +3,10 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Fouladgar\MobileVerifier\ServiceProvider;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Illuminate\Foundation\Application;
 
 class TestCase extends BaseTestCase
 {
@@ -19,9 +19,9 @@ class TestCase extends BaseTestCase
 
         $this->withoutMiddleware(ThrottleRequests::class);
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
-        $this->withFactories(__DIR__ . '/database/factories');
+        $this->withFactories(__DIR__.'/database/factories');
     }
 
     /**
@@ -48,8 +48,9 @@ class TestCase extends BaseTestCase
      * Call the given middleware.
      *
      * @param string|string[] $middleware
-     * @param string $method
-     * @param array $data
+     * @param string          $method
+     * @param array           $data
+     *
      * @return TestResponse
      */
     protected function callMiddleware($middleware, $method = 'GET', array $data = []): TestResponse
@@ -63,8 +64,9 @@ class TestCase extends BaseTestCase
      * Call the given middleware using a JSON request.
      *
      * @param string|string[] $middleware
-     * @param string $method
-     * @param array $data
+     * @param string          $method
+     * @param array           $data
+     *
      * @return TestResponse
      */
     protected function callMiddlewareJson($middleware, $method = 'GET', array $data = []): TestResponse
@@ -77,8 +79,9 @@ class TestCase extends BaseTestCase
     /**
      * Make a dummy route with the given middleware applied.
      *
-     * @param string $method
+     * @param string          $method
      * @param string|string[] $middleware
+     *
      * @return string
      */
     protected function makeMiddlewareRoute($method, $middleware): string
@@ -90,7 +93,7 @@ class TestCase extends BaseTestCase
                 'middleware' => $middleware,
                 static function () {
                     return '__passed__';
-                }
+                },
             ])->uri();
     }
 }

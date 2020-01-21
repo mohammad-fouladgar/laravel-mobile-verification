@@ -2,8 +2,8 @@
 
 namespace Fouladgar\MobileVerifier\Http\Middleware;
 
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Closure;
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 
 class EnsureMobileIsVerified
 {
@@ -12,7 +12,7 @@ class EnsureMobileIsVerified
      *
      * @param $request
      * @param Closure $next
-     * @param null $redirectToRoute
+     * @param null    $redirectToRoute
      *
      * @return mixed|void
      */
