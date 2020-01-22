@@ -1,10 +1,8 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Concerns;
+namespace Fouladgar\MobileVerifier\Tokens;
 
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
-use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
-use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
 
 class TokenBroker implements TokenBrokerInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Concerns;
+namespace Fouladgar\MobileVerifier\Notifications\Messages;
 
 class Payload
 {
