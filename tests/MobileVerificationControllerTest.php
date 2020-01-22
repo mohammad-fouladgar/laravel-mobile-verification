@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Concerns\TokenBroker;
+use Fouladgar\MobileVerifier\Tokens\TokenBroker;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\Response;

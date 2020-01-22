@@ -3,7 +3,7 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Exception;
-use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
+use Fouladgar\MobileVerifier\Tokens\DatabaseTokenRepository;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Illuminate\Config\Repository;
 use Illuminate\Database\ConnectionInterface;

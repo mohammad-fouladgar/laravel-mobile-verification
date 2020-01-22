@@ -3,8 +3,8 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Exception;
-use Fouladgar\MobileVerifier\Concerns\TokenBroker;
-use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
+use Fouladgar\MobileVerifier\Tokens\TokenBroker;
+use Fouladgar\MobileVerifier\Tokens\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Mockery as m;

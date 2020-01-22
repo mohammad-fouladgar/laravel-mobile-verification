@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Contracts;
 
-use Fouladgar\MobileVerifier\Concerns\Payload;
+use Fouladgar\MobileVerifier\Notifications\Messages\Payload;
 
 interface SMSClient
 {

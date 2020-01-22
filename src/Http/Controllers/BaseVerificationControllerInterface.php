@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Contracts;
+namespace Fouladgar\MobileVerifier\Http\Controllers;
 
 use Fouladgar\MobileVerifier\Http\Requests\VerificationRequest;
 use Illuminate\Contracts\View\Factory;

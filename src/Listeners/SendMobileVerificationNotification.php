@@ -4,7 +4,7 @@ namespace Fouladgar\MobileVerifier\Listeners;
 
 use Exception;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
-use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
+use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
 
 class SendMobileVerificationNotification

@@ -102,7 +102,7 @@ This method will return your SMS service api result via a `Payload` object which
 namespace App;
 
 use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Concerns\Payload;
+use Fouladgar\MobileVerifier\Notifications\Messages\Payload;
 
 class SampleSMSClient implements SMSClient
 {

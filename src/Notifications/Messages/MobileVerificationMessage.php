@@ -2,8 +2,6 @@
 
 namespace Fouladgar\MobileVerifier\Notifications\Messages;
 
-use Fouladgar\MobileVerifier\Concerns\Payload;
-
 class MobileVerificationMessage
 {
     /**

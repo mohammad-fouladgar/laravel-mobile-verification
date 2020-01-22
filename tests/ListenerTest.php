@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
+use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
 use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;

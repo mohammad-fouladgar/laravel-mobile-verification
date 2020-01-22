@@ -3,8 +3,7 @@
 namespace Fouladgar\MobileVerifier\Http\Controllers;
 
 use Fouladgar\MobileVerifier\Concerns\VerifiesMobiles;
-use Fouladgar\MobileVerifier\Contracts\BaseVerificationControllerInterface;
-use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
+use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
 use Illuminate\Routing\Controller;
 
 abstract class BaseVerificationController extends Controller implements BaseVerificationControllerInterface

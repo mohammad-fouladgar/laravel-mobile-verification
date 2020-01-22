@@ -2,13 +2,13 @@
 
 namespace Fouladgar\MobileVerifier;
 
-use Fouladgar\MobileVerifier\Concerns\TokenBroker;
+use Fouladgar\MobileVerifier\Tokens\TokenBroker;
 use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Contracts\TokenBrokerInterface;
-use Fouladgar\MobileVerifier\Contracts\TokenRepositoryInterface;
+use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
+use Fouladgar\MobileVerifier\Tokens\TokenRepositoryInterface;
 use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
-use Fouladgar\MobileVerifier\Repository\DatabaseTokenRepository;
+use Fouladgar\MobileVerifier\Tokens\DatabaseTokenRepository;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;

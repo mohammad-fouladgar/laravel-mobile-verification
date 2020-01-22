@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Concerns\Payload;
+use Fouladgar\MobileVerifier\Notifications\Messages\Payload;
 use Fouladgar\MobileVerifier\Contracts\SMSClient;
 
 class SampleSMSClient implements SMSClient
