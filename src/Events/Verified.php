@@ -2,8 +2,8 @@
 
 namespace Fouladgar\MobileVerifier\Events;
 
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Illuminate\Queue\SerializesModels;
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 
 class Verified
 {
@@ -31,7 +31,7 @@ class Verified
      */
     public function __construct(MustVerifyMobile $user, array $request)
     {
-        $this->user = $user;
+        $this->user    = $user;
         $this->request = $request;
     }
 }

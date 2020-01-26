@@ -2,11 +2,11 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\ServiceProvider;
 use Illuminate\Foundation\Application;
+use Fouladgar\MobileVerifier\ServiceProvider;
 use Illuminate\Foundation\Testing\TestResponse;
-use Illuminate\Routing\Middleware\ThrottleRequests;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 
 class TestCase extends BaseTestCase
 {

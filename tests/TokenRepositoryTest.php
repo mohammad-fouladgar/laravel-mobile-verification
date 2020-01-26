@@ -3,13 +3,13 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Exception;
+use ReflectionMethod;
+use Illuminate\Support\Str;
+use Illuminate\Config\Repository;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\ConnectionInterface;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerifier\Tokens\DatabaseTokenRepository;
-use Illuminate\Config\Repository;
-use Illuminate\Database\ConnectionInterface;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Str;
-use ReflectionMethod;
 
 class TokenRepositoryTest extends TestCase
 {
@@ -47,10 +47,10 @@ class TokenRepositoryTest extends TestCase
         $method = new ReflectionMethod(DatabaseTokenRepository::class, 'getTable');
         $method->setAccessible(true);
 
-        $this->table = $method->invoke($tokenRepository);
+        $this->table           = $method->invoke($tokenRepository);
         $this->tokenRepository = $tokenRepository;
-        $this->tokenLength = config('mobile_verifier.token_length');
-        $this->tokenLifetime = config('mobile_verifier.token_lifetime');
+        $this->tokenLength     = config('mobile_verifier.token_length');
+        $this->tokenLifetime   = config('mobile_verifier.token_lifetime');
     }
 
     /** @test
@@ -58,7 +58,7 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_create_a_token()
     {
-        $user = new VerifiableUser();
+        $user         = new VerifiableUser();
         $user->mobile = '555555';
 
         $token = $this->tokenRepository->create($user);
@@ -77,7 +77,7 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_delete_existing_token()
     {
-        $user = new VerifiableUser();
+        $user         = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
@@ -98,7 +98,7 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_find_existing_and_not_expired_token()
     {
-        $user = new VerifiableUser();
+        $user         = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
@@ -117,7 +117,7 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_fails_when_token_is_exist_but_expired()
     {
-        $user = new VerifiableUser();
+        $user         = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [
@@ -136,7 +136,7 @@ class TokenRepositoryTest extends TestCase
      */
     public function it_fails_when_token_is_not_existed()
     {
-        $user = new VerifiableUser();
+        $user         = new VerifiableUser();
         $user->mobile = '555555';
 
         $record = [

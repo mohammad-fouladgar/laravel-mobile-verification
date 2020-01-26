@@ -3,12 +3,12 @@
 namespace Fouladgar\MobileVerifier\Tests;
 
 use Exception;
-use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerifier\Tokens\TokenBroker;
-use Fouladgar\MobileVerifier\Tokens\TokenRepositoryInterface;
-use Mockery as m;
 use Throwable;
+use Mockery as m;
+use Fouladgar\MobileVerifier\Tokens\TokenBroker;
+use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerifier\Tokens\TokenRepositoryInterface;
+use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
 
 class TokenBrokerTest extends TestCase
 {
@@ -29,7 +29,7 @@ class TokenBrokerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = m::mock(VerifiableUser::class)->makePartial();
+        $this->user            = m::mock(VerifiableUser::class)->makePartial();
         $this->tokenRepository = m::mock(TokenRepositoryInterface::class);
     }
 
