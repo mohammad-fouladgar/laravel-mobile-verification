@@ -9,9 +9,9 @@ use Illuminate\Database\ConnectionInterface;
 use Fouladgar\MobileVerification\Tokens\TokenBroker;
 use Fouladgar\MobileVerification\Contracts\SMSClient;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
 use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Fouladgar\MobileVerification\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
 

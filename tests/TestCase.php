@@ -3,8 +3,8 @@
 namespace Fouladgar\MobileVerification\Tests;
 
 use Illuminate\Foundation\Application;
-use Fouladgar\MobileVerification\ServiceProvider;
 use Illuminate\Foundation\Testing\TestResponse;
+use Fouladgar\MobileVerification\ServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 

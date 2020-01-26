@@ -2,8 +2,8 @@
 
 namespace Fouladgar\MobileVerification;
 
-use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
 use Illuminate\Auth\Events\Registered;
+use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
