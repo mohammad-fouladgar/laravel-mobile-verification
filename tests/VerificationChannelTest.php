@@ -1,13 +1,13 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
 use Mockery as m;
-use Fouladgar\MobileVerifier\Tests\Models\User;
-use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
+use Fouladgar\MobileVerification\Tests\Models\User;
+use Fouladgar\MobileVerification\Contracts\SMSClient;
+use Fouladgar\MobileVerification\Notifications\VerifyMobile;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Notifications\Channels\VerificationChannel;
 
 class VerificationChannelTest extends TestCase
 {

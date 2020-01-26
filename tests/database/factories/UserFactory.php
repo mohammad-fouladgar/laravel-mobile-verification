@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
-use Fouladgar\MobileVerifier\Tests\Models\User;
+use Fouladgar\MobileVerification\Tests\Models\User;
 
 /*
 |--------------------------------------------------------------------------

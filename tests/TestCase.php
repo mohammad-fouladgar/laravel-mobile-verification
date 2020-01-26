@@ -1,9 +1,9 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
 use Illuminate\Foundation\Application;
-use Fouladgar\MobileVerifier\ServiceProvider;
+use Fouladgar\MobileVerification\ServiceProvider;
 use Illuminate\Foundation\Testing\TestResponse;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Illuminate\Routing\Middleware\ThrottleRequests;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
-use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Notifications\Messages\Payload;
+use Fouladgar\MobileVerification\Contracts\SMSClient;
+use Fouladgar\MobileVerification\Notifications\Messages\Payload;
 
 class SampleSMSClient implements SMSClient
 {

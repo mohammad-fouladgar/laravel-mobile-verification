@@ -1,13 +1,13 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Concerns;
+namespace Fouladgar\MobileVerification\Concerns;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Fouladgar\MobileVerifier\Events\Verified;
+use Fouladgar\MobileVerification\Events\Verified;
 use Illuminate\Foundation\Auth\RedirectsUsers;
-use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
-use Fouladgar\MobileVerifier\Http\Requests\VerificationRequest;
+use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
+use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
 
 trait VerifiesMobiles
 {

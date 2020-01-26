@@ -1,12 +1,12 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Http\Controllers;
+namespace Fouladgar\MobileVerification\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Contracts\View\Factory;
-use Fouladgar\MobileVerifier\Http\Requests\VerificationRequest;
+use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
 
 interface BaseVerificationControllerInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Notifications\Channels;
+namespace Fouladgar\MobileVerification\Notifications\Channels;
 
 use Illuminate\Notifications\Notification;
-use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
+use Fouladgar\MobileVerification\Contracts\SMSClient;
+use Fouladgar\MobileVerification\Notifications\Messages\MobileVerificationMessage;
 
 class VerificationChannel
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Notifications\Messages;
+namespace Fouladgar\MobileVerification\Notifications\Messages;
 
 class MobileVerificationMessage
 {

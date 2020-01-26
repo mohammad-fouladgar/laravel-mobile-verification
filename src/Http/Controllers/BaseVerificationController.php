@@ -1,10 +1,10 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Http\Controllers;
+namespace Fouladgar\MobileVerification\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Fouladgar\MobileVerifier\Concerns\VerifiesMobiles;
-use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
+use Fouladgar\MobileVerification\Concerns\VerifiesMobiles;
+use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 
 abstract class BaseVerificationController extends Controller implements BaseVerificationControllerInterface
 {

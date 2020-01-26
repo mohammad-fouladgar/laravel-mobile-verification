@@ -1,17 +1,17 @@
 {
-  "name": "fouladgar/laravel-mobile-verifier",
+  "name": "fouladgar/laravel-mobile-verification",
   "description": "",
   "keywords": [
-    "mobile-verifier",
-    "laravel-mobile-verifier",
     "mobile-verification",
+    "mobile-verifier",
+    "laravel-mobile-verification",
     "laravel",
     "lumen",
     "mobile"
   ],
   "support": {
-    "issues": "https://github.com/mohammad-fouladgar/laravel-mobile-verifier/issues",
-    "source": "https://github.com/mohammad-fouladgar/laravel-mobile-verifier"
+    "issues": "https://github.com/mohammad-fouladgar/laravel-mobile-verification/issues",
+    "source": "https://github.com/mohammad-fouladgar/laravel-mobile-verification"
   },
   "authors": [
     {
@@ -35,12 +35,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Fouladgar\\MobileVerifier\\": "src/"
+      "Fouladgar\\MobileVerification\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Fouladgar\\MobileVerifier\\Tests\\": "tests/"
+      "Fouladgar\\MobileVerification\\Tests\\": "tests/"
     }
   },
   "scripts": {
@@ -50,7 +50,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Fouladgar\\MobileVerifier\\ServiceProvider"
+        "Fouladgar\\MobileVerification\\ServiceProvider"
       ]
     }
   },

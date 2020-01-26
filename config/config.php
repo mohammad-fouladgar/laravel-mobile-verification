@@ -73,7 +73,7 @@ return [
     | This is the namespace of default controller. Feel free
     | to change this namespace to anything you like.
     */
-    'controller_namespace' => 'Fouladgar\MobileVerifier\Http\Controllers',
+    'controller_namespace' => 'Fouladgar\MobileVerification\Http\Controllers',
 
     /*
     |--------------------------------------------------------------------------

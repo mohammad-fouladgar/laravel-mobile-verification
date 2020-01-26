@@ -1,10 +1,10 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tokens;
+namespace Fouladgar\MobileVerification\Tokens;
 
 use Exception;
 use Throwable;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 
 interface TokenBrokerInterface
 {

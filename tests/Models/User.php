@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests\Models;
+namespace Fouladgar\MobileVerification\Tests\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

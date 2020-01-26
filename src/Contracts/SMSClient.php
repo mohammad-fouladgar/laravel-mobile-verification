@@ -1,8 +1,8 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Contracts;
+namespace Fouladgar\MobileVerification\Contracts;
 
-use Fouladgar\MobileVerifier\Notifications\Messages\Payload;
+use Fouladgar\MobileVerification\Notifications\Messages\Payload;
 
 interface SMSClient
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tokens;
+namespace Fouladgar\MobileVerification\Tokens;
 
 use Exception;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\ConnectionInterface;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 
 class DatabaseTokenRepository implements TokenRepositoryInterface
 {

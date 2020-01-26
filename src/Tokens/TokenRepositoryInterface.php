@@ -1,9 +1,9 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tokens;
+namespace Fouladgar\MobileVerification\Tokens;
 
 use Exception;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 
 interface TokenRepositoryInterface
 {

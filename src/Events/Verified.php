@@ -1,9 +1,9 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Events;
+namespace Fouladgar\MobileVerification\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 
 class Verified
 {

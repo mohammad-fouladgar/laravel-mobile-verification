@@ -1,13 +1,13 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Fouladgar\MobileVerifier\Tests\Models\User;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Tests\Models\User;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
 
 class MiddlewareTest extends TestCase
 {

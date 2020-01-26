@@ -1,14 +1,14 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
 use Exception;
 use Throwable;
 use Mockery as m;
-use Fouladgar\MobileVerifier\Tokens\TokenBroker;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerifier\Tokens\TokenRepositoryInterface;
-use Fouladgar\MobileVerifier\Exceptions\InvalidTokenException;
+use Fouladgar\MobileVerification\Tokens\TokenBroker;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
+use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 
 class TokenBrokerTest extends TestCase
 {

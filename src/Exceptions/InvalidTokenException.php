@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Exceptions;
+namespace Fouladgar\MobileVerification\Exceptions;
 
 use Exception;
 

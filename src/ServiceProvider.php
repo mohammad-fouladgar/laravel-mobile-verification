@@ -1,19 +1,19 @@
 <?php
 
-namespace Fouladgar\MobileVerifier;
+namespace Fouladgar\MobileVerification;
 
 use Throwable;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\ConnectionInterface;
-use Fouladgar\MobileVerifier\Tokens\TokenBroker;
-use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
-use Fouladgar\MobileVerifier\Tokens\DatabaseTokenRepository;
-use Fouladgar\MobileVerifier\Tokens\TokenRepositoryInterface;
+use Fouladgar\MobileVerification\Tokens\TokenBroker;
+use Fouladgar\MobileVerification\Contracts\SMSClient;
+use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
+use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
+use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Fouladgar\MobileVerifier\Exceptions\SMSClientNotFoundException;
-use Fouladgar\MobileVerifier\Http\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerification\Exceptions\SMSClientNotFoundException;
+use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -66,7 +66,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'MobileVerifier');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'MobileVerification');
     }
 
     /**
@@ -79,7 +79,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([$this->getConfig() => config_path('mobile_verifier.php')], 'config');
 
         $this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/MobileVerifier'),
+            __DIR__.'/../resources/lang' => resource_path('lang/vendor/MobileVerification'),
         ], 'lang');
 
         $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'migrations');
@@ -129,7 +129,7 @@ class ServiceProvider extends BaseServiceProvider
     private function routeConfiguration(): array
     {
         return [
-            'namespace' => config('mobile_verifier.controller_namespace', 'Fouladgar\MobileVerifier\Http\Controllers'),
+            'namespace' => config('mobile_verifier.controller_namespace', 'Fouladgar\MobileVerification\Http\Controllers'),
             'prefix'    => config('mobile_verifier.routes_prefix', 'auth'),
         ];
     }

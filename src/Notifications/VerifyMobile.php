@@ -1,11 +1,11 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Notifications;
+namespace Fouladgar\MobileVerification\Notifications;
 
 use Illuminate\Notifications\Notification;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
-use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
-use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerification\Notifications\Channels\VerificationChannel;
+use Fouladgar\MobileVerification\Notifications\Messages\MobileVerificationMessage;
 
 class VerifyMobile extends Notification
 {

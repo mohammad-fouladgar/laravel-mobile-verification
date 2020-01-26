@@ -1,11 +1,11 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Listeners;
+namespace Fouladgar\MobileVerification\Listeners;
 
 use Exception;
 use Illuminate\Auth\Events\Registered;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
-use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
+use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
+use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 
 class SendMobileVerificationNotification
 {

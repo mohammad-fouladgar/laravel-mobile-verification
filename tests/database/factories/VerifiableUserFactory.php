@@ -4,7 +4,7 @@
 
 use Carbon\Carbon;
 use Faker\Generator as Faker;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 
 /*
 |--------------------------------------------------------------------------

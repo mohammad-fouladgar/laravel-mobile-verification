@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Http\Requests;
+namespace Fouladgar\MobileVerification\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

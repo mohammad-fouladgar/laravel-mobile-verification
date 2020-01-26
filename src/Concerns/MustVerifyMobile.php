@@ -1,26 +1,22 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Concerns;
+namespace Fouladgar\MobileVerification\Concerns;
 
+use Fouladgar\MobileVerification\Notifications\VerifyMobile as VerifyMobileNotification;
 use Illuminate\Config\Repository;
-use Fouladgar\MobileVerifier\Notifications\VerifyMobile as VerifyMobileNotification;
 
 trait MustVerifyMobile
 {
     /**
      * Determine if the user has verified their mobile number.
-     *
-     * @return bool
      */
     public function hasVerifiedMobile(): bool
     {
-        return $this->mobile_verified_at !== null;
+        return null !== $this->mobile_verified_at;
     }
 
     /**
      * Mark the given user's mobile as verified.
-     *
-     * @return bool
      */
     public function markMobileAsVerified(): bool
     {
@@ -29,10 +25,6 @@ trait MustVerifyMobile
 
     /**
      * Send the mobile verification notification.
-     *
-     * @param string $token
-     *
-     * @return void
      */
     public function sendMobileVerifierNotification(string $token): void
     {
@@ -41,8 +33,6 @@ trait MustVerifyMobile
 
     /**
      * Get the mobile number that should be used for verification.
-     *
-     * @return string
      */
     public function getMobileForVerification(): string
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 
 class MustVerifyMobileTraitTest extends TestCase
 {

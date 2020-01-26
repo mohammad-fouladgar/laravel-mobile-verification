@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
 use Exception;
 use ReflectionMethod;
@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 use Illuminate\Config\Repository;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\ConnectionInterface;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerifier\Tokens\DatabaseTokenRepository;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
 
 class TokenRepositoryTest extends TestCase
 {

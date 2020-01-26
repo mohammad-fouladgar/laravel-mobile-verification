@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Contracts;
+namespace Fouladgar\MobileVerification\Contracts;
 
 interface MustVerifyMobile
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Tests;
+namespace Fouladgar\MobileVerification\Tests;
 
 use Mockery as m;
 use Illuminate\Auth\Events\Registered;
-use Fouladgar\MobileVerifier\Tests\Models\User;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
-use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
+use Fouladgar\MobileVerification\Tests\Models\User;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
+use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
 
 class ListenerTest extends TestCase
 {

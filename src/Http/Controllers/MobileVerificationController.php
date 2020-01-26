@@ -1,6 +1,6 @@
 <?php
 
-namespace Fouladgar\MobileVerifier\Http\Controllers;
+namespace Fouladgar\MobileVerification\Http\Controllers;
 
 class MobileVerificationController extends BaseVerificationController
 {
