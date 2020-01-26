@@ -13,9 +13,9 @@
 # a file called CHANGES (under the title of the new version
 # number) and create a GIT tag.
 
-if [ -f VERSION ]; then
+if [[ -f VERSION ]]; then
     BASE_STRING=`cat VERSION`
-    BASE_LIST=(`echo $BASE_STRING | tr '.' ' '`)
+    BASE_LIST=(`echo ${BASE_STRING} | tr '.' ' '`)
     V_MAJOR=${BASE_LIST[0]}
     V_MINOR=${BASE_LIST[1]}
     V_PATCH=${BASE_LIST[2]}
@@ -24,13 +24,13 @@ if [ -f VERSION ]; then
     V_PATCH=0
     SUGGESTED_VERSION="$V_MAJOR.$V_MINOR.$V_PATCH"
     read -p "Enter a version number [$SUGGESTED_VERSION]: " INPUT_STRING
-    if [ "$INPUT_STRING" = "" ]; then
-        INPUT_STRING=$SUGGESTED_VERSION
+    if [[ "$INPUT_STRING" = "" ]]; then
+        INPUT_STRING=${SUGGESTED_VERSION}
     fi
     echo "Will set new version to be $INPUT_STRING"
-    echo $INPUT_STRING > VERSION
+    echo ${INPUT_STRING} > VERSION
     tag_date=$(git log -1 --pretty=format:'%ad' --date=short)
-    
+
     echo "## $INPUT_STRING - ${tag_date}" > tmpfile
     git log --pretty=format:" - %s" "v$BASE_STRING"...HEAD >> tmpfile
     echo "" >> tmpfile
@@ -41,12 +41,12 @@ if [ -f VERSION ]; then
 else
     echo "Could not find a VERSION file"
     read -p "Do you want to create a version file and start from scratch? [y]" RESPONSE
-    if [ "$RESPONSE" = "" ]; then RESPONSE="y"; fi
-    if [ "$RESPONSE" = "Y" ]; then RESPONSE="y"; fi
-    if [ "$RESPONSE" = "Yes" ]; then RESPONSE="y"; fi
-    if [ "$RESPONSE" = "yes" ]; then RESPONSE="y"; fi
-    if [ "$RESPONSE" = "YES" ]; then RESPONSE="y"; fi
-    if [ "$RESPONSE" = "y" ]; then
+    if [[ "$RESPONSE" = "" ]]; then RESPONSE="y"; fi
+    if [[ "$RESPONSE" = "Y" ]]; then RESPONSE="y"; fi
+    if [[ "$RESPONSE" = "Yes" ]]; then RESPONSE="y"; fi
+    if [[ "$RESPONSE" = "yes" ]]; then RESPONSE="y"; fi
+    if [[ "$RESPONSE" = "YES" ]]; then RESPONSE="y"; fi
+    if [[ "$RESPONSE" = "y" ]]; then
         tag_date=$(git log -1 --pretty=format:'%ad' --date=short)
         echo "0.1.0" > VERSION
         echo "## 0.1.0 - ${tag_date}" > CHANGELOG.md
