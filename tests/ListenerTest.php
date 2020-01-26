@@ -2,12 +2,12 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
+use Mockery as m;
+use Illuminate\Auth\Events\Registered;
 use Fouladgar\MobileVerifier\Tests\Models\User;
 use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerifier\Tokens\TokenBrokerInterface;
-use Illuminate\Auth\Events\Registered;
-use Mockery as m;
+use Fouladgar\MobileVerifier\Listeners\SendMobileVerificationNotification;
 
 class ListenerTest extends TestCase
 {
@@ -28,7 +28,7 @@ class ListenerTest extends TestCase
     {
         parent::setUp();
 
-        $this->tokenBroker = m::mock(TokenBrokerInterface::class);
+        $this->tokenBroker    = m::mock(TokenBrokerInterface::class);
         $this->verifiableUser = m::mock(VerifiableUser::class)->makePartial();
     }
 

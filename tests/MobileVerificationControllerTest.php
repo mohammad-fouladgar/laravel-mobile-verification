@@ -2,10 +2,10 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerifier\Tokens\TokenBroker;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\Response;
+use Fouladgar\MobileVerifier\Tokens\TokenBroker;
+use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 
 class MobileVerificationControllerTest extends TestCase
 {
@@ -24,12 +24,12 @@ class MobileVerificationControllerTest extends TestCase
         $this->app->instance(TokenBroker::class, $tokenBroker);
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
-             ->assertOk()
-             ->assertJson(['message' => __('mobile_verifier.successful_verification')]);
+            ->assertOk()
+            ->assertJson(['message' => __('mobile_verifier.successful_verification')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
-             ->assertStatus(Response::HTTP_FOUND)
-             ->assertSessionHas('mobileVerificationVerified');
+            ->assertStatus(Response::HTTP_FOUND)
+            ->assertSessionHas('mobileVerificationVerified');
     }
 
     /** @test */
@@ -40,11 +40,11 @@ class MobileVerificationControllerTest extends TestCase
         $this->actingAs($user);
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
-             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-             ->assertJson(['message' => __('mobile_verifier.already_verified')]);
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJson(['message' => __('mobile_verifier.already_verified')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
-             ->assertStatus(Response::HTTP_FOUND);
+            ->assertStatus(Response::HTTP_FOUND);
     }
 
     /** @test */
@@ -55,12 +55,12 @@ class MobileVerificationControllerTest extends TestCase
         $this->actingAs($user);
 
         $this->postJson(route('mobile.verify'))
-             ->assertJsonValidationErrors(['token'])
-             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+            ->assertJsonValidationErrors(['token'])
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
         $this->post(route('mobile.verify'))
-             ->assertSessionHasErrors('token')
-             ->assertStatus(Response::HTTP_FOUND);
+            ->assertSessionHasErrors('token')
+            ->assertStatus(Response::HTTP_FOUND);
     }
 
     /**
@@ -73,10 +73,10 @@ class MobileVerificationControllerTest extends TestCase
         $this->actingAs($user);
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
-             ->assertStatus(Response::HTTP_NOT_ACCEPTABLE);
+            ->assertStatus(Response::HTTP_NOT_ACCEPTABLE);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
-             ->assertSessionHasErrors('token');
+            ->assertSessionHasErrors('token');
     }
 
     /**
@@ -89,13 +89,13 @@ class MobileVerificationControllerTest extends TestCase
         $this->actingAs($user);
 
         $this->postJson(route('mobile.resend'))
-             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-             ->assertJson([
-                 'message' => __('mobile_verifier.already_verified'),
-             ]);
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJson([
+                'message' => __('mobile_verifier.already_verified'),
+            ]);
 
         $this->post(route('mobile.resend'))
-             ->assertStatus(Response::HTTP_FOUND);
+            ->assertStatus(Response::HTTP_FOUND);
     }
 
     /**
@@ -108,9 +108,9 @@ class MobileVerificationControllerTest extends TestCase
         $this->actingAs($user);
 
         $this->postJson(route('mobile.resend'))
-             ->assertOk();
+            ->assertOk();
 
         $this->post(route('mobile.resend'))
-             ->assertSessionHas('mobileVerificationResend');
+            ->assertSessionHas('mobileVerificationResend');
     }
 }

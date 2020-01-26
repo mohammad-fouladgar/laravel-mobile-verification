@@ -44,6 +44,6 @@ class MobileVerificationMessage
     public function getPayload(): Payload
     {
         return (new Payload())->setTo($this->to)
-                              ->setToken($this->token);
+            ->setToken($this->token);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Fouladgar\MobileVerifier\Notifications;
 
+use Illuminate\Notifications\Notification;
 use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
 use Fouladgar\MobileVerifier\Notifications\Messages\MobileVerificationMessage;
-use Illuminate\Notifications\Notification;
 
 class VerifyMobile extends Notification
 {
@@ -50,6 +50,6 @@ class VerifyMobile extends Notification
     public function toMobile(MustVerifyMobile $notifiable): MobileVerificationMessage
     {
         return (new MobileVerificationMessage())->to($notifiable->getMobileForVerification())
-                                              ->token($this->token);
+            ->token($this->token);
     }
 }

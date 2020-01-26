@@ -2,12 +2,12 @@
 
 namespace Fouladgar\MobileVerifier\Tests;
 
-use Fouladgar\MobileVerifier\Contracts\SMSClient;
-use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
-use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
-use Fouladgar\MobileVerifier\Tests\Models\User;
-use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
 use Mockery as m;
+use Fouladgar\MobileVerifier\Tests\Models\User;
+use Fouladgar\MobileVerifier\Contracts\SMSClient;
+use Fouladgar\MobileVerifier\Notifications\VerifyMobile;
+use Fouladgar\MobileVerifier\Tests\Models\VerifiableUser;
+use Fouladgar\MobileVerifier\Notifications\Channels\VerificationChannel;
 
 class VerificationChannelTest extends TestCase
 {
@@ -15,7 +15,7 @@ class VerificationChannelTest extends TestCase
     public function it_can_successfully_send_verification_token()
     {
         $notification = new VerifyMobile('token_123');
-        $notifiable = new VerifiableUser();
+        $notifiable   = new VerifiableUser();
 
         $notifiable->mobile = '555555';
 
@@ -32,7 +32,7 @@ class VerificationChannelTest extends TestCase
     public function it_not_working_on_not_vefifable_user_model()
     {
         $notification = new VerifyMobile('token_123');
-        $notifiable = new User();
+        $notifiable   = new User();
 
         $verificationChannel = new VerificationChannel(
             $client = m::mock(SMSClient::class)

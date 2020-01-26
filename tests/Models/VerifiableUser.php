@@ -2,12 +2,12 @@
 
 namespace Fouladgar\MobileVerifier\Tests\Models;
 
-use Fouladgar\MobileVerifier\Concerns\MustVerifyMobile as MustVerifyMobile;
-use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile as IMustVerifyMobile;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Fouladgar\MobileVerifier\Concerns\MustVerifyMobile as MustVerifyMobile;
+use Fouladgar\MobileVerifier\Contracts\MustVerifyMobile as IMustVerifyMobile;
 
 class VerifiableUser extends Model implements AuthenticatableContract, IMustVerifyMobile
 {
