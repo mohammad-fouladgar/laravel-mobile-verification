@@ -35,7 +35,7 @@ class VerificationChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $to = $notifiable->routeNotificationFor('verification_mobile', $notification)) {
+        if (! $notifiable->routeNotificationFor('verification_mobile', $notification)) {
             return;
         }
 
