@@ -94,7 +94,7 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 You can use any SMS service for sending verification messages such as `Nexmo`, `Twilio` or etc. For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
 
-This method will return your SMS service api result via a `Payload` object which contains user **number** and **token** message:
+This method will return your SMS service API result via a `Payload` object which contains user **number** and **token** message:
 
 ```php
 <?php
