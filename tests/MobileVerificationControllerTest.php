@@ -5,6 +5,7 @@ namespace Fouladgar\MobileVerification\Tests;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\Response;
 use Fouladgar\MobileVerification\Tokens\TokenBroker;
+use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 
 class MobileVerificationControllerTest extends TestCase
@@ -21,7 +22,8 @@ class MobileVerificationControllerTest extends TestCase
         $tokenBroker = m::mock(TokenBroker::class);
         $tokenBroker->shouldReceive('verifyToken')->andReturn(true);
 
-        $this->app->instance(TokenBroker::class, $tokenBroker);
+        // Override service provider binding with mocked service binding
+        $this->app->instance(TokenBrokerInterface::class, $tokenBroker);
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertOk()
