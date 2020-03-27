@@ -108,4 +108,15 @@ return [
      |
      */
     'throttle' => 10,
+
+    /*
+     |--------------------------------------------------------------------------
+     | Middleware
+     |--------------------------------------------------------------------------
+     |
+     | Here you can specify which middleware you want to use for the APIs
+     | For example: 'web', 'auth', 'auth:api'
+     |
+     */
+    'middleware' => ['web', 'auth'],
 ];

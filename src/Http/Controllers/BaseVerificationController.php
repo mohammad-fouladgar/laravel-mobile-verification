@@ -24,7 +24,7 @@ abstract class BaseVerificationController extends Controller implements BaseVeri
      */
     public function __construct(TokenBrokerInterface $tokenBroker)
     {
-        $this->middleware(['web', 'auth']);
+        $this->middleware(config('mobile_verifier.middleware', ['web', 'auth']));
 
         $throttle = config('mobile_verifier.throttle', 10);
 
