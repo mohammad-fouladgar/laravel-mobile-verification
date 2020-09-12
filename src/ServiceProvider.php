@@ -2,18 +2,18 @@
 
 namespace Fouladgar\MobileVerification;
 
-use Throwable;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Database\ConnectionInterface;
-use Fouladgar\MobileVerification\Tokens\TokenBroker;
 use Fouladgar\MobileVerification\Contracts\SMSClient;
-use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
-use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
 use Fouladgar\MobileVerification\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
+use Fouladgar\MobileVerification\Tokens\TokenBroker;
+use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
+use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Throwable;
 
 class ServiceProvider extends BaseServiceProvider
 {

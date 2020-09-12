@@ -2,11 +2,11 @@
 
 namespace Fouladgar\MobileVerification\Concerns;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Fouladgar\MobileVerification\Events\Verified;
 use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 trait VerifiesMobiles
 {

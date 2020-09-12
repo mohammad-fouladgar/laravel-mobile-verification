@@ -2,8 +2,8 @@
 
 namespace Fouladgar\MobileVerification\Concerns;
 
-use Illuminate\Config\Repository;
 use Fouladgar\MobileVerification\Notifications\VerifyMobile as VerifyMobileNotification;
+use Illuminate\Config\Repository;
 
 trait MustVerifyMobile
 {

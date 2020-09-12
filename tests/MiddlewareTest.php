@@ -2,12 +2,12 @@
 
 namespace Fouladgar\MobileVerification\Tests;
 
+use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
+use Fouladgar\MobileVerification\Tests\Models\User;
+use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Fouladgar\MobileVerification\Tests\Models\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
-use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
 
 class MiddlewareTest extends TestCase
 {
@@ -25,7 +25,7 @@ class MiddlewareTest extends TestCase
     {
         parent::__construct();
 
-        $this->middleware  = new EnsureMobileIsVerified();
+        $this->middleware = new EnsureMobileIsVerified();
         $this->jsonRequest = new Request();
         $this->jsonRequest->headers->set('Accept', 'application/json');
     }
