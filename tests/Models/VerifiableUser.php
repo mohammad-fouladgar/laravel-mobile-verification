@@ -14,6 +14,7 @@ class VerifiableUser extends Model implements AuthenticatableContract, IMustVeri
     use Authenticatable;
     use MustVerifyMobile;
     use Notifiable;
+
     public $timestamps = false;
 
     protected $fillable = [
