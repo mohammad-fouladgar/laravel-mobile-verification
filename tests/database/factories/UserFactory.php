@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(User::class, static function (Faker $faker) {
     return [
-        'name'   => $faker->name,
+        'name' => $faker->name,
         'mobile' => '555555',
     ];
 });
