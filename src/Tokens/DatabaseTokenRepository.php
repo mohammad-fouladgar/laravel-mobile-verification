@@ -101,7 +101,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
             ->where('token', $token)
             ->first();
 
-        return $record && ! $this->tokenExpired($record['expires_at']);
+        return $record && !$this->tokenExpired($record['expires_at']);
     }
 
     /**
