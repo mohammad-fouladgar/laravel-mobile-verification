@@ -19,8 +19,8 @@ use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 
 $factory->define(VerifiableUser::class, function (Faker $faker) {
     return [
-        'name'               => $faker->name,
-        'mobile'             => '555555',
+        'name' => $faker->name,
+        'mobile' => '555555',
         'mobile_verified_at' => null,
     ];
 });
