@@ -130,7 +130,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         return [
             'namespace' => config('mobile_verifier.controller_namespace', 'Fouladgar\MobileVerification\Http\Controllers'),
-            'prefix'    => config('mobile_verifier.routes_prefix', 'auth'),
+            'prefix' => config('mobile_verifier.routes_prefix', 'auth'),
         ];
     }
 }
