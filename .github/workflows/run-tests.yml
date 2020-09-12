@@ -19,6 +19,3 @@ jobs:
 
     - name: Run test suite
       run: composer test
-      
-    - name: Run coverage
-      run: composer test-coverage
