@@ -30,11 +30,4 @@
         <env name="DB_CONNECTION" value="testing"/>
         <env name="APP_KEY" value="base64:AyJGOtNkX6q4z+XaeZv11xdtseDc4P0ZL5gw2fS2aMw="/>
     </php>
-
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml"/>
-        <log type="coverage-html" target="build/coverage"/>
-        <log type="coverage-text" target="build/coverage.txt"/>
-    </logging>
-
 </phpunit>
