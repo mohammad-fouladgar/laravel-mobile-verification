@@ -37,7 +37,7 @@ class SendMobileVerificationNotification
     {
         $user = $event->user;
 
-        if ($user instanceof MustVerifyMobile && !$user->hasVerifiedMobile()) {
+        if ($user instanceof MustVerifyMobile && ! $user->hasVerifiedMobile()) {
             $this->tokenBroker->sendToken($user);
         }
     }
