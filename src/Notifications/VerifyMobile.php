@@ -2,10 +2,10 @@
 
 namespace Fouladgar\MobileVerification\Notifications;
 
-use Illuminate\Notifications\Notification;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerification\Notifications\Channels\VerificationChannel;
 use Fouladgar\MobileVerification\Notifications\Messages\MobileVerificationMessage;
+use Illuminate\Notifications\Notification;
 
 class VerifyMobile extends Notification
 {

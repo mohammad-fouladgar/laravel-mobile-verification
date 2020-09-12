@@ -3,10 +3,10 @@
 namespace Fouladgar\MobileVerification\Tokens;
 
 use Exception;
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Database\ConnectionInterface;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Carbon;
 
 class DatabaseTokenRepository implements TokenRepositoryInterface
 {
@@ -50,9 +50,9 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
         $expires = 5,
         $tokenLength = 5
     ) {
-        $this->table       = $table;
-        $this->expires     = $expires;
-        $this->connection  = $connection;
+        $this->table = $table;
+        $this->expires = $expires;
+        $this->connection = $connection;
         $this->tokenLength = $tokenLength;
     }
 
@@ -101,7 +101,7 @@ class DatabaseTokenRepository implements TokenRepositoryInterface
             ->where('token', $token)
             ->first();
 
-        return $record && ! $this->tokenExpired($record['expires_at']);
+        return $record && !$this->tokenExpired($record['expires_at']);
     }
 
     /**

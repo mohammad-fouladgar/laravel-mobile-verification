@@ -2,11 +2,11 @@
 
 namespace Fouladgar\MobileVerification\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Redirector;
-use Illuminate\Contracts\View\Factory;
 use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 interface BaseVerificationControllerInterface
 {

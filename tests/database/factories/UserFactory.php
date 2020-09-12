@@ -3,8 +3,8 @@
 /** @var Factory $factory */
 
 use Faker\Generator as Faker;
-use Illuminate\Database\Eloquent\Factory;
 use Fouladgar\MobileVerification\Tests\Models\User;
+use Illuminate\Database\Eloquent\Factory;
 
 /*
 |--------------------------------------------------------------------------

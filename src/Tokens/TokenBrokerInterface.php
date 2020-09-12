@@ -3,8 +3,8 @@
 namespace Fouladgar\MobileVerification\Tokens;
 
 use Exception;
-use Throwable;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
+use Throwable;
 
 interface TokenBrokerInterface
 {

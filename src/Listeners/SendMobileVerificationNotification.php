@@ -3,9 +3,9 @@
 namespace Fouladgar\MobileVerification\Listeners;
 
 use Exception;
-use Illuminate\Auth\Events\Registered;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
+use Illuminate\Auth\Events\Registered;
 
 class SendMobileVerificationNotification
 {
@@ -37,7 +37,7 @@ class SendMobileVerificationNotification
     {
         $user = $event->user;
 
-        if ($user instanceof MustVerifyMobile && ! $user->hasVerifiedMobile()) {
+        if ($user instanceof MustVerifyMobile && !$user->hasVerifiedMobile()) {
             $this->tokenBroker->sendToken($user);
         }
     }

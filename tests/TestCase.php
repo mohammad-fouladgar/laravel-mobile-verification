@@ -2,11 +2,11 @@
 
 namespace Fouladgar\MobileVerification\Tests;
 
+use Fouladgar\MobileVerification\ServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\TestResponse;
-use Fouladgar\MobileVerification\ServiceProvider;
-use Orchestra\Testbench\TestCase as BaseTestCase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
@@ -56,7 +56,9 @@ class TestCase extends BaseTestCase
     protected function callMiddleware($middleware, $method = 'GET', array $data = []): TestResponse
     {
         return $this->call(
-            $method, $this->makeMiddlewareRoute($method, $middleware), $data
+            $method,
+            $this->makeMiddlewareRoute($method, $middleware),
+            $data
         );
     }
 
@@ -72,7 +74,9 @@ class TestCase extends BaseTestCase
     protected function callMiddlewareJson($middleware, $method = 'GET', array $data = []): TestResponse
     {
         return $this->json(
-            $method, $this->makeMiddlewareRoute($method, $middleware), $data
+            $method,
+            $this->makeMiddlewareRoute($method, $middleware),
+            $data
         );
     }
 
@@ -88,12 +92,14 @@ class TestCase extends BaseTestCase
     {
         $method = strtolower($method);
 
-        return $this->app->make('router')->{$method}('/__middleware__',
+        return $this->app->make('router')->{$method}(
+            '/__middleware__',
             [
                 'middleware' => $middleware,
                 static function () {
                     return '__passed__';
                 },
-            ])->uri();
+            ]
+        )->uri();
     }
 }

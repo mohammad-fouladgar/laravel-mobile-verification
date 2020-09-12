@@ -2,9 +2,9 @@
 
 namespace Fouladgar\MobileVerification\Notifications\Channels;
 
-use Illuminate\Notifications\Notification;
 use Fouladgar\MobileVerification\Contracts\SMSClient;
 use Fouladgar\MobileVerification\Notifications\Messages\MobileVerificationMessage;
+use Illuminate\Notifications\Notification;
 
 class VerificationChannel
 {
@@ -35,7 +35,7 @@ class VerificationChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $notifiable->routeNotificationFor('verification_mobile', $notification)) {
+        if (!$notifiable->routeNotificationFor('verification_mobile', $notification)) {
             return;
         }
 
