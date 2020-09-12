@@ -11,6 +11,7 @@ class User extends Model implements AuthenticatableContract
 {
     use Authenticatable;
     use Notifiable;
+
     public $timestamps = false;
 
     protected $fillable = [
