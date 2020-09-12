@@ -66,8 +66,8 @@ class TokenRepositoryTest extends TestCase
         $this->assertEquals($this->tokenLength, Str::length($token));
 
         $this->assertDatabaseHas('mobile_verification_tokens', [
-            'mobile'     => '555555',
-            'token'      => $token,
+            'mobile' => '555555',
+            'token' => $token,
             'expires_at' => (string) now()->addMinutes($this->tokenLifetime),
         ]);
     }
@@ -81,8 +81,8 @@ class TokenRepositoryTest extends TestCase
         $user->mobile = '555555';
 
         $record = [
-            'mobile'     => '555555',
-            'token'      => 'token_123',
+            'mobile' => '555555',
+            'token' => 'token_123',
             'expires_at' => (string) now(),
         ];
 
@@ -102,8 +102,8 @@ class TokenRepositoryTest extends TestCase
         $user->mobile = '555555';
 
         $record = [
-            'mobile'     => '555555',
-            'token'      => 'token_123',
+            'mobile' => '555555',
+            'token' => 'token_123',
             'expires_at' => (string) now(),
         ];
 
@@ -121,8 +121,8 @@ class TokenRepositoryTest extends TestCase
         $user->mobile = '555555';
 
         $record = [
-            'mobile'     => '555555',
-            'token'      => 'token_123',
+            'mobile' => '555555',
+            'token' => 'token_123',
             'expires_at' => (string) now()->subMinutes($this->tokenLifetime),
         ];
 
@@ -140,8 +140,8 @@ class TokenRepositoryTest extends TestCase
         $user->mobile = '555555';
 
         $record = [
-            'mobile'     => '555555',
-            'token'      => 'token_123',
+            'mobile' => '555555',
+            'token' => 'token_123',
             'expires_at' => (string) now(),
         ];
 
