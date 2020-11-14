@@ -1,3 +1,6 @@
+## 2.0.0 - 2020-11-14
+ - Add Laravel 8 Support
+ - Deprecated Laravel 5
 ## 1.2.0 - 2020-04-23
  - Add RedirectsUsers trait to package (Due to its removal in L7)
  - Add middleware explicitly
