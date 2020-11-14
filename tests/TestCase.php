@@ -4,7 +4,7 @@ namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\ServiceProvider;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Testing\TestResponse;
+use Illuminate\Testing\TestResponse;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
