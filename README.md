@@ -2,10 +2,9 @@
 
 ![alt text](./cover.jpg "EloquentBuilder")
 
-[![Build Status](https://travis-ci.org/mohammad-fouladgar/laravel-mobile-verification.svg?branch=master)](https://travis-ci.org/mohammad-fouladgar/laravel-mobile-verification)
+![Test Status](https://img.shields.io/github/workflow/status/mohammad-fouladgar/laravel-mobile-verification/run-tests?label=tests)
 [![Coverage Status](https://coveralls.io/repos/github/mohammad-fouladgar/laravel-mobile-verification/badge.svg)](https://coveralls.io/github/mohammad-fouladgar/laravel-mobile-verification)
-[![Quality Score](https://img.shields.io/scrutinizer/g/mohammad-fouladgar/laravel-mobile-verification.svg?style=flat-square)](https://scrutinizer-ci.com/g/mohammad-fouladgar/laravel-mobile-verification)
-[![StyleCI](https://github.styleci.io/repos/231223898/shield?branch=master)](https://github.styleci.io/repos/231223898)
+![Code Style Status](https://img.shields.io/github/workflow/status/mohammad-fouladgar/laravel-mobile-verification/Check%20&%20fix%20styling?label=code%20style)
 [![Latest Stable Version](https://poser.pugx.org/fouladgar/laravel-mobile-verification/v/stable)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
 [![Total Downloads](https://poser.pugx.org/fouladgar/laravel-mobile-verification/downloads)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
 [![License](https://poser.pugx.org/fouladgar/laravel-mobile-verification/license)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
