@@ -39,7 +39,7 @@ If you don't use Auto-Discovery, add the ServiceProvider to the providers array 
 
 ## Configuration
 
-To get started, you should publish the `config/mobile_verification.php` config file with:
+To get started, you should publish the `config/mobile_verifier.php` config file with:
 
 ```
 php artisan vendor:publish --provider="Fouladgar\MobileVerification\ServiceProvider" --tag="config"
@@ -48,7 +48,7 @@ php artisan vendor:publish --provider="Fouladgar\MobileVerification\ServiceProvi
 If you’re using another table name for `users` table or different column name for `mobile` or even `mobile_verification_tokens` table, you can customize their values in config file:
 
 ```php
-// config/mobile_verification.php
+// config/mobile_verifier.php
 
 <?php
 
