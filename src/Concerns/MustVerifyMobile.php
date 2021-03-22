@@ -27,7 +27,7 @@ trait MustVerifyMobile
         $mobileFiled = $this->getMobileField();
 
         if (! in_array($mobileFiled, $this->fillable)) {
-            $this->fillable = array_merge($this->fillable,[$mobileFiled]);
+            $this->fillable = array_merge($this->fillable, [$mobileFiled]);
         }
     }
 
