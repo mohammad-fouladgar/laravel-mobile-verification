@@ -77,7 +77,7 @@ class TestCase extends BaseTestCase
             '/__middleware__',
             [
                 'middleware' => $middleware,
-                static function (){
+                static function () {
                     return '__passed__';
                 },
             ]
