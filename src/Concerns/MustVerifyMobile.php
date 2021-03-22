@@ -8,6 +8,30 @@ use Illuminate\Config\Repository;
 trait MustVerifyMobile
 {
     /**
+     * @inheritDoc
+     */
+    public function getFillable()
+    {
+        $this->appendMobileFieldToFillableAttributes();
+
+        return $this->fillable;
+    }
+
+    /**
+     * Append mobile filed to fillable attributes for model.
+     *
+     * @return void
+     */
+    private function appendMobileFieldToFillableAttributes()
+    {
+        $mobileFiled = $this->getMobileField();
+
+        if (! in_array($mobileFiled, $this->fillable)) {
+            $this->mergeFillable([$mobileFiled]);
+        }
+    }
+
+    /**
      * Determine if the user has verified their mobile number.
      */
     public function hasVerifiedMobile(): bool

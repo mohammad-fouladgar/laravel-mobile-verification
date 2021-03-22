@@ -15,6 +15,6 @@ class User extends Model implements AuthenticatableContract
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'mobile',
+        'name',
     ];
 }

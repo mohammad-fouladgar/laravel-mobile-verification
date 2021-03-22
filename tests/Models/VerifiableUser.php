@@ -18,7 +18,7 @@ class VerifiableUser extends Model implements AuthenticatableContract, IMustVeri
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'mobile',
+        'name',
     ];
 
     /**
