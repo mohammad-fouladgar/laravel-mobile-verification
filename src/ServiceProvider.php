@@ -43,7 +43,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         Route::group(
             $this->routeConfiguration(),
-            function (){
+            function () {
                 $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
             }
         );
@@ -127,7 +127,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->singleton(
             SMSClient::class,
-            static function ($app){
+            static function ($app) {
                 try {
                     return $app->make(config('mobile_verifier.sms_client'));
                 } catch (Throwable $e) {
@@ -138,7 +138,7 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->app->bind(
             TokenRepositoryInterface::class,
-            static function ($app){
+            static function ($app) {
                 switch (config('mobile_verifier.token_storage', 'database')) {
                     case 'database':
                         return new DatabaseTokenRepository(
@@ -157,6 +157,7 @@ class ServiceProvider extends BaseServiceProvider
                             config('mobile_verifier.token_lifetime', 5),
                             config('mobile_verifier.token_length', 'mobile_verification_tokens')
                         );
+
                         break;
                     default:
                 }

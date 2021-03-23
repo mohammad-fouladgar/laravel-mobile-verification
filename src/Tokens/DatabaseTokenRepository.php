@@ -35,7 +35,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
         $tokenLength,
         $table,
         ConnectionInterface $connection
-    ){
+    ) {
         parent::__construct($expires, $tokenLength);
         $this->table = $table;
         $this->connection = $connection;
