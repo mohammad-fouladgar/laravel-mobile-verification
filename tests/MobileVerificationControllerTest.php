@@ -35,7 +35,7 @@ class MobileVerificationControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_failes_on_verifing_when_user_is_already_verified()
+    public function it_fails_on_verifying_when_user_has_already_verified()
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
@@ -68,7 +68,7 @@ class MobileVerificationControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_on_verifing_a_user()
+    public function it_fails_on_verifying_a_user()
     {
         $user = factory(VerifiableUser::class)->create();
 
@@ -84,7 +84,7 @@ class MobileVerificationControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_failes_on_resend_when_user_is_already_verified()
+    public function it_fails_on_resend_when_user_is_already_verified()
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 

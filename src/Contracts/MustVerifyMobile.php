@@ -33,4 +33,6 @@ interface MustVerifyMobile
      * @return string
      */
     public function getMobileForVerification(): string;
+
+    public function getMobileField():string ;
 }

@@ -2,7 +2,7 @@
 
 namespace Fouladgar\MobileVerification\Tests\Models;
 
-use Fouladgar\MobileVerification\Concerns\MustVerifyMobile as MustVerifyMobile;
+use Fouladgar\MobileVerification\Concerns\MustVerifyMobile;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile as IMustVerifyMobile;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;

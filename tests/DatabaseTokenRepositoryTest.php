@@ -5,13 +5,13 @@ namespace Fouladgar\MobileVerification\Tests;
 use Exception;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
+use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
 use Illuminate\Config\Repository;
-use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 
-class TokenRepositoryTest extends TestCase
+class DatabaseTokenRepositoryTest extends TestCase
 {
     /**
      * @var Builder
@@ -40,15 +40,12 @@ class TokenRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $tokenRepository = new DatabaseTokenRepository(
-            app(ConnectionInterface::class)
-        );
+        $this->tokenRepository = $this->app->make(TokenRepositoryInterface::class);
 
         $method = new ReflectionMethod(DatabaseTokenRepository::class, 'getTable');
         $method->setAccessible(true);
 
-        $this->table = $method->invoke($tokenRepository);
-        $this->tokenRepository = $tokenRepository;
+        $this->table = $method->invoke($this->tokenRepository);
         $this->tokenLength = config('mobile_verifier.token_length');
         $this->tokenLifetime = config('mobile_verifier.token_lifetime');
     }

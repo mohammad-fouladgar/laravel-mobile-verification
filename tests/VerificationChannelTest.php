@@ -29,7 +29,7 @@ class VerificationChannelTest extends TestCase
     }
 
     /** @test */
-    public function it_not_working_on_not_vefifable_user_model()
+    public function it_not_working_on_not_verifiable_user_model()
     {
         $notification = new VerifyMobile('token_123');
         $notifiable = new User();
