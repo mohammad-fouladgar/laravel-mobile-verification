@@ -131,5 +131,5 @@ return [
      | For example: 'web', 'auth', 'auth:api'
      |
      */
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['auth'],
 ];

@@ -27,7 +27,7 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertOk()
-            ->assertJson(['message' => __('mobile_verifier.successful_verification')]);
+            ->assertJson(['message' => __('MobileVerification::mobile_verifier.successful_verification')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_FOUND)
@@ -43,7 +43,7 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson(['message' => __('mobile_verifier.already_verified')]);
+            ->assertJson(['message' => __('MobileVerification::mobile_verifier.already_verified')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_FOUND);
@@ -93,7 +93,7 @@ class MobileVerificationControllerTest extends TestCase
         $this->postJson(route('mobile.resend'))
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
-                'message' => __('mobile_verifier.already_verified'),
+                'message' => __('MobileVerification::mobile_verifier.already_verified'),
             ]);
 
         $this->post(route('mobile.resend'))
