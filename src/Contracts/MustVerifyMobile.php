@@ -21,7 +21,7 @@ interface MustVerifyMobile
     /**
      * Send the mobile verification notification.
      *
-     * @param string $token
+     * @param  string  $token
      *
      * @return void
      */
@@ -34,5 +34,10 @@ interface MustVerifyMobile
      */
     public function getMobileForVerification(): string;
 
-    public function getMobileField():string ;
+    /**
+     * Get mobile phone field name.
+     *
+     * @return string
+     */
+    public function getMobileField(): string;
 }

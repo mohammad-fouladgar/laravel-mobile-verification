@@ -31,7 +31,7 @@ trait MustVerifyMobile
     }
 
     /**
-     * Get mobile phone field.
+     * Get mobile phone field name.
      *
      * @return string
      */
