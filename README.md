@@ -60,7 +60,7 @@ return [
 ];
 ```
 
-#####Database
+##### Database
 It means after migrating, a table will be created which your application needs to store verification tokens.
 
 > If you’re using another table name for `users` table or different column name for `mobile` phone or even `mobile_verification_tokens` table, you can customize their values in config file:
@@ -81,7 +81,7 @@ return [
     //...
 ];
 ```
-#####Cache
+##### Cache
 When using the `cache` driver, the token will be stored in a cache driver configured by your application. In this case, your application performance is more than when using database definitely.
 
 All right! Now you should migrate the database:
