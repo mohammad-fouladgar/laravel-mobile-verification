@@ -310,7 +310,7 @@ If you are not using AJAX requests, you should have some views which we provided
 
 return [
     'successful_verification' => 'Your mobile has been verified successfully.',
-    'successful_resend'       => 'Your token has been resent successfully.',
+    'successful_resend'       => 'The token has been resent successfully.',
     'already_verified'        => 'Your mobile already has been verified.',
 ];
 ```

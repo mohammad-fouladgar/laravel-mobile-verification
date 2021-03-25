@@ -1,3 +1,8 @@
+## 2.5.0 - 2021-03-25
+ - Add support cache storage for saving tokens (#163)
+ - Append mobile field to fillable attributes automatically for model.
+ - Fix lang messages response
+
 ## 2.1.0 - 2021-03-10
  - Add support PHP 8
 
