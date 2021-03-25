@@ -12,7 +12,7 @@
 
 
 ## Introduction
-Many web applications require users to verify their mobile numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile verification requests.
+Many web applications require users to verify their mobile phone numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile phone verification requests.
 
 ## Installation
 
@@ -45,7 +45,25 @@ To get started, you should publish the `config/mobile_verifier.php` config file 
 php artisan vendor:publish --provider="Fouladgar\MobileVerification\ServiceProvider" --tag="config"
 ```
 
-If you’re using another table name for `users` table or different column name for `mobile` or even `mobile_verification_tokens` table, you can customize their values in config file:
+### Token Storage
+After generating a token, we need to store that in a storage. This package supports two drivers: `cache` and `database` which the default driver is `database`. You may specify which storage driver you would like to be used for saving tokens in your application:
+```php
+// config/mobile_verifier.php
+
+<?php
+
+return [
+    /**
+    |Supported drivers: "cache", "database"
+    */
+    'token_storage' => 'database',
+];
+```
+
+##### Database
+It means after migrating, a table will be created which your application needs to store verification tokens.
+
+> If you’re using another table name for `users` table or different column name for `mobile` phone or even `mobile_verification_tokens` table, you can customize their values in config file:
 
 ```php
 // config/mobile_verifier.php
@@ -63,17 +81,19 @@ return [
     //...
 ];
 ```
+##### Cache
+When using the `cache` driver, the token will be stored in a cache driver configured by your application. In this case, your application performance is more than when using database definitely.
 
-And then migrate the database:
+All right! Now you should migrate the database:
 ```
 php artisan migrate
 ``` 
 
-The package migration will create a table your application needs to store verification tokens. Also, a `mobile_verified_at` column will be add to your `users` table to show user verification state.
+Depending on the `token_storage` config, the package migration will create a token table. Also, a `mobile_verified_at` and `mobile` column will be added to your `users` table to show user verification state and store user's mobile phone.
 
 ### Model Preparation
 
-In the following, verify that your `User` model implements the `Fouladgar\MobileVerification\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerification\Concerns\MustVerifyMobile` trait:
+In the following, make sure your `User` model implements the `Fouladgar\MobileVerification\Contracts\MustVerifyMobile` contract and use the `Fouladgar\MobileVerification\Concerns\MustVerifyMobile` trait:
 
 ```php
 <?php
@@ -95,9 +115,9 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 ### SMS Client
 
-You can use any SMS service for sending verification messages such as `Nexmo`, `Twilio` or etc. For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
+You can use any SMS service for sending verification messages(it depends on your choice). For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
 
-This method will return your SMS service API result via a `Payload` object which contains user **number** and **token** message:
+This method will return your SMS service API results via a `Payload` object which contains user **number** and **token** message:
 
 ```php
 <?php
@@ -109,6 +129,8 @@ use Fouladgar\MobileVerification\Notifications\Messages\Payload;
 
 class SampleSMSClient implements SMSClient
 {
+    protected $SMSService;
+
     /**
      * @param Payload $payload
      *
@@ -116,18 +138,21 @@ class SampleSMSClient implements SMSClient
      */
     public function sendMessage(Payload $payload)
     {
-        // return $this->NexmoService->send($payload->getTo(), $payload->getToken());
+        // preparing SMSService ...
+
+        return $this->SMSService
+                 ->send($payload->getTo(), $payload->getToken());
     }
 
     // ...
 }
 ```
-> :information_source: In above example, `NexmoService` can be replaced with your chosen SMS service along with its respective method.
+> In above example, `SMSService` can be replaced with your chosen SMS service along with its respective method.
 
 Next, you should set the your `SMSClient` class in config file:
 
 ```php
-// config/mobile_verification.php
+// config/mobile_verifier.php
 
 <?php
 
@@ -155,8 +180,7 @@ use Illuminate\Auth\Events\Registered;
 //...
 ```
 
-At this point, a notification message has been sent to user and you've done half of the job! 
-
+At this point, a notification message has been sent to user automatically, and you've done half of the job! 
 
 ## Routing
 
@@ -185,12 +209,27 @@ curl -X POST \
       -H 'Authorization: JWT_TOKEN'
 ```
 
+> Notice: You should choose a long with middleware which you are going to use them for above APIs through set it in config file:
+
+```php
+// config/mobile_verifier.php
+
+<?php
+
+return [
+
+    'middleware' => ['auth:sanctum'],
+
+    //...
+];
+``` 
+
 ### Customize Routes and Controller
 
 In order to change default routes prefix or routes themselves, you can customize them in config file:
 
 ```php
-// config/mobile_verification.php
+// config/mobile_verifier.php
 
 <?php
 
@@ -207,10 +246,10 @@ return [
 ];
 ```
 
-Also this package allows you to override default controller. To achieve this, you can extend your controller from `Fouladgar\MobileVerification\Http\Controllers\BaseVerificationController` and set your controller namespace in config file:
+Also, this package allows you to override default controller. To achieve this, you can extend your controller from `Fouladgar\MobileVerification\Http\Controllers\BaseVerificationController` and set your controller namespace in config file:
 
 ```php
-// config/mobile_verification.php
+// config/mobile_verifier.php
 
 <?php
 

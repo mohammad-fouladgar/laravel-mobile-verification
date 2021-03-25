@@ -3,7 +3,6 @@
 namespace Fouladgar\MobileVerification\Concerns;
 
 use Fouladgar\MobileVerification\Notifications\VerifyMobile as VerifyMobileNotification;
-use Illuminate\Config\Repository;
 
 trait MustVerifyMobile
 {
@@ -32,7 +31,19 @@ trait MustVerifyMobile
     }
 
     /**
+     * Get mobile phone field name.
+     *
+     * @return string
+     */
+    public function getMobileField(): string
+    {
+        return config('mobile_verifier.mobile_column', 'mobile');
+    }
+
+    /**
      * Determine if the user has verified their mobile number.
+
+     * @return bool
      */
     public function hasVerifiedMobile(): bool
     {
@@ -41,6 +52,8 @@ trait MustVerifyMobile
 
     /**
      * Mark the given user's mobile as verified.
+     *
+     * @return bool
      */
     public function markMobileAsVerified(): bool
     {
@@ -57,6 +70,8 @@ trait MustVerifyMobile
 
     /**
      * Get the mobile number that should be used for verification.
+     *
+     * @return string
      */
     public function getMobileForVerification(): string
     {
@@ -66,18 +81,10 @@ trait MustVerifyMobile
     /**
      * Get the recipients of the given message.
      *
-     * @return mixed
+     * @return string
      */
     public function routeNotificationForVerificationMobile(): string
     {
         return $this->{$this->getMobileField()};
-    }
-
-    /**
-     * @return Repository|mixed
-     */
-    private function getMobileField()
-    {
-        return config('mobile_verifier.mobile_column', 'mobile');
     }
 }

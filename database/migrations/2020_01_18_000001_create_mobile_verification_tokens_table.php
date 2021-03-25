@@ -39,26 +39,44 @@ class CreateMobileVerificationTokensTable extends Migration
      */
     public function up(): void
     {
-        Schema::create($this->tokenTable, static function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('mobile')->index();
-            $table->string('token', 10)->index();
-            $table->timestamp('expires_at')->nullable();
+        $this->tokenTableUp();
 
-            $table->index(['mobile', 'token']);
-        });
-
-        if (!Schema::hasColumn($this->userTable, $this->mobileColumn)) {
-            Schema::table($this->userTable, function (Blueprint $table) {
-                $table->string($this->mobileColumn);
-            });
+        if (! Schema::hasColumn($this->userTable, $this->mobileColumn)) {
+            Schema::table(
+                $this->userTable,
+                function (Blueprint $table){
+                    $table->string($this->mobileColumn);
+                }
+            );
         }
 
-        if (!Schema::hasColumn($this->userTable, 'mobile_verified_at')) {
-            Schema::table($this->userTable, function (Blueprint $table) {
-                $table->timestamp('mobile_verified_at')->nullable()->after($this->mobileColumn);
-            });
+        if (! Schema::hasColumn($this->userTable, 'mobile_verified_at')) {
+            Schema::table(
+                $this->userTable,
+                function (Blueprint $table){
+                    $table->timestamp('mobile_verified_at')->nullable()->after($this->mobileColumn);
+                }
+            );
         }
+    }
+
+    private function tokenTableUp()
+    {
+        if (config('mobile_verifier.token_storage') == 'cache') {
+            return;
+        }
+
+        Schema::create(
+            $this->tokenTable,
+            static function (Blueprint $table){
+                $table->increments('id');
+                $table->string('mobile')->index();
+                $table->string('token', 10)->index();
+                $table->timestamp('expires_at')->nullable();
+
+                $table->index(['mobile', 'token']);
+            }
+        );
     }
 
     /**
@@ -68,10 +86,22 @@ class CreateMobileVerificationTokensTable extends Migration
      */
     public function down(): void
     {
-        Schema::drop($this->tokenTable);
+        $this->tokenTableDown();
 
-        Schema::table($this->userTable, static function (Blueprint $table) {
-            $table->dropColumn('mobile_verified_at');
-        });
+        Schema::table(
+            $this->userTable,
+            static function (Blueprint $table){
+                $table->dropColumn('mobile_verified_at');
+            }
+        );
+    }
+
+    private function tokenTableDown()
+    {
+        if (config('mobile_verifier.token_storage') == 'cache') {
+            return;
+        }
+
+        Schema::drop($this->tokenTable);
     }
 }

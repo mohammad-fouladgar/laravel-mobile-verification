@@ -27,7 +27,7 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertOk()
-            ->assertJson(['message' => __('mobile_verifier.successful_verification')]);
+            ->assertJson(['message' => __('MobileVerification::mobile_verifier.successful_verification')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_FOUND)
@@ -35,7 +35,7 @@ class MobileVerificationControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_failes_on_verifing_when_user_is_already_verified()
+    public function it_fails_on_verifying_when_user_has_already_verified()
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
@@ -43,7 +43,7 @@ class MobileVerificationControllerTest extends TestCase
 
         $this->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson(['message' => __('mobile_verifier.already_verified')]);
+            ->assertJson(['message' => __('MobileVerification::mobile_verifier.already_verified')]);
 
         $this->post(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_FOUND);
@@ -68,7 +68,7 @@ class MobileVerificationControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_on_verifing_a_user()
+    public function it_fails_on_verifying_a_user()
     {
         $user = factory(VerifiableUser::class)->create();
 
@@ -84,7 +84,7 @@ class MobileVerificationControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_failes_on_resend_when_user_is_already_verified()
+    public function it_fails_on_resend_when_user_is_already_verified()
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
@@ -93,7 +93,7 @@ class MobileVerificationControllerTest extends TestCase
         $this->postJson(route('mobile.resend'))
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
-                'message' => __('mobile_verifier.already_verified'),
+                'message' => __('MobileVerification::mobile_verifier.already_verified'),
             ]);
 
         $this->post(route('mobile.resend'))

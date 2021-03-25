@@ -5,12 +5,11 @@ namespace Fouladgar\MobileVerification\Concerns;
 use Fouladgar\MobileVerification\Events\Verified;
 use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 trait VerifiesMobiles
 {
-    use RedirectsUsers;
+    use RedirectsUsers, Responses;
 
     /**
      * {@inheritdoc}
@@ -36,7 +35,7 @@ trait VerifiesMobiles
         return $request->expectsJson()
             ? $this->successMessage()
             : redirect($this->redirectPath())
-                ->with('mobileVerificationVerified', __('mobile_verifier.successful_verification'));
+                ->with('mobileVerificationVerified', __('MobileVerification::mobile_verifier.successful_verification'));
     }
 
     /**
@@ -53,23 +52,7 @@ trait VerifiesMobiles
         $this->tokenBroker->sendToken($user);
 
         return $request->expectsJson()
-            ? $this->successMessage()
-            : back()->with('mobileVerificationResend', __('mobile_verifier.successful_resend'));
-    }
-
-    /**
-     * @return JsonResponse
-     */
-    protected function successMessage(): JsonResponse
-    {
-        return response()->json(['message' => __('mobile_verifier.successful_verification')], 200);
-    }
-
-    /**
-     * @return JsonResponse
-     */
-    protected function unprocessableEntity(): JsonResponse
-    {
-        return response()->json(['message' => __('mobile_verifier.already_verified')], 422);
+            ? $this->successResendMessage()
+            : back()->with('mobileVerificationResend', __('MobileVerification::mobile_verifier.successful_resend'));
     }
 }

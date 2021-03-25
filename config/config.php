@@ -67,6 +67,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    |  Token Storage Driver
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define token "storage" driver. If you choose the "cache", the token will be stored
+    | in a cache driver configured by your application. Otherwise, a table will be created for storing tokens.
+    |
+    | Supported drivers: "cache", "database"
+    |
+    */
+    'token_storage' => 'database',
+
+    /*
+    |--------------------------------------------------------------------------
     | Default Controller Namespace
     |--------------------------------------------------------------------------
     |
@@ -115,8 +128,8 @@ return [
      |--------------------------------------------------------------------------
      |
      | Here you can specify which middleware you want to use for the APIs
-     | For example: 'web', 'auth', 'auth:api'
+     | For example: 'web', 'auth', 'auth:api', 'auth:sanctum'
      |
      */
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['auth'],
 ];
