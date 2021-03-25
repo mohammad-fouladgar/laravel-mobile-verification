@@ -128,7 +128,7 @@ return [
      |--------------------------------------------------------------------------
      |
      | Here you can specify which middleware you want to use for the APIs
-     | For example: 'web', 'auth', 'auth:api'
+     | For example: 'web', 'auth', 'auth:api', 'auth:sanctum'
      |
      */
     'middleware' => ['auth'],

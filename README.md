@@ -115,7 +115,7 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 ### SMS Client
 
-You can use any SMS service for sending verification messages such as `Nexmo`, `Twilio` or etc. For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
+You can use any SMS service for sending verification messages(it depends on your choice). For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
 
 This method will return your SMS service API results via a `Payload` object which contains user **number** and **token** message:
 
@@ -129,6 +129,8 @@ use Fouladgar\MobileVerification\Notifications\Messages\Payload;
 
 class SampleSMSClient implements SMSClient
 {
+    protected $SMSService;
+
     /**
      * @param Payload $payload
      *
@@ -136,13 +138,16 @@ class SampleSMSClient implements SMSClient
      */
     public function sendMessage(Payload $payload)
     {
-        // return $this->NexmoService->send($payload->getTo(), $payload->getToken());
+        // preparing SMSService ...
+
+        return $this->SMSService
+                 ->send($payload->getTo(), $payload->getToken());
     }
 
     // ...
 }
 ```
-> In above example, `NexmoService` can be replaced with your chosen SMS service along with its respective method.
+> In above example, `SMSService` can be replaced with your chosen SMS service along with its respective method.
 
 Next, you should set the your `SMSClient` class in config file:
 
@@ -175,7 +180,7 @@ use Illuminate\Auth\Events\Registered;
 //...
 ```
 
-At this point, a notification message has been sent to user, and you've done half of the job! 
+At this point, a notification message has been sent to user automatically, and you've done half of the job! 
 
 ## Routing
 
@@ -203,6 +208,21 @@ curl -X POST \
       -H 'Accept: application/json' \
       -H 'Authorization: JWT_TOKEN'
 ```
+
+> Notice: You should choose a long with middleware which you are going to use them for above APIs through set it in config file:
+
+```php
+// config/mobile_verifier.php
+
+<?php
+
+return [
+
+    'middleware' => ['auth:sanctum'],
+
+    //...
+];
+``` 
 
 ### Customize Routes and Controller
 
