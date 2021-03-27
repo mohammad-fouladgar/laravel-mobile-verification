@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tokens;
 
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
@@ -20,22 +22,24 @@ class CacheTokenRepository extends AbstractTokenRepository
         return $token;
     }
 
-    public function deleteExisting(MustVerifyMobile $user): ?int
+    public function deleteExisting(MustVerifyMobile $user): void
     {
-        return Cache::forget($user->getMobileForVerification());
+        Cache::forget($user->getMobileForVerification());
     }
 
     /**
      * @inheritDoc
+     *
+     * @throws \Exception
      */
-    protected function insertIntoStorageDriver($mobile, $token): bool
+    protected function insertIntoStorageDriver(string $mobile, string $token): bool
     {
         return Cache::add($mobile, $this->getPayload($mobile, $token), now()->addMinutes($this->expires));
     }
 
-    public function exists($user, $token): bool
+    public function exists(MustVerifyMobile $user, string $token): bool
     {
         return Cache::has($user->getMobileForVerification()) &&
-            Cache::get($user->getMobileForVerification())['token'] == $token;
+            Cache::get($user->getMobileForVerification())['token'] === $token;
     }
 }

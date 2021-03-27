@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\Contracts\SMSClient;

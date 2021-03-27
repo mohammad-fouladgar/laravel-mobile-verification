@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\Contracts\SMSClient;
@@ -12,7 +14,7 @@ use Mockery as m;
 class VerificationChannelTest extends TestCase
 {
     /** @test */
-    public function it_can_successfully_send_verification_token()
+    public function it_can_successfully_send_verification_token(): void
     {
         $notification = new VerifyMobile('token_123');
         $notifiable = new VerifiableUser();
@@ -29,7 +31,7 @@ class VerificationChannelTest extends TestCase
     }
 
     /** @test */
-    public function it_not_working_on_not_verifiable_user_model()
+    public function it_not_working_on_not_verifiable_user_model(): void
     {
         $notification = new VerifyMobile('token_123');
         $notifiable = new User();

@@ -1,31 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tokens;
 
-use Exception;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
-use Throwable;
 
 interface TokenBrokerInterface
 {
     /**
      * Send token via notification.
      *
-     * @param MustVerifyMobile $user
-     *
-     * @throws Exception
-     *
-     * @return void
+     * @throws \Exception
      */
     public function sendToken(MustVerifyMobile $user): void;
 
     /**
-     * @param MustVerifyMobile $user
-     * @param $token
-     *
-     * @throws Throwable
-     *
-     * @return bool
+     * @throws \Throwable
      */
-    public function verifyToken(MustVerifyMobile $user, $token): bool;
+    public function verifyToken(MustVerifyMobile $user, string $token): bool;
 }

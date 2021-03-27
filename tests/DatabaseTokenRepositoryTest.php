@@ -1,40 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
-use Exception;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
 use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
-use Illuminate\Config\Repository;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 
 class DatabaseTokenRepositoryTest extends TestCase
 {
-    /**
-     * @var Builder
-     */
-    private $table;
+    private Builder $table;
+
+    private TokenRepositoryInterface $tokenRepository;
+
+    private int $tokenLength;
+
+    private int $tokenLifetime;
 
     /**
-     * @var DatabaseTokenRepository
-     */
-    private $tokenRepository;
-
-    /**
-     * @var Repository
-     */
-    private $tokenLength;
-
-    /**
-     * @var Repository
-     */
-    private $tokenLifetime;
-
-    /**
-     * {@inheritdoc}
+     * @throws \ReflectionException
      */
     public function setUp(): void
     {
@@ -50,10 +38,12 @@ class DatabaseTokenRepositoryTest extends TestCase
         $this->tokenLifetime = config('mobile_verifier.token_lifetime');
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_successfully_create_a_token()
+    public function it_can_successfully_create_a_token(): void
     {
         $user = new VerifiableUser();
         $user->mobile = '555555';
@@ -69,10 +59,12 @@ class DatabaseTokenRepositoryTest extends TestCase
         ]);
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_successfully_delete_existing_token()
+    public function it_can_successfully_delete_existing_token(): void
     {
         $user = new VerifiableUser();
         $user->mobile = '555555';
@@ -90,10 +82,12 @@ class DatabaseTokenRepositoryTest extends TestCase
         $this->assertDatabaseMissing('mobile_verification_tokens', $record);
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_successfully_find_existing_and_not_expired_token()
+    public function it_can_successfully_find_existing_and_not_expired_token(): void
     {
         $user = new VerifiableUser();
         $user->mobile = '555555';
@@ -109,10 +103,12 @@ class DatabaseTokenRepositoryTest extends TestCase
         $this->assertTrue($this->tokenRepository->exists($user, $record['token']));
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_fails_when_token_is_exist_but_expired()
+    public function it_fails_when_token_is_exist_but_expired(): void
     {
         $user = new VerifiableUser();
         $user->mobile = '555555';
@@ -128,10 +124,12 @@ class DatabaseTokenRepositoryTest extends TestCase
         $this->assertFalse($this->tokenRepository->exists($user, $record['token']));
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_fails_when_token_is_not_existed()
+    public function it_fails_when_token_is_not_existed(): void
     {
         $user = new VerifiableUser();
         $user->mobile = '555555';

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Http\Controllers;
 
 use Fouladgar\MobileVerification\Concerns\VerifiesMobiles;
@@ -10,17 +12,10 @@ abstract class BaseVerificationController extends Controller implements BaseVeri
 {
     use VerifiesMobiles;
 
-    /**
-     * @var TokenBrokerInterface
-     */
-    protected $tokenBroker;
+    protected TokenBrokerInterface $tokenBroker;
 
     /**
      * Create a new controller instance.
-     *
-     * @param TokenBrokerInterface $tokenBroker
-     *
-     * @return void
      */
     public function __construct(TokenBrokerInterface $tokenBroker)
     {

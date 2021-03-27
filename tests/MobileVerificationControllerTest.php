@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
@@ -10,10 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MobileVerificationControllerTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function it_can_verify_a_user()
+    /** @test */
+    public function it_can_verify_a_user(): void
     {
         $user = factory(VerifiableUser::class)->create();
 
@@ -35,7 +35,7 @@ class MobileVerificationControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_fails_on_verifying_when_user_has_already_verified()
+    public function it_fails_on_verifying_when_user_has_already_verified(): void
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
@@ -50,7 +50,7 @@ class MobileVerificationControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_will_check_validation_for_token_verification()
+    public function it_will_check_validation_for_token_verification(): void
     {
         $user = factory(VerifiableUser::class)->make();
 
@@ -65,10 +65,8 @@ class MobileVerificationControllerTest extends TestCase
             ->assertStatus(Response::HTTP_FOUND);
     }
 
-    /**
-     * @test
-     */
-    public function it_fails_on_verifying_a_user()
+    /** @test */
+    public function it_fails_on_verifying_a_user(): void
     {
         $user = factory(VerifiableUser::class)->create();
 
@@ -81,10 +79,8 @@ class MobileVerificationControllerTest extends TestCase
             ->assertSessionHasErrors('token');
     }
 
-    /**
-     * @test
-     */
-    public function it_fails_on_resend_when_user_is_already_verified()
+    /** @test */
+    public function it_fails_on_resend_when_user_is_already_verified(): void
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
@@ -100,10 +96,8 @@ class MobileVerificationControllerTest extends TestCase
             ->assertStatus(Response::HTTP_FOUND);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_resend_a_token()
+    /** @test */
+    public function it_can_resend_a_token(): void
     {
         $user = factory(VerifiableUser::class)->create();
 

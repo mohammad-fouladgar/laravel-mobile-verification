@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
-use Exception;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\CacheTokenRepository;
 use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
@@ -11,16 +12,10 @@ use ReflectionMethod;
 
 class CacheTokenRepositoryTest extends TestCase
 {
-    /**
-     * @var CacheTokenRepository
-     */
-    private $tokenRepository;
+    private TokenRepositoryInterface $tokenRepository;
 
-    private $insertIntoStorageDriver;
+    private ReflectionMethod $insertIntoStorageDriver;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -34,10 +29,12 @@ class CacheTokenRepositoryTest extends TestCase
         $this->tokenRepository = $this->app->make(TokenRepositoryInterface::class);
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_successfully_create_a_token()
+    public function it_can_successfully_create_a_token(): void
     {
         $payload = ['mobile' => '093895999530'];
         $user = new VerifiableUser($payload);
@@ -47,10 +44,12 @@ class CacheTokenRepositoryTest extends TestCase
         $this->assertEquals(Cache::get($payload['mobile']), $payload);
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_successfully_delete_existing_token()
+    public function it_can_successfully_delete_existing_token(): void
     {
         $user = new VerifiableUser(['mobile' => '555555']);
 
@@ -66,10 +65,12 @@ class CacheTokenRepositoryTest extends TestCase
         $this->assertNull(Cache::get($record['mobile']));
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_successfully_find_existing_and_not_expired_token()
+    public function it_can_successfully_find_existing_and_not_expired_token(): void
     {
         $user = new VerifiableUser(['mobile' => '555555']);
 
@@ -83,10 +84,12 @@ class CacheTokenRepositoryTest extends TestCase
         $this->assertTrue($this->tokenRepository->exists($user, $record['token']));
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_fails_when_token_is_exist_but_expired()
+    public function it_fails_when_token_is_exist_but_expired(): void
     {
         $user = new VerifiableUser(['mobile' => '555555']);
 
@@ -101,10 +104,12 @@ class CacheTokenRepositoryTest extends TestCase
         $this->assertFalse($this->tokenRepository->exists($user, $record['token']));
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_fails_when_token_is_not_existed()
+    public function it_fails_when_token_is_not_existed(): void
     {
         $user = new VerifiableUser(['mobile' => '555555']);
 

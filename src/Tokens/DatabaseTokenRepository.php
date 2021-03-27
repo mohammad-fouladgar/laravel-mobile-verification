@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tokens;
 
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
@@ -10,30 +12,18 @@ class DatabaseTokenRepository extends AbstractTokenRepository
 {
     /**
      * The database connection instance.
-     *
-     * @var ConnectionInterface
      */
-    protected $connection;
+    protected ConnectionInterface $connection;
 
     /**
      * The token database table.
-     *
-     * @var string
      */
-    protected $table;
+    protected string $table;
 
-    /**
-     * Create a new token repository instance.
-     *
-     * @param  ConnectionInterface  $connection
-     * @param  string  $table
-     * @param  int  $expires
-     * @param  int  $tokenLength
-     */
     public function __construct(
-        $expires,
-        $tokenLength,
-        $table,
+        int $expires,
+        int $tokenLength,
+        string $table,
         ConnectionInterface $connection
     ) {
         parent::__construct($expires, $tokenLength);
@@ -60,22 +50,23 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     /**
      * {@inheritdoc}
      */
-    public function deleteExisting(MustVerifyMobile $user): ?int
+    public function deleteExisting(MustVerifyMobile $user): void
     {
-        return optional($this->getTable()->where('mobile', $user->getMobileForVerification()))->delete();
+        optional($this->getTable()->where('mobile', $user->getMobileForVerification()))->delete();
     }
 
     /**
      * Begin a new database query against the table.
-     *
-     * @return Builder
      */
     protected function getTable(): Builder
     {
         return $this->connection->table($this->table);
     }
 
-    protected function insertIntoStorageDriver($mobile, $token): bool
+    /**
+     * @throws \Exception
+     */
+    protected function insertIntoStorageDriver(string $mobile, string $token): bool
     {
         return $this->getTable()->insert($this->getPayload($mobile, $token));
     }
@@ -83,7 +74,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     /**
      * @inheritDoc
      */
-    protected function getPayload($mobile, $token): array
+    protected function getPayload(string $mobile, string $token): array
     {
         return parent::getPayload($mobile, $token) + ['expires_at' => now()->addMinutes($this->expires)];
     }
@@ -91,10 +82,9 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     /**
      * {@inheritdoc}
      */
-    public function exists($user, $token): bool
+    public function exists(MustVerifyMobile $user, string $token): bool
     {
-        /** @var MustVerifyMobile $user */
-        $record = (array)$this->getTable()
+        $record = (array) $this->getTable()
             ->where($user->getMobileField(), $user->getMobileForVerification())
             ->where('token', $token)
             ->first();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Events;
 
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
@@ -11,24 +13,14 @@ class Verified
 
     /**
      * The verified user.
-     *
-     * @var MustVerifyMobile
      */
-    public $user;
+    public MustVerifyMobile $user;
 
     /**
      * The validated request.
-     *
-     * @var array
      */
-    protected $request;
+    protected array $request;
 
-    /**
-     * Create a new event instance.
-     *
-     * @param MustVerifyMobile $user
-     * @param array            $request
-     */
     public function __construct(MustVerifyMobile $user, array $request)
     {
         $this->user = $user;

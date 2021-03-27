@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
-use Exception;
 use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\TokenBroker;
 use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
 use Mockery as m;
-use Throwable;
 
 class TokenBrokerTest extends TestCase
 {
@@ -22,9 +22,6 @@ class TokenBrokerTest extends TestCase
      */
     private $tokenRepository;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -33,10 +30,12 @@ class TokenBrokerTest extends TestCase
         $this->tokenRepository = m::mock(TokenRepositoryInterface::class);
     }
 
-    /** @test
-     * @throws Exception
+    /**
+     * @test
+     *
+     * @throws \Exception
      */
-    public function it_can_send_token_to_a_verifiable_user()
+    public function it_can_send_token_to_a_verifiable_user(): void
     {
         $this->user->shouldReceive('sendMobileVerifierNotification');
         $this->tokenRepository->shouldReceive('create')->andReturn('token_123');
@@ -46,10 +45,12 @@ class TokenBrokerTest extends TestCase
         $tokenBroker->sendToken($this->user);
     }
 
-    /** @test
-     * @throws Throwable
+    /**
+     * @test
+     *
+     * @throws \Throwable
      */
-    public function it_fails_on_invalid_token_when_verifing()
+    public function it_fails_on_invalid_token_when_verifying(): void
     {
         $this->tokenRepository->shouldReceive('exists')->andReturn(false);
 
@@ -60,10 +61,12 @@ class TokenBrokerTest extends TestCase
         $tokenBroker->verifyToken($this->user, 'token_123');
     }
 
-    /** @test
-     * @throws Throwable
+    /**
+     * @test
+     *
+     * @throws \Throwable
      */
-    public function it_can_verify_user_successfuly()
+    public function it_can_verify_user_successfully(): void
     {
         $this->user->shouldReceive('markMobileAsVerified')->andReturn(true);
         $this->tokenRepository->shouldReceive('exists')->andReturn(true);
