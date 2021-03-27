@@ -20,14 +20,14 @@ class TokenBrokerTest extends TestCase
     /**
      * @var TokenRepositoryInterface|m\LegacyMockInterface|m\MockInterface
      */
-    private $tokenRepository;
+    private $repository;
 
     public function setUp(): void
     {
         parent::setUp();
 
         $this->user = m::mock(VerifiableUser::class)->makePartial();
-        $this->tokenRepository = m::mock(TokenRepositoryInterface::class);
+        $this->repository = m::mock(TokenRepositoryInterface::class);
     }
 
     /**
@@ -38,9 +38,9 @@ class TokenBrokerTest extends TestCase
     public function it_can_send_token_to_a_verifiable_user(): void
     {
         $this->user->shouldReceive('sendMobileVerifierNotification');
-        $this->tokenRepository->shouldReceive('create')->andReturn('token_123');
+        $this->repository->shouldReceive('create')->andReturn('token_123');
 
-        $tokenBroker = new TokenBroker($this->tokenRepository);
+        $tokenBroker = new TokenBroker($this->repository);
 
         $tokenBroker->sendToken($this->user);
     }
@@ -52,9 +52,9 @@ class TokenBrokerTest extends TestCase
      */
     public function it_fails_on_invalid_token_when_verifying(): void
     {
-        $this->tokenRepository->shouldReceive('exists')->andReturn(false);
+        $this->repository->shouldReceive('exists')->andReturn(false);
 
-        $tokenBroker = new TokenBroker($this->tokenRepository);
+        $tokenBroker = new TokenBroker($this->repository);
 
         $this->expectException(InvalidTokenException::class);
 
@@ -69,10 +69,10 @@ class TokenBrokerTest extends TestCase
     public function it_can_verify_user_successfully(): void
     {
         $this->user->shouldReceive('markMobileAsVerified')->andReturn(true);
-        $this->tokenRepository->shouldReceive('exists')->andReturn(true);
-        $this->tokenRepository->shouldReceive('deleteExisting');
+        $this->repository->shouldReceive('exists')->andReturn(true);
+        $this->repository->shouldReceive('deleteExisting');
 
-        $tokenBroker = new TokenBroker($this->tokenRepository);
+        $tokenBroker = new TokenBroker($this->repository);
 
         $this->assertTrue($tokenBroker->verifyToken($this->user, 'token_123'));
     }

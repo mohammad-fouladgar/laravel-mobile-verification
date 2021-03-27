@@ -45,7 +45,6 @@ class MiddlewareTest extends TestCase
     /** @test */
     public function it_fails_with_guest_user_and_not_ajax_request(): void
     {
-        /** @var \Illuminate\Testing\TestResponse $response */
         $response = $this->callMiddleware(EnsureMobileIsVerified::class);
 
         $response->assertRedirect('/');

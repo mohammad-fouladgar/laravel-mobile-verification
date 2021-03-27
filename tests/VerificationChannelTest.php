@@ -21,9 +21,8 @@ class VerificationChannelTest extends TestCase
 
         $notifiable->mobile = '555555';
 
-        $verificationChannel = new VerificationChannel(
-            $client = m::mock(SMSClient::class)
-        );
+        $client = m::mock(SMSClient::class);
+        $verificationChannel = new VerificationChannel($client);
 
         $client->shouldReceive('sendMessage')->andReturn(true);
 
@@ -36,9 +35,8 @@ class VerificationChannelTest extends TestCase
         $notification = new VerifyMobile('token_123');
         $notifiable = new User();
 
-        $verificationChannel = new VerificationChannel(
-            $client = m::mock(SMSClient::class)
-        );
+        $client = m::mock(SMSClient::class);
+        $verificationChannel = new VerificationChannel($client);
 
         $client->shouldNotReceive('sendMessage');
 

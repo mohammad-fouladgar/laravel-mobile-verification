@@ -6,7 +6,6 @@ namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\ServiceProvider;
 use Illuminate\Routing\Middleware\ThrottleRequests;
-use Illuminate\Testing\TestResponse;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
@@ -50,7 +49,7 @@ class TestCase extends BaseTestCase
      * @param string $method
      * @param array $data
      */
-    protected function callMiddleware($middleware, string $method = 'GET', array $data = []): TestResponse
+    protected function callMiddleware($middleware, string $method = 'GET', array $data = [])
     {
         return $this->call(
             $method,
@@ -87,7 +86,7 @@ class TestCase extends BaseTestCase
      * @param string $method
      * @param array $data
      */
-    protected function callMiddlewareJson($middleware, string $method = 'GET', array $data = []): TestResponse
+    protected function callMiddlewareJson($middleware, string $method = 'GET', array $data = [])
     {
         return $this->json(
             $method,

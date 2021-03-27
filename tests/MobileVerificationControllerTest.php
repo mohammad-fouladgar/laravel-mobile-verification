@@ -17,19 +17,20 @@ class MobileVerificationControllerTest extends TestCase
     {
         $user = factory(VerifiableUser::class)->create();
 
-        $this->actingAs($user);
-
         $tokenBroker = m::mock(TokenBroker::class);
         $tokenBroker->shouldReceive('verifyToken')->andReturn(true);
 
         // Override service provider binding with mocked service binding
         $this->app->instance(TokenBrokerInterface::class, $tokenBroker);
 
-        $this->postJson(route('mobile.verify'), ['token' => '12345'])
+        $this
+            ->actingAs($user)
+            ->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertOk()
             ->assertJson(['message' => __('MobileVerification::mobile_verifier.successful_verification')]);
 
-        $this->post(route('mobile.verify'), ['token' => '12345'])
+        $this
+            ->post(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_FOUND)
             ->assertSessionHas('mobileVerificationVerified');
     }
@@ -39,13 +40,14 @@ class MobileVerificationControllerTest extends TestCase
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
-        $this->actingAs($user);
-
-        $this->postJson(route('mobile.verify'), ['token' => '12345'])
+        $this
+            ->actingAs($user)
+            ->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(['message' => __('MobileVerification::mobile_verifier.already_verified')]);
 
-        $this->post(route('mobile.verify'), ['token' => '12345'])
+        $this
+            ->post(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_FOUND);
     }
 
@@ -54,13 +56,14 @@ class MobileVerificationControllerTest extends TestCase
     {
         $user = factory(VerifiableUser::class)->make();
 
-        $this->actingAs($user);
-
-        $this->postJson(route('mobile.verify'))
+        $this
+            ->actingAs($user)
+            ->postJson(route('mobile.verify'))
             ->assertJsonValidationErrors(['token'])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
-        $this->post(route('mobile.verify'))
+        $this
+            ->post(route('mobile.verify'))
             ->assertSessionHasErrors('token')
             ->assertStatus(Response::HTTP_FOUND);
     }
@@ -70,12 +73,12 @@ class MobileVerificationControllerTest extends TestCase
     {
         $user = factory(VerifiableUser::class)->create();
 
-        $this->actingAs($user);
-
-        $this->postJson(route('mobile.verify'), ['token' => '12345'])
+        $this
+            ->actingAs($user)->postJson(route('mobile.verify'), ['token' => '12345'])
             ->assertStatus(Response::HTTP_NOT_ACCEPTABLE);
 
-        $this->post(route('mobile.verify'), ['token' => '12345'])
+        $this
+            ->post(route('mobile.verify'), ['token' => '12345'])
             ->assertSessionHasErrors('token');
     }
 
@@ -84,15 +87,14 @@ class MobileVerificationControllerTest extends TestCase
     {
         $user = factory(VerifiableUser::class)->state('verified')->create();
 
-        $this->actingAs($user);
-
-        $this->postJson(route('mobile.resend'))
+        $this
+            ->actingAs($user)
+            ->postJson(route('mobile.resend'))
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'message' => __('MobileVerification::mobile_verifier.already_verified'),
-            ]);
+            ->assertJson(['message' => __('MobileVerification::mobile_verifier.already_verified')]);
 
-        $this->post(route('mobile.resend'))
+        $this
+            ->post(route('mobile.resend'))
             ->assertStatus(Response::HTTP_FOUND);
     }
 
@@ -101,12 +103,13 @@ class MobileVerificationControllerTest extends TestCase
     {
         $user = factory(VerifiableUser::class)->create();
 
-        $this->actingAs($user);
-
-        $this->postJson(route('mobile.resend'))
+        $this
+            ->actingAs($user)
+            ->postJson(route('mobile.resend'))
             ->assertOk();
 
-        $this->post(route('mobile.resend'))
+        $this
+            ->post(route('mobile.resend'))
             ->assertSessionHas('mobileVerificationResend');
     }
 }

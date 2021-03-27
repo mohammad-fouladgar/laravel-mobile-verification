@@ -12,11 +12,9 @@ class MustVerifyMobileTraitTest extends TestCase
     public function it_checks_has_verified_mobile_method(): void
     {
         $user = factory(VerifiableUser::class)->make();
-
         $this->assertFalse($user->hasVerifiedMobile());
 
         $user = factory(VerifiableUser::class)->state('verified')->make();
-
         $this->assertTrue($user->hasVerifiedMobile());
     }
 

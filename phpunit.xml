@@ -18,9 +18,7 @@
   </testsuites>
   <php>
     <env name="APP_ENV" value="testing"/>
-<!--    <env name="DB_CONNECTION" value="testing"/>-->
-    <env name="DB_CONNECTION" value="sqlite"/>
-    <env name="DB_DATABASE" value=":memory:"/>
+    <env name="DB_CONNECTION" value="testing"/>
     <env name="APP_KEY" value="base64:AyJGOtNkX6q4z+XaeZv11xdtseDc4P0ZL5gw2fS2aMw="/>
   </php>
 </phpunit>
