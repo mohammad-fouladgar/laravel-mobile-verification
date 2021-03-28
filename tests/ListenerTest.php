@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
@@ -21,9 +23,6 @@ class ListenerTest extends TestCase
      */
     private $verifiableUser;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -32,8 +31,12 @@ class ListenerTest extends TestCase
         $this->verifiableUser = m::mock(VerifiableUser::class)->makePartial();
     }
 
-    /** @test */
-    public function it_can_not_listen_when_user_is_not_verifiable()
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function it_can_not_listen_when_user_is_not_verifiable(): void
     {
         $user = m::mock(User::class)->makePartial();
 
@@ -44,8 +47,12 @@ class ListenerTest extends TestCase
         $listener->handle(new Registered($user));
     }
 
-    /** @test */
-    public function it_can_not_listen_when_user_is_already_verified()
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function it_can_not_listen_when_user_is_already_verified(): void
     {
         $this->verifiableUser->shouldReceive('hasVerifiedMobile')->andReturn(true);
         $this->tokenBroker->shouldNotReceive('sendToken');
@@ -55,8 +62,12 @@ class ListenerTest extends TestCase
         $listener->handle(new Registered($this->verifiableUser));
     }
 
-    /** @test */
-    public function it_can_listen_successfully()
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function it_can_listen_successfully(): void
     {
         $this->verifiableUser->shouldReceive('hasVerifiedMobile')->andReturn(false);
         $this->tokenBroker->shouldReceive('sendToken');

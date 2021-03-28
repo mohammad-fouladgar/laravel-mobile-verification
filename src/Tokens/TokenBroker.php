@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tokens;
 
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
@@ -7,16 +9,8 @@ use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 
 class TokenBroker implements TokenBrokerInterface
 {
-    /**
-     * @var TokenRepositoryInterface
-     */
-    protected $tokenRepository;
+    protected TokenRepositoryInterface $tokenRepository;
 
-    /**
-     * Create a new token broker instance.
-     *
-     * @param TokenRepositoryInterface $tokenRepository
-     */
     public function __construct(TokenRepositoryInterface $tokenRepository)
     {
         $this->tokenRepository = $tokenRepository;
@@ -35,7 +29,7 @@ class TokenBroker implements TokenBrokerInterface
     /**
      * {@inheritdoc}
      */
-    public function verifyToken(MustVerifyMobile $user, $token): bool
+    public function verifyToken(MustVerifyMobile $user, string $token): bool
     {
         throw_unless($this->tokenExists($user, $token), InvalidTokenException::class);
 
@@ -46,13 +40,7 @@ class TokenBroker implements TokenBrokerInterface
         return true;
     }
 
-    /**
-     * @param MustVerifyMobile $user
-     * @param $token
-     *
-     * @return bool
-     */
-    protected function tokenExists(MustVerifyMobile $user, $token): bool
+    protected function tokenExists(MustVerifyMobile $user, string $token): bool
     {
         return $this->tokenRepository->exists($user, $token);
     }

@@ -1,30 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Concerns;
 
 use Illuminate\Http\JsonResponse;
 
 trait Responses
 {
-    /**
-     * @return JsonResponse
-     */
     protected function successMessage(): JsonResponse
     {
-        return response()->json(['message' => __('MobileVerification::mobile_verifier.successful_verification')], 200);
+        return response()->json(['message' => __('MobileVerification::mobile_verifier.successful_verification')]);
     }
 
-    /**
-     * @return JsonResponse
-     */
     protected function successResendMessage(): JsonResponse
     {
-        return response()->json(['message' => __('MobileVerification::mobile_verifier.successful_resend')], 200);
+        return response()->json(['message' => __('MobileVerification::mobile_verifier.successful_resend')]);
     }
 
-    /**
-     * @return JsonResponse
-     */
     protected function unprocessableEntity(): JsonResponse
     {
         return response()->json(['message' => __('MobileVerification::mobile_verifier.already_verified')], 422);

@@ -1,32 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Notifications\Messages;
 
 class Payload
 {
-    /**
-     * @var string
-     */
-    private $token;
+    private string $token;
 
-    /**
-     * @var string
-     */
-    private $to;
+    private string $to;
 
-    /**
-     * @return string
-     */
     public function getToken(): string
     {
         return $this->token;
     }
 
-    /**
-     * @param string $token
-     *
-     * @return Payload
-     */
     public function setToken(string $token): self
     {
         $this->token = $token;
@@ -34,19 +22,11 @@ class Payload
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getTo(): string
     {
         return $this->to;
     }
 
-    /**
-     * @param string $to
-     *
-     * @return Payload
-     */
     public function setTo(string $to): self
     {
         $this->to = $to;

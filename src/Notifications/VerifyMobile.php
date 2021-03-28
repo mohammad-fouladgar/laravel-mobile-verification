@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Notifications;
 
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
@@ -11,18 +13,9 @@ class VerifyMobile extends Notification
 {
     /**
      * The verification token.
-     *
-     * @var string
      */
-    public $token;
+    public string $token;
 
-    /**
-     * Create a notification instance.
-     *
-     * @param string $token
-     *
-     * @return void
-     */
     public function __construct(string $token)
     {
         $this->token = $token;
@@ -42,14 +35,9 @@ class VerifyMobile extends Notification
 
     /**
      * Build the mobile representation of the notification.
-     *
-     * @param $notifiable
-     *
-     * @return MobileVerificationMessage
      */
     public function toMobile(MustVerifyMobile $notifiable): MobileVerificationMessage
     {
-        return (new MobileVerificationMessage())->to($notifiable->getMobileForVerification())
-            ->token($this->token);
+        return (new MobileVerificationMessage())->to($notifiable->getMobileForVerification())->token($this->token);
     }
 }

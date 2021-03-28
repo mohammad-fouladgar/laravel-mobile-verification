@@ -1,10 +1,9 @@
 <?php
 
-/** @var Factory $factory */
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Faker\Generator as Faker;
 use Fouladgar\MobileVerification\Tests\Models\User;
-use Illuminate\Database\Eloquent\Factory;
 
 /*
 |--------------------------------------------------------------------------

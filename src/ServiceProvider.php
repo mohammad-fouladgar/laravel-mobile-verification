@@ -20,8 +20,6 @@ class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     *
-     * @param  Router  $router
      */
     public function boot(Router $router): void
     {
@@ -36,23 +34,19 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Register the package routes.
-     *
-     * @return void
      */
     protected function registerRoutes(): void
     {
         Route::group(
             $this->routeConfiguration(),
-            function () {
-                $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
+            function (): void {
+                $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
             }
         );
     }
 
     /**
      * Get the Telescope route group configuration array.
-     *
-     * @return array
      */
     private function routeConfiguration(): array
     {
@@ -70,15 +64,13 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function loadAssetsFrom(): void
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'MobileVerification');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'MobileVerification');
     }
 
     /**
      * Register the package's publishable resources.
-     *
-     * @return void
      */
     protected function registerPublishing(): void
     {
@@ -86,28 +78,24 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->publishes(
             [
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/MobileVerification'),
+                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/MobileVerification'),
             ],
             'lang'
         );
 
-        $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'migrations');
     }
 
     /**
      * Get the config file path.
-     *
-     * @return string
      */
     protected function getConfig(): string
     {
-        return __DIR__.'/../config/config.php';
+        return __DIR__ . '/../config/config.php';
     }
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -120,8 +108,6 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * Register any package bindings.
-     *
-     * @return void
      */
     protected function registerBindings(): void
     {
@@ -144,21 +130,14 @@ class ServiceProvider extends BaseServiceProvider
                         return new DatabaseTokenRepository(
                             config('mobile_verifier.token_lifetime', 5),
                             config('mobile_verifier.token_length', 5),
-                            config(
-                                'mobile_verifier.token_table',
-                                'mobile_verification_tokens'
-                            ),
+                            config('mobile_verifier.token_table', 'mobile_verification_tokens'),
                             $app->make(ConnectionInterface::class)
                         );
-//
-                        break;
                     case 'cache':
                         return new CacheTokenRepository(
                             config('mobile_verifier.token_lifetime', 5),
                             config('mobile_verifier.token_length', 'mobile_verification_tokens')
                         );
-
-                        break;
                     default:
                 }
             }

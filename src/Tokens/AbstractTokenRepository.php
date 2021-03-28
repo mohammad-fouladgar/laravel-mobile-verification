@@ -1,33 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tokens;
 
-use Exception;
 use Illuminate\Support\Carbon;
 
 abstract class AbstractTokenRepository implements TokenRepositoryInterface
 {
     /**
      * The number of seconds a token should last.
-     *
-     * @var int
      */
-    protected $expires;
+    protected int $expires;
 
-    /**
-     * @var int
-     */
-    protected $tokenLength;
+    protected int $tokenLength;
 
-    /**
-     * Create a new token repository instance.
-     *
-     * @param  ConnectionInterface  $connection
-     * @param  string  $table
-     * @param  int  $expires
-     * @param  int  $tokenLength
-     */
-    public function __construct($expires, $tokenLength)
+    public function __construct(int $expires, int $tokenLength)
     {
         $this->expires = $expires;
         $this->tokenLength = $tokenLength;
@@ -35,12 +23,8 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
 
     /**
      * Set Expires token.
-     *
-     * @param  int  $expires
-     *
-     * @return $this
      */
-    public function setExpires(int $expires)
+    public function setExpires(int $expires): self
     {
         $this->expires = $expires;
 
@@ -50,25 +34,19 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     /**
      * Create a new token for the user.
      *
-     * @throws Exception
-     *
-     * @return string
+     * @throws \Exception
      */
     protected function createNewToken(): string
     {
         $tokenLength = config('mobile_verifier.token_length', 5);
 
-        return (string)random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
+        return (string) random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
     }
 
     /**
      * Determine if the token has expired.
-     *
-     * @param  string  $expiresAt
-     *
-     * @return bool
      */
-    protected function tokenExpired($expiresAt): bool
+    protected function tokenExpired(string $expiresAt): bool
     {
         return Carbon::parse($expiresAt)->addMinutes($this->expires)->isPast();
     }
@@ -76,25 +54,15 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     /**
      * Build the record payload for the table.
      *
-     * @param $mobile
-     * @param  string  $token
-     *
-     * @throws Exception
-     *
-     * @return array
+     * @throws \Exception
      */
-    protected function getPayload($mobile, $token): array
+    protected function getPayload(string $mobile, string $token): array
     {
         return ['mobile' => $mobile, 'token' => $token];
     }
 
     /**
      * Insert into storage token driver.
-     *
-     * @param $mobile
-     * @param $token
-     *
-     * @return bool
      */
-    abstract protected function insertIntoStorageDriver($mobile, $token): bool;
+    abstract protected function insertIntoStorageDriver(string $mobile, string $token): bool;
 }

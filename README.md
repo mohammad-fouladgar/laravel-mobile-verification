@@ -46,7 +46,7 @@ php artisan vendor:publish --provider="Fouladgar\MobileVerification\ServiceProvi
 ```
 
 ### Token Storage
-After generating a token, we need to store that in a storage. This package supports two drivers: `cache` and `database` which the default driver is `database`. You may specify which storage driver you would like to be used for saving tokens in your application:
+After generating a token, we need to store it in a storage. This package supports two drivers: `cache` and `database` which the default driver is `cache`. You may specify which storage driver you would like to be used for saving tokens in your application:
 ```php
 // config/mobile_verifier.php
 
@@ -56,7 +56,7 @@ return [
     /**
     |Supported drivers: "cache", "database"
     */
-    'token_storage' => 'database',
+    'token_storage' => 'cache',
 ];
 ```
 

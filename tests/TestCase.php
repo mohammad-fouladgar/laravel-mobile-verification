@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\ServiceProvider;
-use Illuminate\Foundation\Application;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -18,15 +19,13 @@ class TestCase extends BaseTestCase
 
         $this->withoutMiddleware(ThrottleRequests::class);
 
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        $this->withFactories(__DIR__.'/database/factories');
+        $this->withFactories(__DIR__ . '/database/factories');
     }
 
     /**
-     * @param  Application  $app
-     *
-     * @return array
+     * @param \Illuminate\Foundation\Application $app
      */
     protected function getPackageProviders($app): array
     {
@@ -36,7 +35,7 @@ class TestCase extends BaseTestCase
     /**
      * Define environment setup.
      *
-     * @param  Application  $app
+     * @param \Illuminate\Foundation\Application $app
      */
     protected function getEnvironmentSetUp($app): void
     {
@@ -46,13 +45,11 @@ class TestCase extends BaseTestCase
     /**
      * Call the given middleware.
      *
-     * @param  string|string[]  $middleware
-     * @param  string  $method
-     * @param  array  $data
-     *
-     * @return TestResponse
+     * @param string|string[] $middleware
+     * @param string $method
+     * @param array $data
      */
-    protected function callMiddleware($middleware, $method = 'GET', array $data = [])
+    protected function callMiddleware($middleware, string $method = 'GET', array $data = [])
     {
         return $this->call(
             $method,
@@ -64,12 +61,10 @@ class TestCase extends BaseTestCase
     /**
      * Make a dummy route with the given middleware applied.
      *
-     * @param  string  $method
-     * @param  string|string[]  $middleware
-     *
-     * @return string
+     * @param string $method
+     * @param string|string[] $middleware
      */
-    protected function makeMiddlewareRoute($method, $middleware): string
+    protected function makeMiddlewareRoute(string $method, $middleware): string
     {
         $method = strtolower($method);
 
@@ -87,13 +82,11 @@ class TestCase extends BaseTestCase
     /**
      * Call the given middleware using a JSON request.
      *
-     * @param  string|string[]  $middleware
-     * @param  string  $method
-     * @param  array  $data
-     *
-     * @return TestResponse
+     * @param string|string[] $middleware
+     * @param string $method
+     * @param array $data
      */
-    protected function callMiddlewareJson($middleware, $method = 'GET', array $data = [])
+    protected function callMiddlewareJson($middleware, string $method = 'GET', array $data = [])
     {
         return $this->json(
             $method,

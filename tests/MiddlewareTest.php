@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
@@ -11,15 +13,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class MiddlewareTest extends TestCase
 {
-    /**
-     * @var EnsureMobileIsVerified
-     */
-    private $middleware;
+    private EnsureMobileIsVerified $middleware;
 
-    /**
-     * @var Request
-     */
-    private $jsonRequest;
+    private Request $jsonRequest;
 
     public function __construct()
     {
@@ -31,10 +27,10 @@ class MiddlewareTest extends TestCase
     }
 
     /** @test */
-    public function it_fails_if_user_not_authenticated_and_request_is_ajax()
+    public function it_fails_if_user_not_authenticated_and_request_is_ajax(): void
     {
         try {
-            $this->middleware->handle($this->jsonRequest, static function ($request) {
+            $this->middleware->handle($this->jsonRequest, static function ($request): void {
             });
         } catch (HttpException $ex) {
             $this->assertEquals(Response::HTTP_FORBIDDEN, $ex->getStatusCode());
@@ -47,7 +43,7 @@ class MiddlewareTest extends TestCase
     }
 
     /** @test */
-    public function it_fails_with_guest_user_and_not_ajax_request()
+    public function it_fails_with_guest_user_and_not_ajax_request(): void
     {
         $response = $this->callMiddleware(EnsureMobileIsVerified::class);
 
@@ -55,23 +51,23 @@ class MiddlewareTest extends TestCase
     }
 
     /** @test */
-    public function it_fails_if_user_is_not_verifiable()
+    public function it_fails_if_user_is_not_verifiable(): void
     {
         $this->actingAs(factory(User::class)->make());
 
-        $response = $this->middleware->handle($this->jsonRequest, static function ($request) {
+        $response = $this->middleware->handle($this->jsonRequest, static function ($request): void {
         });
 
         $this->assertNull($response);
     }
 
     /** @test */
-    public function it_fails_if_user_mobile_is_not_verified()
+    public function it_fails_if_user_mobile_is_not_verified(): void
     {
         $this->actingAs(factory(VerifiableUser::class)->make());
 
         try {
-            $this->middleware->handle($this->jsonRequest, static function ($request) {
+            $this->middleware->handle($this->jsonRequest, static function ($request): void {
             });
         } catch (HttpException $ex) {
             $this->assertEquals(Response::HTTP_FORBIDDEN, $ex->getStatusCode());
@@ -84,11 +80,11 @@ class MiddlewareTest extends TestCase
     }
 
     /** @test */
-    public function it_pass_the_request_successfully()
+    public function it_pass_the_request_successfully(): void
     {
         $this->actingAs(factory(VerifiableUser::class)->state('verified')->make());
 
-        $response = $this->middleware->handle($this->jsonRequest, static function ($request) {
+        $response = $this->middleware->handle($this->jsonRequest, static function ($request): void {
         });
 
         $this->assertNull($response);

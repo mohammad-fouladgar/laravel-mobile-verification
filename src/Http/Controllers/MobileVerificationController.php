@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Http\Controllers;
 
 class MobileVerificationController extends BaseVerificationController
@@ -17,8 +19,6 @@ class MobileVerificationController extends BaseVerificationController
 
     /**
      * Where to redirect users after verification.
-     *
-     * @var string
      */
-    protected $redirectTo = '/home';
+    protected string $redirectTo = '/home';
 }

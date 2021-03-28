@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Concerns;
 
 use Fouladgar\MobileVerification\Events\Verified;
@@ -9,7 +11,8 @@ use Illuminate\Http\Request;
 
 trait VerifiesMobiles
 {
-    use RedirectsUsers, Responses;
+    use RedirectsUsers;
+    use Responses;
 
     /**
      * {@inheritdoc}
@@ -34,8 +37,10 @@ trait VerifiesMobiles
 
         return $request->expectsJson()
             ? $this->successMessage()
-            : redirect($this->redirectPath())
-                ->with('mobileVerificationVerified', __('MobileVerification::mobile_verifier.successful_verification'));
+            : redirect($this->redirectPath())->with(
+                'mobileVerificationVerified',
+                __('MobileVerification::mobile_verifier.successful_verification')
+            );
     }
 
     /**

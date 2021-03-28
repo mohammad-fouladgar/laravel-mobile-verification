@@ -76,7 +76,7 @@ return [
     | Supported drivers: "cache", "database"
     |
     */
-    'token_storage' => 'database',
+    'token_storage' => 'cache',
 
     /*
     |--------------------------------------------------------------------------

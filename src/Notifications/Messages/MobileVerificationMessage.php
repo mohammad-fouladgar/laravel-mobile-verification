@@ -1,49 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Notifications\Messages;
 
 class MobileVerificationMessage
 {
-    /**
-     * @var string
-     */
-    protected $token;
+    protected string $token;
 
-    /**
-     * @var string
-     */
-    protected $to;
+    protected string $to;
 
-    /**
-     * @param $to
-     *
-     * @return MobileVerificationMessage
-     */
-    public function to($to): self
+    public function to(string $to): self
     {
         $this->to = $to;
 
         return $this;
     }
 
-    /**
-     * @param $token
-     *
-     * @return MobileVerificationMessage
-     */
-    public function token($token): self
+    public function token(string $token): self
     {
         $this->token = $token;
 
         return $this;
     }
 
-    /**
-     * @return Payload
-     */
     public function getPayload(): Payload
     {
-        return (new Payload())->setTo($this->to)
-            ->setToken($this->token);
+        return (new Payload())->setTo($this->to)->setToken($this->token);
     }
 }

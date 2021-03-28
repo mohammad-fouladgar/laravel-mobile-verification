@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification\Http\Middleware;
 
 use Closure;
@@ -12,7 +14,7 @@ class EnsureMobileIsVerified
      *
      * @param $request
      * @param Closure $next
-     * @param null    $redirectToRoute
+     * @param null $redirectToRoute
      *
      * @return mixed|void
      */
