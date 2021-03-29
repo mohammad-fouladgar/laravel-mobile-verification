@@ -1,3 +1,7 @@
+## 2.6.0 - 2021-03-29
+ - Change the default storage driver to cache from database.
+ - Refactor and cleanup (#164)
+
 ## 2.5.0 - 2021-03-25
  - Add support cache storage for saving tokens (#163)
  - Append mobile field to fillable attributes automatically for model.
