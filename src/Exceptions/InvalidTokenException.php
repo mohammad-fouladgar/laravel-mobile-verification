@@ -11,6 +11,6 @@ class InvalidTokenException extends Exception
      */
     public function __construct()
     {
-        parent::__construct('The token has been expired or invalid.', 406);
+        parent::__construct(__('MobileVerification::mobile_verifier.expired_or_invalid'), 406);
     }
 }
