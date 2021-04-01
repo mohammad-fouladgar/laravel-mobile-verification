@@ -85,7 +85,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     public function exists(MustVerifyMobile $user, string $token): bool
     {
         $record = (array) $this->getTable()
-            ->where($user->getMobileField(), $user->getMobileForVerification())
+            ->where('mobile', $user->getMobileForVerification())
             ->where('token', $token)
             ->first();
 

@@ -24,8 +24,8 @@ class EnsureMobileIsVerified
 
         if (! $user || ($user instanceof MustVerifyMobile && ! $user->hasVerifiedMobile())) {
             return $request->expectsJson()
-                ? abort(403, 'Your mobile number is not verified.')
-                : redirect('/')->withErrors(['mobile' => 'Your mobile number is not verified.']);
+                ? abort(403, __('MobileVerification::mobile_verifier.not_verified'))
+                : redirect('/')->withErrors(['mobile' => __('MobileVerification::mobile_verifier.not_verified')]);
         }
 
         return $next($request);
