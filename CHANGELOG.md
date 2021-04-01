@@ -1,3 +1,6 @@
+## 2.6.1 - 2021-04-01
+ - Hotfix solved and add some languages for messaging(#165)
+
 ## 2.6.0 - 2021-03-29
  - Change the default storage driver to cache from database.
  - Refactor and cleanup (#164)
