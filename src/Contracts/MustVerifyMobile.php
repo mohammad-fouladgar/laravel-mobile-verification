@@ -25,9 +25,4 @@ interface MustVerifyMobile
      * Get the mobile number that should be used for verification.
      */
     public function getMobileForVerification(): string;
-
-    /**
-     * Get mobile phone field name.
-     */
-    public function getMobileField(): string;
 }
