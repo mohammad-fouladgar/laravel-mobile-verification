@@ -33,7 +33,7 @@ trait MustVerifyMobile
     /**
      * Get mobile phone field name.
      */
-    public function getMobileField(): string
+    private function getMobileField(): string
     {
         return config('mobile_verifier.mobile_column', 'mobile');
     }
