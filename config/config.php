@@ -132,4 +132,15 @@ return [
      |
      */
     'middleware' => ['auth'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queue
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify if you want your messages to process in a queue
+    | To use queue, change this to true and be sure to config your queue connection
+    |
+    */
+    'use_queue' => false,
 ];
