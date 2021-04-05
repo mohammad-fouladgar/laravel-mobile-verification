@@ -293,6 +293,16 @@ Route::get('profile', function () {
 })->middleware('mobile.verified');
 ```
 
+## Using Queue
+
+By default, this package does not queue your messages. If you want to queue your messages, you may change `use_queue` value from false to true  in config file.
+And be sure to config your queue connection in your .env file.
+```php
+return [
+    'use_queue' => false,
+];
+```
+
 ## Translates and Views
 
 To publish translation file you may use this command:
