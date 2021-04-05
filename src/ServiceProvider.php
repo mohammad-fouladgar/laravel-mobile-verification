@@ -46,7 +46,7 @@ class ServiceProvider extends BaseServiceProvider
     }
 
     /**
-     * Get the Telescope route group configuration array.
+     * Get route group configuration array.
      */
     private function routeConfiguration(): array
     {
