@@ -295,11 +295,15 @@ Route::get('profile', function () {
 
 ## Using Queue
 
-By default, this package does not queue your messages. If you want to queue your messages, you may change `use_queue` value from false to true  in config file.
+By default, this package does not process sending verification messages in the queue.But if you want your sending messages to be queued, you may change `connection` value from sync to your preferred queue connection.
 And be sure to config your queue connection in your .env file.
+You can also change name of the queue by changing `queue` name from mobile-verification to any other name.
 ```php
 return [
-    'use_queue' => false,
+    'queue' =>  [
+        'connection' => 'sync',
+        'queue' => 'mobile-verification',
+    ]
 ];
 ```
 
