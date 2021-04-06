@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Listeners;
 
-
-use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendMobileVerificationNotificationQueueable implements ShouldQueue
+class SendMobileVerificationNotificationQueueable extends AbstractMobileVerificationListener implements ShouldQueue
 {
 
     /**
@@ -28,24 +26,10 @@ class SendMobileVerificationNotificationQueueable implements ShouldQueue
     public $queue = null;
 
 
-    protected TokenBrokerInterface $tokenBroker;
-
     public function __construct(TokenBrokerInterface $tokenBroker)
     {
-        $this->tokenBroker = $tokenBroker;
+        parent::__construct($tokenBroker);
         $this->queue = config('mobile_verifier.queue.connection');
         $this->connection = config('mobile_verifier.queue.queue');
-    }
-
-    /**
-     * @throws \Exception
-     */
-    public function handle(Registered $event): void
-    {
-        $user = $event->user;
-
-        if ($user instanceof MustVerifyMobile && !$user->hasVerifiedMobile()) {
-            $this->tokenBroker->sendToken($user);
-        }
     }
 }
