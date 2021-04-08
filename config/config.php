@@ -146,5 +146,7 @@ return [
     'queue' =>  [
         'connection' => 'sync',
         'queue' => 'mobile-verification',
+        'tries' => 3,
+        'timeout' => 60,
     ]
 ];

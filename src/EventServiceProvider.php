@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification;
 
 use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
@@ -17,10 +19,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (config('mobile_verifier.queue.connection') == 'sync') {
-            Event::listen(Registered::class, [SendMobileVerificationNotification::class, 'handle']);
+        if (config('mobile_verifier.queue.connection') === 'sync') {
+            Event::listen(Registered::class, SendMobileVerificationNotification::class);
         } else {
-            Event::listen(Registered::class, [SendMobileVerificationNotificationQueueable::class, 'handle']);
+            Event::listen(Registered::class, SendMobileVerificationNotificationQueueable::class);
         }
     }
 }

@@ -4,32 +4,30 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Listeners;
 
-use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendMobileVerificationNotificationQueueable extends AbstractMobileVerificationListener implements ShouldQueue
 {
-
     /**
-     * The name of the connection the job should be sent to.
-     *
-     * @var string|null
+     * @param $name
+     * @return mixed
      */
-    public $connection = null;
-
-    /**
-     * The name of the queue the job should be sent to.
-     *
-     * @var string|null
-     */
-    public $queue = null;
-
-
-    public function __construct(TokenBrokerInterface $tokenBroker)
+    public function __get($name)
     {
-        parent::__construct($tokenBroker);
-        $this->queue = config('mobile_verifier.queue.connection');
-        $this->connection = config('mobile_verifier.queue.queue');
+        switch ($name) {
+            case 'tries':
+                return config('mobile_verifier.queue.tries');
+                break;
+            case 'timeout':
+                return config('mobile_verifier.queue.timeout');
+                break;
+            case 'connection':
+                return config('mobile_verifier.queue.connection');
+                break;
+            case 'queue':
+                return config('mobile_verifier.queue.queue');
+                break;
+        }
     }
 }
