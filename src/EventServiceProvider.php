@@ -1,21 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Fouladgar\MobileVerification;
 
 use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
+use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotificationQueueable;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event listener mappings for the application.
+     * Register any other events for your application.
      *
-     * @var array
+     * @return void
      */
-    protected $listen = [
-        Registered::class => [
-            SendMobileVerificationNotification::class,
-        ],
-    ];
+    public function boot()
+    {
+        if (config('mobile_verifier.queue.connection') === 'sync') {
+            Event::listen(Registered::class, SendMobileVerificationNotification::class);
+        } else {
+            Event::listen(Registered::class, SendMobileVerificationNotificationQueueable::class);
+        }
+    }
 }

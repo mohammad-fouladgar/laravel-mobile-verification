@@ -132,4 +132,21 @@ return [
      |
      */
     'middleware' => ['auth'],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Queue
+     |--------------------------------------------------------------------------
+     |
+     | By default, This package does not queue sending verification messages.
+     | But if you want your messages to process in a queue, change connection from sync to your preferred connection.
+     | Be sure to config your queue settings in your .env file if you want to enable queue.
+     |
+     */
+    'queue' =>  [
+        'connection' => 'sync',
+        'queue' => 'mobile-verification',
+        'tries' => 3,
+        'timeout' => 60,
+    ]
 ];

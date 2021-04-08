@@ -76,4 +76,14 @@ class ListenerTest extends TestCase
 
         $listener->handle(new Registered($this->verifiableUser));
     }
+
+    /**
+     * @test
+     *
+     * @throws \Exception
+     */
+    public function it_should_not_queue()
+    {
+        $this->assertListening(Registered::class, SendMobileVerificationNotification::class);
+    }
 }

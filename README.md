@@ -293,6 +293,24 @@ Route::get('profile', function () {
 })->middleware('mobile.verified');
 ```
 
+## Using Queue
+
+By default, this package does not process sending verification messages in the queue.But if you want your sending messages to be queued, you may change `connection` value from sync to your preferred queue connection.
+And be sure to config your queue connection in your .env file.
+You are allowed to to change other queue settings here in the config.
+
+Connections : "sync", "database", "beanstalkd", "sqs", "redis", "null"
+```php
+return [
+    'queue' =>  [
+       'connection' => 'sync',
+       'queue' => 'mobile-verification',
+       'tries' => 3,
+       'timeout' => 60,
+    ]
+];
+```
+
 ## Translates and Views
 
 To publish translation file you may use this command:
