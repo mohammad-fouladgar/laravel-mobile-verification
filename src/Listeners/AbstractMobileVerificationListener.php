@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Listeners;
 
-
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
@@ -26,7 +25,7 @@ abstract class AbstractMobileVerificationListener extends Notification
     {
         $user = $event->user;
 
-        if ($user instanceof MustVerifyMobile && !$user->hasVerifiedMobile()) {
+        if ($user instanceof MustVerifyMobile && ! $user->hasVerifiedMobile()) {
             $this->tokenBroker->sendToken($user);
         }
     }
