@@ -17,7 +17,7 @@ class CacheTokenRepository extends AbstractTokenRepository
 
         $token = $this->createNewToken();
 
-        $this->insertIntoStorageDriver($mobile, $token);
+        $this->insert($mobile, $token);
 
         return $token;
     }
@@ -32,7 +32,7 @@ class CacheTokenRepository extends AbstractTokenRepository
      *
      * @throws \Exception
      */
-    protected function insertIntoStorageDriver(string $mobile, string $token): bool
+    protected function insert(string $mobile, string $token): bool
     {
         return Cache::add($mobile, $this->getPayload($mobile, $token), now()->addMinutes($this->expires));
     }

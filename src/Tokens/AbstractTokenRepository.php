@@ -62,7 +62,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     }
 
     /**
-     * Insert into storage token driver.
+     * Insert into token storage.
      */
-    abstract protected function insertIntoStorageDriver(string $mobile, string $token): bool;
+    abstract protected function insert(string $mobile, string $token): bool;
 }

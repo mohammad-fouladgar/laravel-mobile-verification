@@ -27,7 +27,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
         ConnectionInterface $connection
     ) {
         parent::__construct($expires, $tokenLength);
-        $this->table = $table;
+        $this->table      = $table;
         $this->connection = $connection;
     }
 
@@ -42,7 +42,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
 
         $token = $this->createNewToken();
 
-        $this->insertIntoStorageDriver($mobile, $token);
+        $this->insert($mobile, $token);
 
         return $token;
     }
@@ -56,6 +56,19 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function exists(MustVerifyMobile $user, string $token): bool
+    {
+        $record = (array)$this->getTable()
+                              ->where('mobile', $user->getMobileForVerification())
+                              ->where('token', $token)
+                              ->first();
+
+        return $record && !$this->tokenExpired($record['expires_at']);
+    }
+
+    /**
      * Begin a new database query against the table.
      */
     protected function getTable(): Builder
@@ -66,7 +79,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     /**
      * @throws \Exception
      */
-    protected function insertIntoStorageDriver(string $mobile, string $token): bool
+    protected function insert(string $mobile, string $token): bool
     {
         return $this->getTable()->insert($this->getPayload($mobile, $token));
     }
@@ -77,18 +90,5 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     protected function getPayload(string $mobile, string $token): array
     {
         return parent::getPayload($mobile, $token) + ['expires_at' => now()->addMinutes($this->expires)];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists(MustVerifyMobile $user, string $token): bool
-    {
-        $record = (array) $this->getTable()
-            ->where('mobile', $user->getMobileForVerification())
-            ->where('token', $token)
-            ->first();
-
-        return $record && ! $this->tokenExpired($record['expires_at']);
     }
 }

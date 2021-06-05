@@ -22,21 +22,7 @@ You can install the package via composer:
 composer require fouladgar/laravel-mobile-verification
 ```
 > Laravel 5.5 uses Package Auto-Discovery, so you are not required to add ServiceProvider manually.
-
-### Laravel <= 5.4.x
-
-If you don't use Auto-Discovery, add the ServiceProvider to the providers array in ``config/app.php`` file
-
-```php
-'providers' => [
-  /*
-   * Package Service Providers...
-   */
-  Fouladgar\MobileVerification\ServiceProvider::class,
-],
-```
-
-
+>
 ## Configuration
 
 To get started, you should publish the `config/mobile_verifier.php` config file with:
@@ -295,16 +281,21 @@ Route::get('profile', function () {
 
 ## Using Queue
 
-By default, this package does not process sending verification messages in the queue.But if you want your sending messages to be queued, you may change `connection` value from sync to your preferred queue connection.
-And be sure to config your queue connection in your .env file.
+By default, this package does not process sending verification messages in the queue. But if you want your sending messages to be queued, you may change `connection` value from `sync` to your preferred queue connection.
+And be sure to config your queue connection in your `.env` file.
 You are allowed to to change other queue settings here in the config.
 
-Connections : "sync", "database", "beanstalkd", "sqs", "redis", "null"
 ```php
+// config/mobile_verifier.php
+<?php
+
 return [
+     /**
+     | Supported drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
+     */
     'queue' =>  [
        'connection' => 'sync',
-       'queue' => 'mobile-verification',
+       'queue' => 'default',
        'tries' => 3,
        'timeout' => 60,
     ]

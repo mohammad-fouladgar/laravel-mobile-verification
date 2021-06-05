@@ -142,10 +142,12 @@ return [
      | But if you want your messages to process in a queue, change connection from sync to your preferred connection.
      | Be sure to config your queue settings in your .env file if you want to enable queue.
      |
+     | Supported drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
+     |
      */
     'queue' =>  [
         'connection' => 'sync',
-        'queue' => 'mobile-verification',
+        'queue' => 'default',
         'tries' => 3,
         'timeout' => 60,
     ]
