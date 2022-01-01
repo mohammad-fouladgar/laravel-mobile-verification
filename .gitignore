@@ -9,4 +9,4 @@ build
 .php_cs.cache
 cache
 .htaccess
-!/.php-cs-fixer.cache
+.php-cs-fixer.cache
