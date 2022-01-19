@@ -36,7 +36,7 @@ class CacheTokenRepository extends AbstractTokenRepository
     public function latestSentAt(MustVerifyMobile $user, string $token): string
     {
         $key = $user->getMobileForVerification();
-        if (!Cache::has($key)) {
+        if (! Cache::has($key)) {
             return '';
         }
 

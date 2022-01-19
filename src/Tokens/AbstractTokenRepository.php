@@ -17,7 +17,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
 
     public function __construct(int $expires, int $tokenLength)
     {
-        $this->expires     = $expires;
+        $this->expires = $expires;
         $this->tokenLength = $tokenLength;
     }
 

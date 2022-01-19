@@ -26,7 +26,7 @@ class TokenBrokerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user       = m::mock(VerifiableUser::class)->makePartial();
+        $this->user = m::mock(VerifiableUser::class)->makePartial();
         $this->repository = m::mock(TokenRepositoryInterface::class);
     }
 

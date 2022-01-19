@@ -31,8 +31,8 @@ class CacheTokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_create_a_token(): void
     {
-        $payload          = ['mobile' => $this->user->mobile, 'sent_at' => now()->toDateTimeString()];
-        $token            = $this->repository->create($this->user);
+        $payload = ['mobile' => $this->user->mobile, 'sent_at' => now()->toDateTimeString()];
+        $token = $this->repository->create($this->user);
         $payload['token'] = $token;
 
         $this->assertEquals(Cache::get($payload['mobile']), $payload);
