@@ -31,11 +31,32 @@ class CacheTokenRepositoryTest extends TestCase
      */
     public function it_can_successfully_create_a_token(): void
     {
-        $payload = ['mobile' => $this->user->mobile];
-        $token = $this->repository->create($this->user);
+        $payload          = ['mobile' => $this->user->mobile, 'sent_at' => now()->toDateTimeString()];
+        $token            = $this->repository->create($this->user);
         $payload['token'] = $token;
 
         $this->assertEquals(Cache::get($payload['mobile']), $payload);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_return_latest_sent_at_as_empty_string_if_token_doesnt_exist()
+    {
+        $this->repository->setExpires(-5);
+        $token = $this->repository->create($this->user);
+
+        $this->assertEmpty($this->repository->latestSentAt($this->user, $token));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_return_latest_sent_at_as_date_time_string_if_token_exists()
+    {
+        $token = $this->repository->create($this->user);
+
+        $this->assertEquals(now()->toDateTimeString(), $this->repository->latestSentAt($this->user, $token));
     }
 
     /**

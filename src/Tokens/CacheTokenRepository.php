@@ -27,6 +27,22 @@ class CacheTokenRepository extends AbstractTokenRepository
         Cache::forget($user->getMobileForVerification());
     }
 
+    public function exists(MustVerifyMobile $user, string $token): bool
+    {
+        return Cache::has($user->getMobileForVerification()) &&
+            Cache::get($user->getMobileForVerification())['token'] === $token;
+    }
+
+    public function latestSentAt(MustVerifyMobile $user, string $token): string
+    {
+        $key = $user->getMobileForVerification();
+        if (!Cache::has($key)) {
+            return '';
+        }
+
+        return Cache::get($key)['sent_at'];
+    }
+
     /**
      * @inheritDoc
      *
@@ -35,11 +51,5 @@ class CacheTokenRepository extends AbstractTokenRepository
     protected function insert(string $mobile, string $token): bool
     {
         return Cache::add($mobile, $this->getPayload($mobile, $token), now()->addMinutes($this->expires));
-    }
-
-    public function exists(MustVerifyMobile $user, string $token): bool
-    {
-        return Cache::has($user->getMobileForVerification()) &&
-            Cache::get($user->getMobileForVerification())['token'] === $token;
     }
 }

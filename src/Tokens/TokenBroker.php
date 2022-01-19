@@ -40,8 +40,13 @@ class TokenBroker implements TokenBrokerInterface
         return true;
     }
 
-    protected function tokenExists(MustVerifyMobile $user, string $token): bool
+    public function tokenExists(MustVerifyMobile $user, string $token): bool
     {
         return $this->tokenRepository->exists($user, $token);
+    }
+
+    public function getLatestSentAt(MustVerifyMobile $user, string $token): string
+    {
+        return $this->tokenRepository->latestSentAt($user, $token);
     }
 }

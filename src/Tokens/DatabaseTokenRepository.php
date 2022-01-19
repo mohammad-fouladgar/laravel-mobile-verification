@@ -27,7 +27,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
         ConnectionInterface $connection
     ) {
         parent::__construct($expires, $tokenLength);
-        $this->table = $table;
+        $this->table      = $table;
         $this->connection = $connection;
     }
 
@@ -60,12 +60,20 @@ class DatabaseTokenRepository extends AbstractTokenRepository
      */
     public function exists(MustVerifyMobile $user, string $token): bool
     {
-        $record = (array)$this->getTable()
-                              ->where('mobile', $user->getMobileForVerification())
-                              ->where('token', $token)
-                              ->first();
+        $record = $this->getTokenRecord($user, $token);
 
-        return $record && ! $this->tokenExpired($record['expires_at']);
+        return $record && !$this->tokenExpired($record['expires_at']);
+    }
+
+    public function latestSentAt(MustVerifyMobile $user, string $token): string
+    {
+        $tokenRow = $this->getTokenRecord($user, $token);
+
+        if (!$tokenRow) {
+            return '';
+        }
+
+        return $tokenRow['sent_at'];
     }
 
     /**
@@ -90,5 +98,13 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     protected function getPayload(string $mobile, string $token): array
     {
         return parent::getPayload($mobile, $token) + ['expires_at' => now()->addMinutes($this->expires)];
+    }
+
+    private function getTokenRecord(MustVerifyMobile $user, string $token): array
+    {
+        return (array) $this->getTable()
+                            ->where('mobile', $user->getMobileForVerification())
+                            ->where('token', $token)
+                            ->first();
     }
 }

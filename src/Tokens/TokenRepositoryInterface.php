@@ -24,4 +24,6 @@ interface TokenRepositoryInterface
      * Delete all existing tokens from the database.
      */
     public function deleteExisting(MustVerifyMobile $user): void;
+
+    public function latestSentAt(MustVerifyMobile $user, string $token): string;
 }

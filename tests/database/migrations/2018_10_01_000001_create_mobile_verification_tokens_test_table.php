@@ -20,6 +20,7 @@ class CreateMobileVerificationTokensTestTable extends Migration
             $table->string('mobile')->index();
             $table->string('token', 10)->index();
             $table->timestamp('expires_at')->nullable();
+            $table->timestamp('sent_at')->nullable();
 
             $table->index(['mobile', 'token']);
         });

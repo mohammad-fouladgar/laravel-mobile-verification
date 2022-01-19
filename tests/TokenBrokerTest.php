@@ -26,7 +26,7 @@ class TokenBrokerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = m::mock(VerifiableUser::class)->makePartial();
+        $this->user       = m::mock(VerifiableUser::class)->makePartial();
         $this->repository = m::mock(TokenRepositoryInterface::class);
     }
 
@@ -75,5 +75,36 @@ class TokenBrokerTest extends TestCase
         $tokenBroker = new TokenBroker($this->repository);
 
         $this->assertTrue($tokenBroker->verifyToken($this->user, 'token_123'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_check_token_exists(): void
+    {
+        $this->repository->shouldReceive('exists')
+                         ->with($this->user, 'token_123')
+                         ->andReturn(true);
+
+        $tokenBroker = new TokenBroker($this->repository);
+
+        $this->assertTrue($tokenBroker->tokenExists($this->user, 'token_123'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_return_latest_sent_at_token(): void
+    {
+        $this->repository->shouldReceive('latestSentAt')
+                         ->with($this->user, 'token_123')
+                         ->andReturn('2022-01-19 13:30:17');
+
+        $tokenBroker = new TokenBroker($this->repository);
+
+        $this->assertEquals(
+            '2022-01-19 13:30:17',
+            $tokenBroker->getLatestSentAt($this->user, 'token_123')
+        );
     }
 }

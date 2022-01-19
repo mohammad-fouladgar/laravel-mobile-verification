@@ -19,4 +19,8 @@ interface TokenBrokerInterface
      * @throws \Throwable
      */
     public function verifyToken(MustVerifyMobile $user, string $token): bool;
+
+    public function tokenExists(MustVerifyMobile $user, string $token): bool;
+
+    public function getLatestSentAt(MustVerifyMobile $user, string $token): string;
 }

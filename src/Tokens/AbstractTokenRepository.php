@@ -17,7 +17,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
 
     public function __construct(int $expires, int $tokenLength)
     {
-        $this->expires = $expires;
+        $this->expires     = $expires;
         $this->tokenLength = $tokenLength;
     }
 
@@ -58,7 +58,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
      */
     protected function getPayload(string $mobile, string $token): array
     {
-        return ['mobile' => $mobile, 'token' => $token];
+        return ['mobile' => $mobile, 'token' => $token, 'sent_at' => now()->toDateTimeString()];
     }
 
     /**
