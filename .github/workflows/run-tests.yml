@@ -20,7 +20,7 @@ jobs:
             testbench: ^4.9
 
     steps:
-      - Checkout code
+      - name: Checkout code
         uses: actions/checkout@v1
 
       - name: Validate composer.json and composer.lock
