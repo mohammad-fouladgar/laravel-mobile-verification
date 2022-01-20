@@ -33,7 +33,5 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-suggest --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
-      - run: php artisan -V
-
       - name: Run test suite
         run: composer test
