@@ -10,9 +10,15 @@ use Illuminate\Support\Str;
 
 class DatabaseTokenRepositoryTest extends TestCase
 {
-    private TokenRepositoryInterface $repository;
+    /**
+     * @var TokenRepositoryInterface
+     */
+    private $repository;
 
-    private VerifiableUser $user;
+    /**
+     * @var VerifiableUser
+     */
+    private $user;
 
     public function setUp(): void
     {
@@ -30,15 +36,15 @@ class DatabaseTokenRepositoryTest extends TestCase
     public function it_can_successfully_create_a_token(): void
     {
         $tokenLifetime = config('mobile_verifier.token_lifetime');
-        $tokenLength = config('mobile_verifier.token_length');
+        $tokenLength   = config('mobile_verifier.token_length');
 
         $token = $this->repository->create($this->user);
 
         $this->assertEquals($tokenLength, Str::length($token));
 
         $this->assertDatabaseHas('mobile_verification_tokens', [
-            'mobile' => $this->user->mobile,
-            'token' => $token,
+            'mobile'     => $this->user->mobile,
+            'token'      => $token,
             'expires_at' => (string) now()->addMinutes($tokenLifetime),
         ]);
     }
@@ -76,7 +82,7 @@ class DatabaseTokenRepositoryTest extends TestCase
 
         $record = [
             'mobile' => $this->user->mobile,
-            'token' => $token,
+            'token'  => $token,
         ];
 
         $this->assertDatabaseMissing('mobile_verification_tokens', $record);

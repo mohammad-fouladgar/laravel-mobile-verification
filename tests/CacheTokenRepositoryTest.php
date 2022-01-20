@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheTokenRepositoryTest extends TestCase
 {
-    private TokenRepositoryInterface $repository;
+    /**
+     * @var TokenRepositoryInterface
+     */
+    private $repository;
 
-    private VerifiableUser $user;
+    /**
+     * @var VerifiableUser
+     */
+    private $user;
 
     public function setUp(): void
     {
