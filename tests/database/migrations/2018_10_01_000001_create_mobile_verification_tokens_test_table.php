@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMobileVerificationTokensTestTable extends Migration
 {
-    private string $userTable;
+    /** @var string  */
+    private $userTable;
 
     public function __construct()
     {

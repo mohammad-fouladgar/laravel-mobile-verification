@@ -11,7 +11,8 @@ use Illuminate\Notifications\Notification;
 
 abstract class AbstractMobileVerificationListener extends Notification
 {
-    protected TokenBrokerInterface $tokenBroker;
+    /** @var TokenBrokerInterface  */
+    protected $tokenBroker;
 
     public function __construct(TokenBrokerInterface $tokenBroker)
     {

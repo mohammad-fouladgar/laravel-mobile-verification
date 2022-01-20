@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMobileVerificationTokensTable extends Migration
 {
-    private string $userTable;
+    /** @var string  */
+    private $userTable;
 
-    private string $tokenTable;
+    /** @var string  */
+    private $tokenTable;
 
-    private string $mobileColumn;
+    /** @var string  */
+    private $mobileColumn;
 
     public function __construct()
     {

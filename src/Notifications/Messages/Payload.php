@@ -6,9 +6,11 @@ namespace Fouladgar\MobileVerification\Notifications\Messages;
 
 class Payload
 {
-    private string $token;
+    /** @var string  */
+    private $token;
 
-    private string $to;
+    /** @var string  */
+    private $to;
 
     public function getToken(): string
     {

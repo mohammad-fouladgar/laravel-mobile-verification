@@ -9,11 +9,12 @@ use Illuminate\Support\Carbon;
 abstract class AbstractTokenRepository implements TokenRepositoryInterface
 {
     /**
-     * The number of seconds a token should last.
+     * @var int
      */
-    protected int $expires;
+    protected $expires;
 
-    protected int $tokenLength;
+    /** @var int  */
+    protected $tokenLength;
 
     public function __construct(int $expires, int $tokenLength)
     {

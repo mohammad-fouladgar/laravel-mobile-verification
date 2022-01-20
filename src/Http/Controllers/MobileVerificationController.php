@@ -20,5 +20,5 @@ class MobileVerificationController extends BaseVerificationController
     /**
      * Where to redirect users after verification.
      */
-    protected string $redirectTo = '/home';
+    protected $redirectTo = '/home';
 }

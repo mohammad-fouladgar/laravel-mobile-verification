@@ -11,15 +11,15 @@ class Verified
 {
     use SerializesModels;
 
-    /**
-     * The verified user.
-     */
-    public MustVerifyMobile $user;
+    /** @var MustVerifyMobile  */
+    public $user;
 
     /**
      * The validated request.
+     *
+     * @var array
      */
-    protected array $request;
+    protected $request;
 
     public function __construct(MustVerifyMobile $user, array $request)
     {

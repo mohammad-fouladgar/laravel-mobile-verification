@@ -12,13 +12,15 @@ class DatabaseTokenRepository extends AbstractTokenRepository
 {
     /**
      * The database connection instance.
+     * @var ConnectionInterface
      */
-    protected ConnectionInterface $connection;
+    protected $connection;
 
     /**
      * The token database table.
+     * @var string
      */
-    protected string $table;
+    protected $table;
 
     public function __construct(
         int $expires,
