@@ -12,7 +12,7 @@ abstract class BaseVerificationController extends Controller implements BaseVeri
 {
     use VerifiesMobiles;
 
-    /** @var TokenBrokerInterface  */
+    /** @var TokenBrokerInterface */
     protected $tokenBroker;
 
     /**

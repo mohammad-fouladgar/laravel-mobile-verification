@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 
 class VerifyMobile extends Notification
 {
-    /** @var string  */
+    /** @var string */
     public $token;
 
     public function __construct(string $token)

@@ -11,7 +11,7 @@ class Verified
 {
     use SerializesModels;
 
-    /** @var MustVerifyMobile  */
+    /** @var MustVerifyMobile */
     public $user;
 
     /**

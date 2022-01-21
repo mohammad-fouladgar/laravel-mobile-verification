@@ -6,10 +6,10 @@ namespace Fouladgar\MobileVerification\Notifications\Messages;
 
 class MobileVerificationMessage
 {
-    /** @var string  */
+    /** @var string */
     protected $token;
 
-    /** @var string  */
+    /** @var string */
     protected $to;
 
     public function to(string $to): self

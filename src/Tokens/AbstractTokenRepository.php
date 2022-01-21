@@ -13,7 +13,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
      */
     protected $expires;
 
-    /** @var int  */
+    /** @var int */
     protected $tokenLength;
 
     public function __construct(int $expires, int $tokenLength)
