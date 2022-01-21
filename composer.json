@@ -28,7 +28,8 @@
     "illuminate/notifications": "~6.0|~7.0|~8.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.0",
+    "ext-json": "*",
+    "phpunit/phpunit": "^9.3",
     "laravel/legacy-factories": "^1.0.4",
     "orchestra/testbench": "^4.9|^5.8|^6.3",
     "mockery/mockery": "^1.4",
