@@ -77,9 +77,7 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([$this->getConfig() => config_path('mobile_verifier.php')], 'config');
 
         $this->publishes(
-            [
-                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/MobileVerification'),
-            ],
+            [__DIR__ . '/../resources/lang' => app()->langPath() . '/vendor/MobileVerification'],
             'lang'
         );
 
