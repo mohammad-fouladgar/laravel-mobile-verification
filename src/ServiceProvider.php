@@ -66,7 +66,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'MobileVerification');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'MobileVerification');
     }
 
     /**
@@ -76,12 +76,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->publishes([$this->getConfig() => config_path('mobile_verifier.php')], 'config');
 
-        $this->publishes(
-            [
-                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/MobileVerification'),
-            ],
-            'lang'
-        );
+        $this->publishes([__DIR__ . '/../lang' => app()->langPath() . '/vendor/MobileVerification'], 'lang');
 
         $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'migrations');
     }
