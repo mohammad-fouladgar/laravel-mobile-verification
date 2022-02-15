@@ -27,8 +27,6 @@ jobs:
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - run: php -v
-
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
