@@ -13,21 +13,15 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class MiddlewareTest extends TestCase
 {
-    /**
-     * @var EnsureMobileIsVerified
-     */
-    private $middleware;
+    private EnsureMobileIsVerified $middleware;
 
-    /**
-     * @var Request
-     */
-    private $jsonRequest;
+    private Request $jsonRequest;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->middleware = new EnsureMobileIsVerified();
+        $this->middleware  = new EnsureMobileIsVerified();
         $this->jsonRequest = new Request();
         $this->jsonRequest->headers->set('Accept', 'application/json');
     }

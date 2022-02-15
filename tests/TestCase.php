@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\ServiceProvider;
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Testing\TestResponse;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use ReflectionFunction;
 
 class TestCase extends BaseTestCase
 {
@@ -94,37 +92,4 @@ class TestCase extends BaseTestCase
             $data
         );
     }
-
-    /**
-     * Custom assertListening function for supporting Laravel < v8
-     *
-     * @param $expectedEvent
-     * @param $expectedListener
-     */
-//    protected function assertListening($expectedEvent, $expectedListener)
-//    {
-//        $dispatcher = $this->app->make(Dispatcher::class);
-//
-//        foreach ($dispatcher->getListeners($expectedEvent) as $listenerClosure) {
-//            $actualListener = (new ReflectionFunction($listenerClosure))
-//                ->getStaticVariables()['listener'];
-//
-//            if ($actualListener === $expectedListener ||
-//                ($actualListener instanceof Closure &&
-//                    $expectedListener === Closure::class)) {
-//                $this->assertTrue(true);
-//
-//                return;
-//            }
-//        }
-//
-//        $this->assertTrue(
-//            false,
-//            sprintf(
-//                'Event [%s] does not have the [%s] listener attached to it',
-//                $expectedEvent,
-//                print_r($expectedListener, true)
-//            )
-//        );
-//    }
 }

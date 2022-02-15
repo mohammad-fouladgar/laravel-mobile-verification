@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tests;
 
+use Exception;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
 use Illuminate\Support\Str;
 
 class DatabaseTokenRepositoryTest extends TestCase
 {
-    /**
-     * @var TokenRepositoryInterface
-     */
-    private $repository;
+    private TokenRepositoryInterface $repository;
 
-    /**
-     * @var VerifiableUser
-     */
-    private $user;
+    private VerifiableUser $user;
 
     public function setUp(): void
     {
@@ -72,7 +67,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_successfully_delete_existing_token(): void
     {
@@ -91,7 +86,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_successfully_find_existing_and_not_expired_token(): void
     {
@@ -103,7 +98,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_fails_when_token_is_exist_but_expired(): void
     {
@@ -116,7 +111,7 @@ class DatabaseTokenRepositoryTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_fails_when_token_is_not_existed(): void
     {
