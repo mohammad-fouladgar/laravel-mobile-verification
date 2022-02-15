@@ -16,7 +16,7 @@ class VerificationChannel
 
     public function send(mixed $notifiable, Notification $notification): mixed
     {
-        if (!$notifiable->routeNotificationFor('verification_mobile', $notification)) {
+        if (! $notifiable->routeNotificationFor('verification_mobile', $notification)) {
             return null;
         }
 

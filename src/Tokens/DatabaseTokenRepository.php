@@ -51,14 +51,14 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     {
         $record = $this->getTokenRecord($user, $token);
 
-        return $record && !$this->tokenExpired($record['expires_at']);
+        return $record && ! $this->tokenExpired($record['expires_at']);
     }
 
     public function latestSentAt(MustVerifyMobile $user, string $token): string
     {
         $tokenRow = $this->getTokenRecord($user, $token);
 
-        if (!$tokenRow) {
+        if (! $tokenRow) {
             return '';
         }
 

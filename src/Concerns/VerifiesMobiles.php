@@ -9,9 +9,9 @@ use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Routing\Redirector;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 trait VerifiesMobiles
 {

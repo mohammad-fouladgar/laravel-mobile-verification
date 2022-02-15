@@ -26,8 +26,8 @@ class ListenerTest extends TestCase
     {
         parent::setUp();
 
-        $this->tokenBroker    = m::mock(TokenBrokerInterface::class);
-        $this->verifiableUser  = m::mock(VerifiableUser::class);
+        $this->tokenBroker = m::mock(TokenBrokerInterface::class);
+        $this->verifiableUser = m::mock(VerifiableUser::class);
     }
 
     /**

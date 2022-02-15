@@ -9,9 +9,8 @@ use Illuminate\Support\Carbon;
 
 abstract class AbstractTokenRepository implements TokenRepositoryInterface
 {
-    public function __construct(protected int $expires,protected int $tokenLength)
+    public function __construct(protected int $expires, protected int $tokenLength)
     {
-
     }
 
     /**

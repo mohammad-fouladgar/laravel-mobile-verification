@@ -76,7 +76,7 @@ class TestCase extends BaseTestCase
             '/__middleware__',
             [
                 'middleware' => $middleware,
-                static fn() => '__passed__',
+                static fn () => '__passed__',
             ]
         )->uri();
     }
