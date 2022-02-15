@@ -1,3 +1,7 @@
+## 3.0.0 - 2022-02-15
+- Add Support PHP 8.0 and Laravel 9.0
+- Deprecated PHP <= 7.* and Laravel <=8.*
+
 ## 2.7.0 - 2022-01-20
  - Add **getLatestSentAt** method to the token broker(#171)
  - Fix some bugs.
