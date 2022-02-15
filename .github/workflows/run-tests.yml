@@ -13,7 +13,7 @@ jobs:
         dependency-version: [prefer-lowest, prefer-stable]
         include:
           - laravel: 9.*
-            testbench: ^7.0
+            testbench: 7.*
 
     steps:
       - name: Checkout code
