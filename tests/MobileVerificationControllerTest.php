@@ -15,7 +15,7 @@ class MobileVerificationControllerTest extends TestCase
     /** @test */
     public function it_can_verify_a_user(): void
     {
-        $user = factory(VerifiableUser::class)->create();
+        $user = VerifiableUser::factory()->create();
 
         $tokenBroker = m::mock(TokenBroker::class);
         $tokenBroker->shouldReceive('verifyToken')->andReturn(true);
@@ -38,7 +38,7 @@ class MobileVerificationControllerTest extends TestCase
     /** @test */
     public function it_fails_on_verifying_when_user_has_already_verified(): void
     {
-        $user = factory(VerifiableUser::class)->state('verified')->create();
+        $user = VerifiableUser::factory()->verified()->create();
 
         $this
             ->actingAs($user)
@@ -54,7 +54,7 @@ class MobileVerificationControllerTest extends TestCase
     /** @test */
     public function it_will_check_validation_for_token_verification(): void
     {
-        $user = factory(VerifiableUser::class)->make();
+        $user = VerifiableUser::factory()->make();
 
         $this
             ->actingAs($user)
@@ -71,7 +71,7 @@ class MobileVerificationControllerTest extends TestCase
     /** @test */
     public function it_fails_on_verifying_a_user(): void
     {
-        $user = factory(VerifiableUser::class)->create();
+        $user = VerifiableUser::factory()->create();
 
         $this
             ->actingAs($user)->postJson(route('mobile.verify'), ['token' => '12345'])
@@ -85,7 +85,7 @@ class MobileVerificationControllerTest extends TestCase
     /** @test */
     public function it_fails_on_resend_when_user_is_already_verified(): void
     {
-        $user = factory(VerifiableUser::class)->state('verified')->create();
+        $user = VerifiableUser::factory()->verified()->create();
 
         $this
             ->actingAs($user)
@@ -101,7 +101,7 @@ class MobileVerificationControllerTest extends TestCase
     /** @test */
     public function it_can_resend_a_token(): void
     {
-        $user = factory(VerifiableUser::class)->create();
+        $user = VerifiableUser::factory()->create();
 
         $this
             ->actingAs($user)

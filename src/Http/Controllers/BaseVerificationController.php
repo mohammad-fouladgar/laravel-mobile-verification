@@ -12,20 +12,12 @@ abstract class BaseVerificationController extends Controller implements BaseVeri
 {
     use VerifiesMobiles;
 
-    /** @var TokenBrokerInterface */
-    protected $tokenBroker;
-
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct(TokenBrokerInterface $tokenBroker)
+    public function __construct(protected TokenBrokerInterface $tokenBroker)
     {
         $this->middleware(config('mobile_verifier.middleware', ['web', 'auth']));
 
         $throttle = config('mobile_verifier.throttle', 10);
 
         $this->middleware("throttle:$throttle,1")->only('verify', 'resend');
-
-        $this->tokenBroker = $tokenBroker;
     }
 }

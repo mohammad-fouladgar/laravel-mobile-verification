@@ -7,6 +7,10 @@ namespace Fouladgar\MobileVerification\Concerns;
 use Fouladgar\MobileVerification\Events\Verified;
 use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 trait VerifiesMobiles
@@ -14,10 +18,7 @@ trait VerifiesMobiles
     use RedirectsUsers;
     use Responses;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function verify(VerificationRequest $request)
+    public function verify(VerificationRequest $request): ViewFactory|JsonResponse|RedirectResponse
     {
         $user = $request->user();
 
@@ -43,10 +44,7 @@ trait VerifiesMobiles
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function resend(Request $request)
+    public function resend(Request $request): ViewFactory|JsonResponse|Redirector|RedirectResponse
     {
         $user = $request->user();
 

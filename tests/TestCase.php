@@ -6,7 +6,9 @@ namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Testing\TestResponse;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use ReflectionFunction;
 
@@ -23,7 +25,9 @@ class TestCase extends BaseTestCase
 
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        $this->withFactories(__DIR__ . '/database/factories');
+        Factory::guessFactoryNamesUsing(
+            fn (string $modelName) => 'Fouladgar\\MobileVerification\\Database\\Factories\\'.class_basename($modelName).'Factory'
+        );
     }
 
     /**
@@ -74,21 +78,15 @@ class TestCase extends BaseTestCase
             '/__middleware__',
             [
                 'middleware' => $middleware,
-                static function () {
-                    return '__passed__';
-                },
+                static fn() => '__passed__',
             ]
         )->uri();
     }
 
     /**
      * Call the given middleware using a JSON request.
-     *
-     * @param string|string[] $middleware
-     * @param string $method
-     * @param array $data
      */
-    protected function callMiddlewareJson($middleware, string $method = 'GET', array $data = [])
+    protected function callMiddlewareJson(string|array $middleware, string $method = 'GET', array $data = []): TestResponse
     {
         return $this->json(
             $method,
@@ -103,30 +101,30 @@ class TestCase extends BaseTestCase
      * @param $expectedEvent
      * @param $expectedListener
      */
-    protected function assertListening($expectedEvent, $expectedListener)
-    {
-        $dispatcher = $this->app->make(Dispatcher::class);
-
-        foreach ($dispatcher->getListeners($expectedEvent) as $listenerClosure) {
-            $actualListener = (new ReflectionFunction($listenerClosure))
-                ->getStaticVariables()['listener'];
-
-            if ($actualListener === $expectedListener ||
-                ($actualListener instanceof Closure &&
-                    $expectedListener === Closure::class)) {
-                $this->assertTrue(true);
-
-                return;
-            }
-        }
-
-        $this->assertTrue(
-            false,
-            sprintf(
-                'Event [%s] does not have the [%s] listener attached to it',
-                $expectedEvent,
-                print_r($expectedListener, true)
-            )
-        );
-    }
+//    protected function assertListening($expectedEvent, $expectedListener)
+//    {
+//        $dispatcher = $this->app->make(Dispatcher::class);
+//
+//        foreach ($dispatcher->getListeners($expectedEvent) as $listenerClosure) {
+//            $actualListener = (new ReflectionFunction($listenerClosure))
+//                ->getStaticVariables()['listener'];
+//
+//            if ($actualListener === $expectedListener ||
+//                ($actualListener instanceof Closure &&
+//                    $expectedListener === Closure::class)) {
+//                $this->assertTrue(true);
+//
+//                return;
+//            }
+//        }
+//
+//        $this->assertTrue(
+//            false,
+//            sprintf(
+//                'Event [%s] does not have the [%s] listener attached to it',
+//                $expectedEvent,
+//                print_r($expectedListener, true)
+//            )
+//        );
+//    }
 }

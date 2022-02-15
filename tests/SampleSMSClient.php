@@ -9,8 +9,9 @@ use Fouladgar\MobileVerification\Notifications\Messages\Payload;
 
 class SampleSMSClient implements SMSClient
 {
-    public function sendMessage(Payload $payload)
+    public function sendMessage(Payload $payload): mixed
     {
+        return null;
 //        return $this->send($payload->getTo(), $payload->getToken());
     }
 }

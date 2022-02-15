@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tokens;
 
+use Exception;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 
 interface TokenRepositoryInterface
@@ -11,7 +12,7 @@ interface TokenRepositoryInterface
     /**
      * Create a new token record.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function create(MustVerifyMobile $user): string;
 

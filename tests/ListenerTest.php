@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tests;
 
+use Exception;
 use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotification;
 use Fouladgar\MobileVerification\Tests\Models\User;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Event;
 use Mockery as m;
 
 class ListenerTest extends TestCase
 {
-    /**
-     * @var TokenBrokerInterface|m\LegacyMockInterface|m\MockInterface
-     */
-    private $tokenBroker;
+    private TokenBrokerInterface|m\LegacyMockInterface|m\MockInterface $tokenBroker;
 
     /**
      * @var m\Mock
@@ -27,14 +26,14 @@ class ListenerTest extends TestCase
     {
         parent::setUp();
 
-        $this->tokenBroker = m::mock(TokenBrokerInterface::class);
-        $this->verifiableUser = m::mock(VerifiableUser::class)->makePartial();
+        $this->tokenBroker    = m::mock(TokenBrokerInterface::class);
+        $this->verifiableUser  = m::mock(VerifiableUser::class);
     }
 
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_not_listen_when_user_is_not_verifiable(): void
     {
@@ -50,7 +49,7 @@ class ListenerTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_not_listen_when_user_is_already_verified(): void
     {
@@ -65,7 +64,7 @@ class ListenerTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_listen_successfully(): void
     {
@@ -80,10 +79,15 @@ class ListenerTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_should_not_queue()
     {
-        $this->assertListening(Registered::class, SendMobileVerificationNotification::class);
+        Event::fake();
+
+        Event::assertListening(
+            Registered::class,
+            SendMobileVerificationNotification::class
+        );
     }
 }

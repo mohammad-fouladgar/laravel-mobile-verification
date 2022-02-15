@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class AddSentAtInTokensTable extends Migration
 {
-    /** @var string */
-    private $tokenTable;
+    private string $tokenTable;
 
     public function __construct()
     {

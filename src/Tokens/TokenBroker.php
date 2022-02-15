@@ -9,12 +9,9 @@ use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 
 class TokenBroker implements TokenBrokerInterface
 {
-    /** @var TokenRepositoryInterface */
-    protected $tokenRepository;
 
-    public function __construct(TokenRepositoryInterface $tokenRepository)
+    public function __construct(protected TokenRepositoryInterface $tokenRepository)
     {
-        $this->tokenRepository = $tokenRepository;
     }
 
     /**

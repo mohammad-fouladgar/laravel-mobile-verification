@@ -6,13 +6,14 @@ namespace Fouladgar\MobileVerification\Tests;
 
 use Fouladgar\MobileVerification\Listeners\SendMobileVerificationNotificationQueueable;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Event;
 
 class QueueableListenerTest extends TestCase
 {
     /** @test * */
     public function it_should_be_queueable()
     {
-        $this->assertListening(
+        Event::assertListening(
             Registered::class,
             SendMobileVerificationNotificationQueueable::class
         );
@@ -26,6 +27,9 @@ class QueueableListenerTest extends TestCase
     protected function getEnvironmentSetUp($app): void
     {
         parent::getEnvironmentSetUp($app);
+
+        Event::fake();
+
         $app['config']->set('mobile_verifier.queue.connection', 'database');
     }
 }

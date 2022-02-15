@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tests;
 
+use Exception;
 use Fouladgar\MobileVerification\Exceptions\InvalidTokenException;
 use Fouladgar\MobileVerification\Tests\Models\VerifiableUser;
 use Fouladgar\MobileVerification\Tokens\TokenBroker;
@@ -20,7 +21,7 @@ class TokenBrokerTest extends TestCase
     /**
      * @var TokenRepositoryInterface|m\LegacyMockInterface|m\MockInterface
      */
-    private $repository;
+    private m\LegacyMockInterface|m\MockInterface|TokenRepositoryInterface $repository;
 
     public function setUp(): void
     {
@@ -33,7 +34,7 @@ class TokenBrokerTest extends TestCase
     /**
      * @test
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function it_can_send_token_to_a_verifiable_user(): void
     {

@@ -4,33 +4,20 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tokens;
 
+use Exception;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
 
 class DatabaseTokenRepository extends AbstractTokenRepository
 {
-    /**
-     * The database connection instance.
-     * @var ConnectionInterface
-     */
-    protected $connection;
-
-    /**
-     * The token database table.
-     * @var string
-     */
-    protected $table;
-
     public function __construct(
-        int $expires,
-        int $tokenLength,
-        string $table,
-        ConnectionInterface $connection
+        protected int $expires,
+        protected int $tokenLength,
+        protected string $table,
+        protected ConnectionInterface $connection
     ) {
         parent::__construct($expires, $tokenLength);
-        $this->table = $table;
-        $this->connection = $connection;
     }
 
     /**
@@ -64,14 +51,14 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     {
         $record = $this->getTokenRecord($user, $token);
 
-        return $record && ! $this->tokenExpired($record['expires_at']);
+        return $record && !$this->tokenExpired($record['expires_at']);
     }
 
     public function latestSentAt(MustVerifyMobile $user, string $token): string
     {
         $tokenRow = $this->getTokenRecord($user, $token);
 
-        if (! $tokenRow) {
+        if (!$tokenRow) {
             return '';
         }
 
@@ -87,7 +74,7 @@ class DatabaseTokenRepository extends AbstractTokenRepository
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     protected function insert(string $mobile, string $token): bool
     {

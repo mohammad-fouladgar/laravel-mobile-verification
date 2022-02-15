@@ -6,16 +6,14 @@ namespace Fouladgar\MobileVerification\Http\Controllers;
 
 use Fouladgar\MobileVerification\Http\Requests\VerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 
 interface BaseVerificationControllerInterface
 {
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Routing\Redirector
-     */
-    public function verify(VerificationRequest $request);
+    public function verify(VerificationRequest $request): ViewFactory|JsonResponse|RedirectResponse;
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Routing\Redirector
-     */
-    public function resend(Request $request);
+    public function resend(Request $request): ViewFactory|JsonResponse|Redirector|RedirectResponse;
 }

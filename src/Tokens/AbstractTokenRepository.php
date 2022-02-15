@@ -4,22 +4,14 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tokens;
 
+use Exception;
 use Illuminate\Support\Carbon;
 
 abstract class AbstractTokenRepository implements TokenRepositoryInterface
 {
-    /**
-     * @var int
-     */
-    protected $expires;
-
-    /** @var int */
-    protected $tokenLength;
-
-    public function __construct(int $expires, int $tokenLength)
+    public function __construct(protected int $expires,protected int $tokenLength)
     {
-        $this->expires = $expires;
-        $this->tokenLength = $tokenLength;
+
     }
 
     /**
@@ -35,7 +27,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     /**
      * Create a new token for the user.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function createNewToken(): string
     {
@@ -55,7 +47,7 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     /**
      * Build the record payload for the table.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function getPayload(string $mobile, string $token): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tokens;
 
+use Exception;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Illuminate\Support\Facades\Cache;
 
@@ -46,7 +47,7 @@ class CacheTokenRepository extends AbstractTokenRepository
     /**
      * @inheritDoc
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function insert(string $mobile, string $token): bool
     {

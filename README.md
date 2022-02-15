@@ -21,8 +21,7 @@ You can install the package via composer:
 ```shell
 composer require fouladgar/laravel-mobile-verification
 ```
-> Laravel 5.5 uses Package Auto-Discovery, so you are not required to add ServiceProvider manually.
->
+
 ## Configuration
 
 To get started, you should publish the `config/mobile_verifier.php` config file with:
@@ -59,9 +58,9 @@ It means after migrating, a table will be created which your application needs t
 return [
 
     'user_table'    => 'users',
-    
+
     'mobile_column' => 'mobile',
-    
+
     'token_table'   => 'mobile_verification_tokens',
 
     //...
@@ -73,7 +72,7 @@ When using the `cache` driver, the token will be stored in a cache driver config
 All right! Now you should migrate the database:
 ```
 php artisan migrate
-``` 
+```
 
 Depending on the `token_storage` config, the package migration will create a token table. Also, a `mobile_verified_at` and `mobile` column will be added to your `users` table to show user verification state and store user's mobile phone.
 
@@ -101,7 +100,7 @@ class User extends Authenticatable implements IMustVerifyMobile
 
 ### SMS Client
 
-You can use any SMS service for sending verification messages(it depends on your choice). For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method. 
+You can use any SMS service for sending verification messages(it depends on your choice). For sending notifications via this package, first you need to implement the `Fouladgar\MobileVerification\Contracts\SMSClient` contract. This contract requires you to implement `sendMessage` method.
 
 This method will return your SMS service API results via a `Payload` object which contains user **number** and **token** message:
 
@@ -122,7 +121,7 @@ class SampleSMSClient implements SMSClient
      *
      * @return mixed
      */
-    public function sendMessage(Payload $payload)
+    public function sendMessage(Payload $payload):mixed
     {
         // preparing SMSService ...
 
@@ -144,8 +143,8 @@ Next, you should set the your `SMSClient` class in config file:
 
 return [
 
-  'sms_client' => App\SampleSMSClient::class, 
-    
+  'sms_client' => App\SampleSMSClient::class,
+
   //...
 ];
 ```
@@ -166,7 +165,7 @@ use Illuminate\Auth\Events\Registered;
 //...
 ```
 
-At this point, a notification message has been sent to user automatically, and you've done half of the job! 
+At this point, a notification message has been sent to user automatically, and you've done half of the job!
 
 ## Routing
 
@@ -208,7 +207,7 @@ return [
 
     //...
 ];
-``` 
+```
 
 ### Customize Routes and Controller
 

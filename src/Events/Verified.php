@@ -11,19 +11,7 @@ class Verified
 {
     use SerializesModels;
 
-    /** @var MustVerifyMobile */
-    public $user;
-
-    /**
-     * The validated request.
-     *
-     * @var array
-     */
-    protected $request;
-
-    public function __construct(MustVerifyMobile $user, array $request)
+    public function __construct(public MustVerifyMobile $user, protected array $request)
     {
-        $this->user = $user;
-        $this->request = $request;
     }
 }

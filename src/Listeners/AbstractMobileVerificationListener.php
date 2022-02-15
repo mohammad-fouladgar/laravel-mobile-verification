@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Listeners;
 
+use Exception;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Illuminate\Auth\Events\Registered;
@@ -11,16 +12,12 @@ use Illuminate\Notifications\Notification;
 
 abstract class AbstractMobileVerificationListener extends Notification
 {
-    /** @var TokenBrokerInterface */
-    protected $tokenBroker;
-
-    public function __construct(TokenBrokerInterface $tokenBroker)
+    public function __construct(protected TokenBrokerInterface $tokenBroker)
     {
-        $this->tokenBroker = $tokenBroker;
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(Registered $event): void
     {

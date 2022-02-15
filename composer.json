@@ -29,14 +29,14 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.0",
-    "laravel/legacy-factories": "^1.0.4",
     "orchestra/testbench": "^7.0",
     "mockery/mockery": "^1.4",
     "php-coveralls/php-coveralls": "^2.1"
   },
   "autoload": {
     "psr-4": {
-      "Fouladgar\\MobileVerification\\": "src/"
+      "Fouladgar\\MobileVerification\\": "src/",
+      "Fouladgar\\MobileVerification\\Database\\Factories\\": "database/factories"
     }
   },
   "autoload-dev": {

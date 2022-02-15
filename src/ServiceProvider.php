@@ -33,6 +33,18 @@ class ServiceProvider extends BaseServiceProvider
     }
 
     /**
+     * Register any package services.
+     */
+    public function register(): void
+    {
+        $this->app->register(EventServiceProvider::class);
+
+        $this->mergeConfigFrom($this->getConfig(), 'mobile_verifier');
+
+        $this->registerBindings();
+    }
+
+    /**
      * Register the package routes.
      */
     protected function registerRoutes(): void
@@ -64,9 +76,9 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function loadAssetsFrom(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'MobileVerification');
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'MobileVerification');
     }
 
     /**
@@ -76,9 +88,9 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->publishes([$this->getConfig() => config_path('mobile_verifier.php')], 'config');
 
-        $this->publishes([__DIR__ . '/../lang' => app()->langPath() . '/vendor/MobileVerification'], 'lang');
+        $this->publishes([__DIR__.'/../lang' => app()->langPath().'/vendor/MobileVerification'], 'lang');
 
-        $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'migrations');
     }
 
     /**
@@ -86,19 +98,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     protected function getConfig(): string
     {
-        return __DIR__ . '/../config/config.php';
-    }
-
-    /**
-     * Register any package services.
-     */
-    public function register(): void
-    {
-        $this->app->register(EventServiceProvider::class);
-
-        $this->mergeConfigFrom($this->getConfig(), 'mobile_verifier');
-
-        $this->registerBindings();
+        return __DIR__.'/../config/config.php';
     }
 
     /**

@@ -59,7 +59,7 @@ class MiddlewareTest extends TestCase
     /** @test */
     public function it_fails_if_user_is_not_verifiable(): void
     {
-        $this->actingAs(factory(User::class)->make());
+        $this->actingAs(User::factory()->make());
 
         $response = $this->middleware->handle($this->jsonRequest, static function ($request): void {
         });
@@ -70,7 +70,7 @@ class MiddlewareTest extends TestCase
     /** @test */
     public function it_fails_if_user_mobile_is_not_verified(): void
     {
-        $this->actingAs(factory(VerifiableUser::class)->make());
+        $this->actingAs(VerifiableUser::factory()->make());
 
         try {
             $this->middleware->handle($this->jsonRequest, static function ($request): void {
@@ -88,7 +88,7 @@ class MiddlewareTest extends TestCase
     /** @test */
     public function it_pass_the_request_successfully(): void
     {
-        $this->actingAs(factory(VerifiableUser::class)->state('verified')->make());
+        $this->actingAs(VerifiableUser::factory()->verified()->make());
 
         $response = $this->middleware->handle($this->jsonRequest, static function ($request): void {
         });

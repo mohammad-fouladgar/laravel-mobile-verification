@@ -8,8 +8,5 @@ use Fouladgar\MobileVerification\Notifications\Messages\Payload;
 
 interface SMSClient
 {
-    /**
-     * @return mixed
-     */
-    public function sendMessage(Payload $payload);
+    public function sendMessage(Payload $payload): mixed;
 }

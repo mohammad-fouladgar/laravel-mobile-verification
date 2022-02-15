@@ -11,22 +11,11 @@ use Illuminate\Notifications\Notification;
 
 class VerifyMobile extends Notification
 {
-    /** @var string */
-    public $token;
-
-    public function __construct(string $token)
+    public function __construct(public string $token)
     {
-        $this->token = $token;
     }
 
-    /**
-     * Get the notification's channels.
-     *
-     * @param mixed $notifiable
-     *
-     * @return array|string
-     */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array|string
     {
         return [VerificationChannel::class];
     }
