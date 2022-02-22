@@ -7,9 +7,6 @@
 ![Code Style Status](https://img.shields.io/github/workflow/status/mohammad-fouladgar/laravel-mobile-verification/Check%20&%20fix%20styling?label=code%20style)
 [![Latest Stable Version](https://poser.pugx.org/fouladgar/laravel-mobile-verification/v/stable)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
 [![Total Downloads](https://poser.pugx.org/fouladgar/laravel-mobile-verification/downloads)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
-[![License](https://poser.pugx.org/fouladgar/laravel-mobile-verification/license)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
-
-
 
 ## Introduction
 Many web applications require users to verify their mobile phone numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile phone verification requests.
@@ -18,11 +15,9 @@ Many web applications require users to verify their mobile phone numbers before 
 
 Laravel  | LaravelMobileVerification
 :---------|:----------
-5.0.x    | 1.2.0
-6.0.x    | 2.0.x
-7.0.x    | 2.0.x
-8.0.x    | 2.0.x
-9.0.x    | 3.0.x
+9.0.x         | 3.0.x
+6.0.x to 8.0x | 2.0.x
+5.0.x         | 1.2.0
 
 ## Installation
 
