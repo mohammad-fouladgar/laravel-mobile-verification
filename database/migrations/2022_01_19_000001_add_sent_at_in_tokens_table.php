@@ -19,7 +19,7 @@ class AddSentAtInTokensTable extends Migration
             return;
         }
 
-        Schema::create($this->tokenTable, function (Blueprint $table) {
+        Schema::table($this->tokenTable, function (Blueprint $table) {
             $table->timestamp('sent_at')->nullable();
         });
     }
