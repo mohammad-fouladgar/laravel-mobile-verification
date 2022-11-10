@@ -7,7 +7,6 @@ use Illuminate\Support\Manager;
 
 class TokenRepositoryManager extends Manager
 {
-
     public function getDefaultDriver()
     {
         return $this->config->get('mobile_verifier.token_storage', 'cache');

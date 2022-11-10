@@ -101,11 +101,11 @@ class ServiceProvider extends BaseServiceProvider
             }
         );
 
-        $this->app->singleton('mobile.verifier.token.repository', fn($app) => new TokenRepositoryManager($app));
+        $this->app->singleton('mobile.verifier.token.repository', fn ($app) => new TokenRepositoryManager($app));
 
         $this->app->singleton(
             TokenRepositoryInterface::class,
-            fn($app) => $app['mobile.verifier.token.repository']->driver()
+            fn ($app) => $app['mobile.verifier.token.repository']->driver()
         );
 
         $this->app->bind(TokenBrokerInterface::class, TokenBroker::class);
@@ -121,7 +121,7 @@ class ServiceProvider extends BaseServiceProvider
                 'mobile_verifier.controller_namespace',
                 'Fouladgar\MobileVerification\Http\Controllers'
             ),
-            'prefix'    => config('mobile_verifier.routes_prefix', 'auth'),
+            'prefix' => config('mobile_verifier.routes_prefix', 'auth'),
         ];
     }
 }
