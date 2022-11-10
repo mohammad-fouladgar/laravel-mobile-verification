@@ -1,3 +1,7 @@
+## 3.0.1 - 2022-11-11
+ - Fix some bugs and add some env in config file
+ - Fixed migration updating a table instead of trying to create it when already exists (#177)
+
 ## 3.0.0 - 2022-02-15
 - Add Support PHP 8.0 and Laravel 9.0
 - Deprecated PHP <= 7.* and Laravel <=8.*
