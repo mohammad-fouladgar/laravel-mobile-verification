@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Fouladgar\MobileVerification\Tokens;
 
-use Exception;
 use Fouladgar\MobileVerification\Contracts\MustVerifyMobile;
 use Illuminate\Support\Facades\Cache;
 
@@ -44,11 +43,6 @@ class CacheTokenRepository extends AbstractTokenRepository
         return Cache::get($key)['sent_at'];
     }
 
-    /**
-     * @inheritDoc
-     *
-     * @throws Exception
-     */
     protected function insert(string $mobile, string $token): bool
     {
         return Cache::add($mobile, $this->getPayload($mobile, $token), now()->addMinutes($this->expires));

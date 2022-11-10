@@ -5,12 +5,10 @@ namespace Fouladgar\MobileVerification;
 use Fouladgar\MobileVerification\Contracts\SMSClient;
 use Fouladgar\MobileVerification\Exceptions\SMSClientNotFoundException;
 use Fouladgar\MobileVerification\Http\Middleware\EnsureMobileIsVerified;
-use Fouladgar\MobileVerification\Tokens\CacheTokenRepository;
-use Fouladgar\MobileVerification\Tokens\DatabaseTokenRepository;
 use Fouladgar\MobileVerification\Tokens\TokenBroker;
 use Fouladgar\MobileVerification\Tokens\TokenBrokerInterface;
 use Fouladgar\MobileVerification\Tokens\TokenRepositoryInterface;
-use Illuminate\Database\ConnectionInterface;
+use Fouladgar\MobileVerification\Tokens\TokenRepositoryManager;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
@@ -52,23 +50,9 @@ class ServiceProvider extends BaseServiceProvider
         Route::group(
             $this->routeConfiguration(),
             function (): void {
-                $this->loadRoutesFrom(__DIR__ . '/Http/routes.php');
+                $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
             }
         );
-    }
-
-    /**
-     * Get route group configuration array.
-     */
-    private function routeConfiguration(): array
-    {
-        return [
-            'namespace' => config(
-                'mobile_verifier.controller_namespace',
-                'Fouladgar\MobileVerification\Http\Controllers'
-            ),
-            'prefix' => config('mobile_verifier.routes_prefix', 'auth'),
-        ];
     }
 
     /**
@@ -111,33 +95,33 @@ class ServiceProvider extends BaseServiceProvider
             static function ($app) {
                 try {
                     return $app->make(config('mobile_verifier.sms_client'));
-                } catch (Throwable $e) {
+                } catch (Throwable) {
                     throw new SMSClientNotFoundException();
                 }
             }
         );
 
-        $this->app->bind(
+        $this->app->singleton('mobile.verifier.token.repository', fn($app) => new TokenRepositoryManager($app));
+
+        $this->app->singleton(
             TokenRepositoryInterface::class,
-            static function ($app) {
-                switch (config('mobile_verifier.token_storage', 'database')) {
-                    case 'database':
-                        return new DatabaseTokenRepository(
-                            config('mobile_verifier.token_lifetime', 5),
-                            config('mobile_verifier.token_length', 5),
-                            config('mobile_verifier.token_table', 'mobile_verification_tokens'),
-                            $app->make(ConnectionInterface::class)
-                        );
-                    case 'cache':
-                        return new CacheTokenRepository(
-                            config('mobile_verifier.token_lifetime', 5),
-                            config('mobile_verifier.token_length', 'mobile_verification_tokens')
-                        );
-                    default:
-                }
-            }
+            fn($app) => $app['mobile.verifier.token.repository']->driver()
         );
 
         $this->app->bind(TokenBrokerInterface::class, TokenBroker::class);
+    }
+
+    /**
+     * Get route group configuration array.
+     */
+    private function routeConfiguration(): array
+    {
+        return [
+            'namespace' => config(
+                'mobile_verifier.controller_namespace',
+                'Fouladgar\MobileVerification\Http\Controllers'
+            ),
+            'prefix'    => config('mobile_verifier.routes_prefix', 'auth'),
+        ];
     }
 }

@@ -42,7 +42,7 @@ return [
      | Here you can specify length of verification tokens which will send to users.
      |
      */
-    'token_length' => 5,
+    'token_length' =>  env('MOBILE_VERIFICATION_TOKEN_LENGTH', 5),
 
     /*
      |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
      | Here you can specify lifetime of verification tokens (in minutes) which will send to users.
      |
      */
-    'token_lifetime' => 5,
+    'token_lifetime' => env('MOBILE_VERIFICATION_TOKEN_LIFE_TIME', 5),
 
     /*
      |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ return [
     | Supported drivers: "cache", "database"
     |
     */
-    'token_storage' => 'cache',
+    'token_storage' => env('MOBILE_VERIFICATION_TOKEN_STORAGE', 'cache'),
 
     /*
     |--------------------------------------------------------------------------

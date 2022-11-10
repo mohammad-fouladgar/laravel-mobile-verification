@@ -36,17 +36,15 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     }
 
     /**
-     * Determine if the token has expired.
+     * Determine if the token has been expired.
      */
     protected function tokenExpired(string $expiresAt): bool
     {
-        return Carbon::parse($expiresAt)->addMinutes($this->expires)->isPast();
+        return Carbon::parse($expiresAt)->isPast();
     }
 
     /**
      * Build the record payload for the table.
-     *
-     * @throws Exception
      */
     protected function getPayload(string $mobile, string $token): array
     {
