@@ -1,3 +1,10 @@
+## 4.0.0 - 2023-03-29
+ - Add support for Laravel V10
+ - Bumped version to v3.0.1
+ - Merge branch 'release-3.0.1'
+ - Bumped version to v3.0.1
+ - Fix styling
+
 ## 3.0.1 - 2022-11-11
  - Fix some bugs and add some env in config file
  - Fixed migration updating a table instead of trying to create it when already exists (#177)

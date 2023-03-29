@@ -15,6 +15,7 @@ Many web applications require users to verify their mobile phone numbers before 
 
 Laravel  | LaravelMobileVerification
 :---------|:----------
+10.0.x        | 4.0.x
 9.0.x         | 3.0.x
 6.0.x to 8.0x | 2.0.x
 5.0.x         | 1.2.0
