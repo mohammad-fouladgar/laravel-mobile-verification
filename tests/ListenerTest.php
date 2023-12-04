@@ -81,7 +81,7 @@ class ListenerTest extends TestCase
      *
      * @throws Exception
      */
-    public function it_should_not_queue()
+    public function it_should_not_queue(): void
     {
         Event::fake();
 

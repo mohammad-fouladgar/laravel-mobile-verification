@@ -41,7 +41,7 @@ class CacheTokenRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function it_can_return_latest_sent_at_as_empty_string_if_token_doesnt_exist()
+    public function it_can_return_latest_sent_at_as_empty_string_if_token_doesnt_exist(): void
     {
         $this->repository->setExpires(-5);
         $token = $this->repository->create($this->user);
@@ -52,7 +52,7 @@ class CacheTokenRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function it_can_return_latest_sent_at_as_date_time_string_if_token_exists()
+    public function it_can_return_latest_sent_at_as_date_time_string_if_token_exists(): void
     {
         $token = $this->repository->create($this->user);
 

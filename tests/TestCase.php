@@ -48,12 +48,8 @@ class TestCase extends BaseTestCase
 
     /**
      * Call the given middleware.
-     *
-     * @param string|string[] $middleware
-     * @param string $method
-     * @param array $data
      */
-    protected function callMiddleware($middleware, string $method = 'GET', array $data = [])
+    protected function callMiddleware(string|array $middleware, string $method = 'GET', array $data = [])
     {
         return $this->call(
             $method,
@@ -64,11 +60,8 @@ class TestCase extends BaseTestCase
 
     /**
      * Make a dummy route with the given middleware applied.
-     *
-     * @param string $method
-     * @param string|string[] $middleware
      */
-    protected function makeMiddlewareRoute(string $method, $middleware): string
+    protected function makeMiddlewareRoute(string $method, array|string $middleware): string
     {
         $method = strtolower($method);
 

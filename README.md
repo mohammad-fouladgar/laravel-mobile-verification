@@ -2,11 +2,10 @@
 
 ![alt text](./cover.jpg "EloquentBuilder")
 
-![Test Status](https://img.shields.io/github/workflow/status/mohammad-fouladgar/laravel-mobile-verification/run-tests?label=tests)
-[![Coverage Status](https://coveralls.io/repos/github/mohammad-fouladgar/laravel-mobile-verification/badge.svg)](https://coveralls.io/github/mohammad-fouladgar/laravel-mobile-verification)
-![Code Style Status](https://img.shields.io/github/workflow/status/mohammad-fouladgar/laravel-mobile-verification/Check%20&%20fix%20styling?label=code%20style)
-[![Latest Stable Version](https://poser.pugx.org/fouladgar/laravel-mobile-verification/v/stable)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
-[![Total Downloads](https://poser.pugx.org/fouladgar/laravel-mobile-verification/downloads)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/fouladgar/laravel-mobile-verification.svg)](https://packagist.org/packages/fouladgar/laravel-mobile-verification)
+![Test Status](https://img.shields.io/github/actions/workflow/status/mohammad-fouladgar/laravel-mobile-verification/run-tests.yml?label=tests)
+![Code Style Status](https://img.shields.io/github/actions/workflow/status/mohammad-fouladgar/laravel-mobile-verification/php-cs-fixer.yml?label=code%20style)
+![Total Downloads](https://img.shields.io/packagist/dt/fouladgar/laravel-mobile-verification)
 
 ## Introduction
 Many web applications require users to verify their mobile phone numbers before using the application. Rather than forcing you to re-implement this on each application, this package provides convenient methods for sending and verifying mobile phone verification requests.

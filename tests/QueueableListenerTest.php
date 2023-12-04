@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Event;
 
 class QueueableListenerTest extends TestCase
 {
-    /** @test * */
-    public function it_should_be_queueable()
+    /** @test **/
+    public function it_should_be_queueable(): void
     {
         Event::assertListening(
             Registered::class,

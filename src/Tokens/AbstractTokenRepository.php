@@ -13,9 +13,6 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     {
     }
 
-    /**
-     * Set Expires token.
-     */
     public function setExpires(int $expires): self
     {
         $this->expires = $expires;
@@ -24,8 +21,6 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
     }
 
     /**
-     * Create a new token for the user.
-     *
      * @throws Exception
      */
     protected function createNewToken(): string
@@ -35,9 +30,6 @@ abstract class AbstractTokenRepository implements TokenRepositoryInterface
         return (string) random_int(10 ** ($tokenLength - 1), (10 ** $tokenLength) - 1);
     }
 
-    /**
-     * Determine if the token has been expired.
-     */
     protected function tokenExpired(string $expiresAt): bool
     {
         return Carbon::parse($expiresAt)->isPast();

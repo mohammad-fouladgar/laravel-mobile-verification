@@ -25,8 +25,6 @@ class VerifiableUser extends Model implements AuthenticatableContract, IMustVeri
 
     /**
      * The table associated with the model.
-     *
-     * @var string
      */
     protected $table = 'users';
 }

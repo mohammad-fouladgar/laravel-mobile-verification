@@ -8,9 +8,6 @@ use Fouladgar\MobileVerification\Notifications\VerifyMobile;
 
 trait MustVerifyMobile
 {
-    /**
-     * @inheritDoc
-     */
     public function getFillable()
     {
         $this->appendMobileFieldToFillableAttributes();
