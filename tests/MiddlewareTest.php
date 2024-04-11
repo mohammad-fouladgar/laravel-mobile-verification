@@ -17,11 +17,11 @@ class MiddlewareTest extends TestCase
 
     private Request $jsonRequest;
 
-    public function __construct()
+    public function setUp(): void
     {
-        parent::__construct();
+        parent::setUp();
 
-        $this->middleware = new EnsureMobileIsVerified();
+        $this->middleware  = new EnsureMobileIsVerified();
         $this->jsonRequest = new Request();
         $this->jsonRequest->headers->set('Accept', 'application/json');
     }
