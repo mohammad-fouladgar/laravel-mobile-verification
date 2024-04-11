@@ -1,6 +1,6 @@
-## 4.1.0 - 2023-03-29
- - Add support for Laravel 11.x
- - Laravel 9 is deprecated
+## 4.2.0 - 2024-04-11
+- Add support for Laravel 11.x
+- Laravel 9 is deprecated
 
 ## 4.0.0 - 2023-03-29
  - Add support for Laravel V10
