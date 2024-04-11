@@ -14,10 +14,8 @@ class EventServiceProvider extends ServiceProvider
 {
     /**
      * Register any other events for your application.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         if (config('mobile_verifier.queue.connection') === 'sync') {
             Event::listen(Registered::class, SendMobileVerificationNotification::class);
