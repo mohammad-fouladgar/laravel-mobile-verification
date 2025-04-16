@@ -11,3 +11,4 @@ cache
 .htaccess
 .php-cs-fixer.cache
 .php_cs.cache
+.phpunit.cache

@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" bootstrap="vendor/autoload.php" colors="true" processIsolation="false" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
-  <testsuites>
-    <testsuite name="Unit">
-      <directory suffix="Test.php">./tests</directory>
-    </testsuite>
-  </testsuites>
-  <php>
-    <env name="APP_ENV" value="testing"/>
-    <!--    <env name="DB_CONNECTION" value="testing"/>-->
-    <env name="DB_CONNECTION" value="sqlite"/>
-    <env name="DB_DATABASE" value=":memory:"/>
-    <env name="APP_KEY" value="base64:AyJGOtNkX6q4z+XaeZv11xdtseDc4P0ZL5gw2fS2aMw="/>
-  </php>
-  <source>
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-    <exclude>
-      <file>src/Events/Verified.php</file>
-      <file>src/Notifications/Messages/Payload.php</file>
-      <file>src/ServiceProvider.php</file>
-      <file>src/Exceptions/SMSClientNotFoundException.php</file>
-    </exclude>
-  </source>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" backupGlobals="false" colors="true" stopOnFailure="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache" backupStaticProperties="false">
+<testsuites>
+  <testsuite name="Test Unit">
+    <directory suffix="Test.php">./tests</directory>
+  </testsuite>
+</testsuites>
+<php>
+  <env name="APP_ENV" value="testing"/>
+  <env name="DB_CONNECTION" value="sqlite"/>
+  <env name="DB_DATABASE" value=":memory:"/>
+  <env name="APP_KEY" value="base64:AyJGOtNkX6q4z+XaeZv11xdtseDc4P0ZL5gw2fS2aMw="/>
+</php>
 </phpunit>
