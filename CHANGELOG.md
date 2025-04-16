@@ -1,3 +1,6 @@
+## 4.3.0 - 2025-04-16
+ - Add support Laravel 12
+
 ## 4.2.0 - 2024-04-11
 - Add support for Laravel 11.x
 - Laravel 9 is deprecated
